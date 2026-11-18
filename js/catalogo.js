@@ -26,7 +26,7 @@ const catalogo = [
     numero: "01",
     titulo: "A VIDA 2%",
     categoria: "DESENVOLVIMENTO PESSOAL",
-    descricao: "Uma série sobre escolhas, disciplina e transformação. Um convite para questionar hábitos e construir uma vida com mais intenção.",
+    descricao: "Uma série sobre escolhas, disciplina e transformação. Um convite para questionar hábitos e construir uma vida com mais propósito.",
     destaque: true,
     banner: "assets/banners/avidadoisporcentobanner.png",
     capa: "assets/posters/avidadoisporcentocapa.png",
