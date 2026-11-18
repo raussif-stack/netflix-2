@@ -317,9 +317,9 @@ const catalogo = [
     temporadas: [
       { numero: 1, titulo: "Temporada 1", // Use o número do episódio como chave: 1, 2, 3.
         episodios: criarEpisodios(3, {
-        1: "", // Episódio 001
-        2: "", // Episódio 002
-        3: "", // Episódio 003
+        1: "y50TIL2I68g", // Episódio 001
+        2: "KBYdwCPXAK4", // Episódio 002
+        3: "lH275gpnLk0", // Episódio 003
         }) }
     ]
   }
