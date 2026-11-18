@@ -36,7 +36,7 @@ const catalogo = [
         episodios: criarEpisodios(245, {
         1: "0LfDv8SSDIo", // Episódio 001
         2: "9r_CyHLEn20", // Episódio 002
-        3: "", // Episódio 003
+        3: "YILrb0x5FHE", // Episódio 003
         4: "", // Episódio 004
         5: "", // Episódio 005
         6: "", // Episódio 006
