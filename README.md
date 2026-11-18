@@ -151,3 +151,5 @@ Os caminhos das capas e banners cadastrados em `js/catalogo.js` foram mantidos. 
 5. Abra novamente o `index.html` pelo Live Server e teste as páginas em diferentes larguras.
 
 A responsividade foi implementada em CSS. Ainda é importante conferir o resultado em aparelhos físicos, pois navegadores, proporções de tela e comportamento do YouTube podem variar.
+
+22222
