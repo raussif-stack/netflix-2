@@ -285,24 +285,24 @@ const catalogo = [
           1: "Decidi vir para o YouTube e falar sobre a verdade do NoFap. 1.599 dias", // Episódio 001 — Decidi vir para o YouTube e falar sobre a verdade do NoFap. 1.599 dias
 
           2: "Você tem essa sensação ao praticar NoFap? (hipnotizado). 1600 dias", // Episódio 002 — Você tem essa sensação ao praticar NoFap? (hipnotizado). 1600 dias
-          3: "", // Título do Episódio 003
-          4: "", // Título do Episódio 004
-          5: "", // Título do Episódio 005
-          6: "", // Título do Episódio 006
-          7: "", // Título do Episódio 007
-          8: "", // Título do Episódio 008
-          9: "", // Título do Episódio 009
-          10: "", // Título do Episódio 010
-          11: "", // Título do Episódio 011
-          12: "", // Título do Episódio 012
-          13: "", // Título do Episódio 013
-          14: "", // Título do Episódio 014
-          15: "", // Título do Episódio 015
-          16: "", // Título do Episódio 016
-          17: "", // Título do Episódio 017
-          18: "", // Título do Episódio 018
-          19: "", // Título do Episódio 019
-          20: "", // Título do Episódio 020
+          3: "O motivo de você recair no nofap (REVELADO.) 1.606 Dias", // Episódio 003 — O motivo de você recair no nofap (REVELADO.) 1.606 Dias
+          4: "Eu tive 26 benefícios praticando nofap. 1.609 DIAS", // Episódio 004 — Eu tive 26 benefícios praticando nofap. 1.609 DIAS
+          5: "EU VOU PARAR DE PRATICAR NOFAP. 1621 DIAS.", // Episódio 005 — EU VOU PARAR DE PRATICAR NOFAP. 1621 DIAS
+          6: "CHEGUEI AOS 1.628 DIAS DE NOFAP FAZENDO ISSO CCC.", // Episódio 006 — CHEGUEI AOS 1.628 DIAS DE NOFAP FAZENDO ISSO CCC.
+          7: "SE VOCÊ FAZ NOFAP E TOMA CAFÉ, CUIDADO. 15 DIAS SEM CAFÉ.", // Episódio 007 — SE VOCÊ FAZ NOFAP E TOMA CAFÉ, CUIDADO. 15 DIAS SEM CAFÉ.
+          8: "NENHUMA AUTORIDADE TE ENSINA SOBRE NOFAP 1.646 DIAS.", // Episódio 008 — NENHUMA AUTORIDADE TE ENSINA SOBRE NOFAP 1.646 DIAS.
+          9: "Eu tive uma mudança absurda na minha APARÊNCIA depois de praticar nofap. 1654 DIAS", // Episódio 009 — Eu tive uma mudança absurda na minha APARÊNCIA depois de praticar nofap. 1654 DIAS
+          10: "VOCÊ VAI FICAR POBRE. 1.663 DIAS NOFAP.", // Episódio 010 — VOCÊ VAI FICAR POBRE. 1.663 DIAS NOFAP.
+          11: "ESSES 19 BIOHACKERS ME FIZERAM CHEGAR A 1.679 DIAS DE NOFAP.", // Episódio 011 — ESSES 19 BIOHACKERS ME FIZERAM CHEGAR A 1.679 DIAS DE NOFAP.
+          12: "O que acontece nos PRIMEIROS 30 DIAS longe da pornografia. 1.690 NO FAP", // Episódio 012 — O que acontece nos PRIMEIROS 30 DIAS longe da pornografia. 1.690 NO FAP
+          13: "Esse video chegará até você na hora CERTA. 1.692 DIAS | NOFAP", // Episódio 013 — Esse video chegará até você na hora CERTA. 1.692 DIAS | NOFAP
+          14: "Os poderes de Jesus e a Retenção Seminal. 1.694 Dias de Nofap", // Episódio 014 — Os poderes de Jesus e a Retenção Seminal. 1.694 Dias de Nofap
+          15: "MÁS - TURBAÇÃO é isso que você precisa entender. 1.702 dias de Nofap", // Episódio 015 — MÁS - TURBAÇÃO é isso que você precisa entender. 1.702 dias de Nofap
+          16: "ESSE É O JOGO DO NOFAP 1.722 Dias.", // Episódio 016 — ESSE É O JOGO DO NOFAP 1.722 Dias.
+          17: "RECAÍ NO NOFAP. 1.724 DIAS", // Episódio 017 — RECAÍ NO NOFAP. 1.724 DIAS
+          18: "AS MULHERES AMAM ISSO. (HOMENS QUE SE MAST). 1.741 Dias", // Episódio 018 — AS MULHERES AMAM ISSO. (HOMENS QUE SE MAST). 1.741 Dias
+          19: "DIA 1.742 DE NOFAP E A ESSA ALTURA DO CAMPEONATO ESTOU ARREPENDIDO", // Episódio 019 — DIA 1.742 DE NOFAP E A ESSA ALTURA DO CAMPEONATO ESTOU ARREPENDIDO
+          20: "O MESMO OLHAR DE SOLDADOS EM GUERRA ESTÁ APARECENDO EM MULHERES ONLINE", // Episódio 020 — O MESMO OLHAR DE SOLDADOS EM GUERRA ESTÁ APARECENDO EM MULHERES ONLINE
           21: "", // Título do Episódio 021
           22: "", // Título do Episódio 022
           23: "", // Título do Episódio 023
