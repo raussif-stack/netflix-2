@@ -597,5 +597,22 @@ const catalogo = [
         
         }) }
     ]
+  },
+  {
+    id: "lives-2",
+    titulo: "LIVES 2%",
+    categoria: "LIVES E TRANSMISSÕES",
+    descricao: "Lives, conversas e transmissões do universo 2%.",
+    destaque: false,
+    banner: "assets/banners/lives-2-banner.svg",
+    capa: "assets/posters/lives-2-poster.svg",
+    capaFallback: "assets/posters/lives-2-poster.svg",
+    temporadas: [
+      {
+        numero: 1,
+        titulo: "Temporada 1",
+        episodios: criarEpisodios(4, {}, {})
+      }
+    ]
   }
 ];

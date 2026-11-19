@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">LIVES 2%</title>
+  <desc id="desc">Banner provisório para a série LIVES 2%.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#35204f"/><stop offset="1" stop-color="#090b16"/></linearGradient>
+    <radialGradient id="glow"><stop stop-color="#b58cff" stop-opacity=".35"/><stop offset="1" stop-color="#b58cff" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <circle cx="1180" cy="390" r="510" fill="url(#glow)"/>
+  <circle cx="1180" cy="390" r="190" fill="none" stroke="#fff" stroke-opacity=".14" stroke-width="3"/>
+  <circle cx="1180" cy="390" r="135" fill="none" stroke="#fff" stroke-opacity=".22" stroke-width="3"/>
+  <path d="M1150 320 L1150 460 L1265 390 Z" fill="#fff" fill-opacity=".8"/>
+  <text x="120" y="390" fill="#fff" font-family="Arial,sans-serif" font-size="116" font-weight="700" letter-spacing="4">LIVES 2%</text>
+  <text x="128" y="465" fill="#fff" fill-opacity=".65" font-family="Arial,sans-serif" font-size="28" letter-spacing="9">LIVES E TRANSMISSÕES</text>
+  <text x="128" y="790" fill="#fff" fill-opacity=".45" font-family="Arial,sans-serif" font-size="20" letter-spacing="7">NETFLIX 2%  •  ARTE PROVISÓRIA</text>
+</svg>
