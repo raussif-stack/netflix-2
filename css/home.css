@@ -31,7 +31,8 @@
   background: rgba(0,0,0,.35); transition: width .25s, border-color .25s;
 }
 .search-box:focus-within { width: 235px; border-color: #fff; }
-.search-icon { font-size: 24px; line-height: 1; transform: rotate(-20deg); }
+.search-icon { flex: 0 0 auto; padding: 0; border: 0; color: white; background: transparent; cursor: pointer; font-size: 24px; line-height: 1; transform: rotate(-20deg); }
+.search-icon:hover { color: var(--red); }
 .search-box input { width: 100%; min-width: 0; color: white; border: 0; outline: 0; background: transparent; font-size: 12px; }
 .search-box input::placeholder { color: #c2c2c2; }
 .login-link { font-size: 13px; font-weight: 700; padding: 10px 16px; background: var(--red); border-radius: 3px; }
@@ -113,6 +114,66 @@
 .card-action:hover { color: #ff626a; }
 .empty-message { padding: 25px 0; color: var(--muted); }
 
+/* RESULTADOS DA PESQUISA DE EPISÓDIOS */
+.search-episode-card {
+  position: relative;
+  isolation: isolate;
+  min-width: 0;
+  min-height: 220px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 10px;
+  overflow: hidden;
+  background: linear-gradient(145deg, #302124, #171717 65%, #090909);
+  border: 1px solid rgba(255,255,255,.12);
+}
+.search-episode-thumbnail {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.search-episode-thumbnail[hidden] { display: none; }
+.search-episode-card::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,.08) 0%, rgba(0,0,0,.42) 38%, rgba(0,0,0,.94) 100%);
+}
+.search-episode-series {
+  margin: 0;
+  color: #d7a5a7;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+.search-episode-number {
+  color: #aaa;
+  font-size: 9px;
+  letter-spacing: 1.2px;
+}
+.search-episode-card h3 {
+  margin: 0;
+  color: #fff;
+  font: 600 19px/1.25 "Space Grotesk", sans-serif;
+  overflow-wrap: anywhere;
+}
+.search-episode-link {
+  margin-top: 8px;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+.search-episode-link:hover { color: #ff626a; }
+
+
 /* FAIXA E RODAPÉ */
 .quote-strip { margin: 0 var(--page-padding) 85px; padding: 28px 0; display: flex; align-items: center; gap: 18px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .quote-symbol { color: var(--red); font: 700 54px Georgia; line-height: .5; }
@@ -160,6 +221,8 @@
   .section-heading h2 { font-size: 25px; }
   .series-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
   .series-card { padding: 12px; }
+  .search-episode-card { min-height: 190px; padding: 14px; }
+  .search-episode-card h3 { font-size: 16px; }
   .card-content h3 { font-size: 16px; line-height: 1.15; }
   .card-content p { font-size: 10px; }
   .card-category { font-size: 7px; letter-spacing: 1px; }

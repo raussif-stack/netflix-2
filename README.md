@@ -1,3 +1,30 @@
+# NETFLIX 2% — Versão 1.10
+
+## Miniaturas dos episódios nos resultados da pesquisa
+
+- Os resultados de episódios agora exibem a miniatura do vídeo correspondente no YouTube, usando o ID já cadastrado em `js/catalogo.js`.
+- A miniatura é carregada diretamente de `img.youtube.com`; não é necessário salvar imagens manualmente no projeto.
+- Os textos dos resultados permanecem sobre a imagem, com uma camada escura em gradiente para manter a leitura.
+- Se um episódio não tiver ID do YouTube, o card mantém o fundo padrão.
+- Se a miniatura não carregar, ela é ocultada e o fundo padrão continua disponível.
+- O link de cada resultado continua abrindo o episódio correto no player.
+
+
+## Pesquisa de séries e episódios
+
+- A pesquisa da página inicial agora encontra séries pelo nome, categoria e descrição.
+- Também percorre os episódios das três séries e encontra a numeração (por exemplo, `Episódio 001`).
+- O campo `descricao` de cada episódio foi mantido como o espaço para você cadastrar o título real do episódio. Quando esse texto provisório for substituído, a pesquisa também encontrará o episódio pelo título informado.
+- Cada resultado de episódio contém um link direto para sua página no player.
+- A numeração original dos episódios e os IDs do YouTube foram preservados.
+- Não foi criado um campo de descrição separado nesta versão.
+
+## Sobre a tentativa anterior de imagem de fundo
+
+O ZIP recebido para esta versão não contém o arquivo `assets/imagemfundoprincipal.png` nem referências a esse nome nos arquivos da página inicial. Por isso, a versão 1.7 mantém o destaque original, que utiliza o banner da série em destaque. Nenhuma imagem de fundo adicional foi adicionada.
+
+---
+
 # NETFLIX 2% — Etapa 4: imagens e catálogo atualizado
 
 ## O que foi atualizado
@@ -153,3 +180,11 @@ Os caminhos das capas e banners cadastrados em `js/catalogo.js` foram mantidos. 
 A responsividade foi implementada em CSS. Ainda é importante conferir o resultado em aparelhos físicos, pois navegadores, proporções de tela e comportamento do YouTube podem variar.
 
 22222
+
+## Versão 1.8 — títulos individuais dos episódios
+
+- Os 254 episódios possuem um espaço individual para cadastrar seu título no objeto `titulosEpisodios` em `js/catalogo.js`.
+- A numeração `Episódio 001`, `Episódio 002` etc. continua separada e automática.
+- O campo `descricao` do episódio recebe o texto de `titulosEpisodios`, e a pesquisa da versão 1.7 já procura esse conteúdo.
+- Nenhum título foi inventado; os campos começam vazios.
+- Os IDs do YouTube foram preservados.
