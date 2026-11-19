@@ -372,73 +372,79 @@ const catalogo = [
           87: "O livro proibido que me fez praticar Retenção Seminal (ele elimina a Matrix)", // Episódio 087 — Título do Episódio 087
           88: "Seu testículo vale 4 milhões de euros (a Matrix quer ele)", // Episódio 088 — Título do Episódio 088
           89: "Pare de Goz@r e o Espelho Vai Começar a Te Respeitar", // Episódio 089 — Título do Episódio 089
-          90: "", // Título do Episódio 090
-          91: "", // Título do Episódio 091
-          92: "", // Título do Episódio 092
-          93: "", // Título do Episódio 093
-          94: "", // Título do Episódio 094
-          95: "", // Título do Episódio 095
-          96: "", // Título do Episódio 096
-          97: "", // Título do Episódio 097
-          98: "", // Título do Episódio 098
-          99: "", // Título do Episódio 099
-          100: "", // Título do Episódio 100
-          101: "", // Título do Episódio 101
-          102: "", // Título do Episódio 102
-          103: "", // Título do Episódio 103
-          104: "", // Título do Episódio 104
-          105: "", // Título do Episódio 105
-          106: "", // Título do Episódio 106
-          107: "", // Título do Episódio 107
-          108: "", // Título do Episódio 108
-          109: "", // Título do Episódio 109
-          110: "", // Título do Episódio 110
-          111: "", // Título do Episódio 111
-          112: "", // Título do Episódio 112
-          113: "", // Título do Episódio 113
-          114: "", // Título do Episódio 114
-          115: "", // Título do Episódio 115
-          116: "", // Título do Episódio 116
-          117: "", // Título do Episódio 117
-          118: "", // Título do Episódio 118
-          119: "", // Título do Episódio 119
-          120: "", // Título do Episódio 120
-          121: "", // Título do Episódio 121
-          122: "", // Título do Episódio 122
-          123: "", // Título do Episódio 123
-          124: "", // Título do Episódio 124
-          125: "", // Título do Episódio 125
-          126: "", // Título do Episódio 126
-          127: "", // Título do Episódio 127
-          128: "", // Título do Episódio 128
-          129: "", // Título do Episódio 129
-          130: "", // Título do Episódio 130
-          131: "", // Título do Episódio 131
-          132: "", // Título do Episódio 132
-          133: "", // Título do Episódio 133
-          134: "", // Título do Episódio 134
-          135: "", // Título do Episódio 135
-          136: "", // Título do Episódio 136
-          137: "", // Título do Episódio 137
-          138: "", // Título do Episódio 138
-          139: "", // Título do Episódio 139
-          140: "", // Título do Episódio 140
-          141: "", // Título do Episódio 141
-          142: "", // Título do Episódio 142
-          143: "", // Título do Episódio 143
-          144: "", // Título do Episódio 144
-          145: "", // Título do Episódio 145
-          146: "", // Título do Episódio 146
-          147: "", // Título do Episódio 147
-          148: "", // Título do Episódio 148
-          149: "", // Título do Episódio 149
-          150: "", // Título do Episódio 150
-          151: "", // Título do Episódio 151
-          152: "", // Título do Episódio 152
-          153: "", // Título do Episódio 153
-          154: "", // Título do Episódio 154
-          155: "", // Título do Episódio 155
-          156: "", // Título do Episódio 156
+          90: "Pare de Goz@r e Você Vai Assustar as Mulheres",
+          91: "Pare de Goz@r e Você Vai Ficar Inteligente Demais",
+          92: "Pare de Goz@r antes de 2026 (Alerta)",
+          93: "\"Pare de Goz@r\" A DURA VERDADE SOBRE A RETENÇÃO SEMINAL",
+          94: "TOME SOL NAS BOLAS",
+          95: "Pare de Goz@r e vire o Leonardo DiCaprio (GLOW UP)",
+          96: "Pare de Goz@r, igual o Elon Musk (a verdade por traz da genialidade)",
+          97: "Pare de Goz@r por 24h (a ciência não quer que você saiba)",
+          98: "Parei de Goz@r e me l@skei (cuidado com a Retenção Seminal)",
+          99: "Pare de Goz@r: Um grande erro que cometi (confissão)",
+          100: "Pare de Goz@ar e atraia Disciplina Riqueza e Sabedoria",
+          101: "Pare de Goz@r, as mulheres não querem que você aprenda isso (NÃO IGNORE)",
+
+          // Episódios 102–118
+          102: "Nunca Goz3 em uma Segunda feira (Truque da Matrix)",
+          103: "Eu não goz00 há anos — e tenho 15 hábitos estranhos",
+          104: "Depois de 7 meses Recaí no café... (mas transformei em poder)",
+          105: "Eu não goz00 a anos, mas não recomendo à todos (cuidado)",
+          106: "Eu parei de goz@r — E minha ansiedade desapareceu em 30 dias",
+          107: "12 anos em Retenção Seminal — o que acontece com o homem?",
+          108: "A Maior AULA Sobre Retenção Seminal da Internet (15 Perguntas Essenciais)",
+          109: "Faz 5 anos que parei de goz@r e aconteceu o que eles temiam (veja até o final)",
+          110: "Pare de Goz@r e ela vai te mandar mensagem. [Me agradeça]",
+          111: "O que acontece nos PRIMEIROS 90 dias LONGE DA PORNOGRAFIA. 1.918 NO FAP",
+          112: "Pare de Goz@r e comece a farmar AURA",
+          113: "Nofap atrai muitas mulheres (EFEITO COLATERAL)",
+          114: "Como parei com a pornografia e voltei ao modo analógico. 1.921 NO FAP",
+          115: "7 Mulheres implorando por você? (Inevitável) NO FAP",
+          116: "Dessexualizar sua Mente vai te dar poderes. (Teste já) NO FAP",
+          117: "Em Retenção Seminal 90% dos seus PROBLEMAS NÃO EXISTEM",
+          118: "ESSE INFLUENCIADOR DE +1Mi FALOU ISSO DE MIM (Absurdo)",
+
+          // Episódios 119–137
+          119: "ESSE INFLUENCIADOR NÃO SABE O QUE FALA (Conselho absurdo)",
+          120: "Essa Dra é GO FAP (Eu Reagi ao vídeo dela)",
+          121: "Se não vencer o 5 contra 1 você vai ser corno. (Presenciei ao vivo)",
+          122: "2026 VAI TE QUEBRAR (se você continuar goz@ndo como um idiota)",
+          123: "A TENTAÇÃO QUE QUASE ME FEZ CAIR (NOFAP NA ACADEMIA)",
+          124: "O Feminino só respeita saco cheio. (Retenção Seminal)",
+          125: "O famoso espanta tudo (mulher, dinheiro, sorte)",
+          126: "RETENÇÃO SEMINAL - Se você pratica, está correndo perigo. (Urgente)",
+          127: "Efeito Gentleman em 30 Dias de Retenção Seminal. (Atração)",
+          128: "O MAIOR ERRO DO NEYMAR FOI NÃO PRATICAR RETENÇÃO SEMINAL. (a falha do gênio)",
+          129: "EU NÃO GOOZO E NÃO OUÇO MÚSICA (estou vivendo?)",
+          130: "Não Goz3 em 2026 e IRÁ ACONTECER ESSAS 10 COISAS com você (NoFap)",
+          131: "VOCÊ ESTÁ USANDO O SEU TESÃO ERRADO (Evite esse Erro Agora)",
+          132: "Essa técnica ATIVARÁ SEUS PODERES usando a Retenção Seminal.(Segredo Revelado)",
+          133: "A Retenção Seminal te transformará em um Guerreiro no Jardim",
+          134: "NÃO OLHE PARA ELAS E PARE DE GOZ@R (Retenção Seminal)",
+          135: "ELAS NÃO TE QUEREM PORQUE ESTÃO VICIADAS EM PORNOGRAFIA (Retenção Seminal)",
+          136: "NOFAP: EDGING PARECE SER UM BOM ALIADO",
+          137: "JÁ FAZEM 5 ANOS QUE NÃO ACORDO MOLHADO - POLUÇÃO NOTURNA",
+
+          // Episódios 138–156
+          138: "Elas querem que você Goz3 (isso é loucura)",
+          139: "A TÉCNICA MAIS IDIOTA QUE VAI RESETAR SEU CÉREBRO DA PORNOGRAFIA",
+          140: "O fim da pornografia é isso que ocorreu no BBB",
+          141: "Cuidado com A FASE mais difícil da Retenção Seminal (o teste final)",
+          142: "Elas só precisam que você Goz3 e será o fim (Está na Bíblia)",
+          143: "Eu larguei a CLT depois que comecei a praticar Retenção Seminal",
+          144: "Os Poderes dos Gênios e a Retenção Seminal. 1.982 dias",
+          145: "Esse tipo de mulher vai aparecer quando você estiver em Nofap/Retenção Seminal",
+          146: "HACK ANTI PORNOGRAFIA PROIBIDO PELA ELITE (antiético)",
+          147: "O PORQUÊ A MASTURBAÇÃO FAZ MAL (EXPLICAÇÃO ASSUSTADORA)",
+          148: "Como parar com as Recaídas Seguidas na Pornografia | Retenção Seminal",
+          149: "Epstein tinha 142 de testosterona (Retenção de Sêmen)",
+          150: "Carnaval é um Portal para o INF3RNO (Retenção de Sêmen)",
+          151: "OS 7 NÍVEIS DA RETENÇÃO SEMINAL (os 6° e 7° são absurdos)",
+          152: "DESAPRENDA TUDO QUE VOCÊ APRENDEU SOBRE S3X0 (14 conselhos)",
+          153: "Infelizmente eu tive esses 15 EFEITOS COLATERAIS após muitos anos de Retenção de Sêmen",
+          154: "Nofap não funciona e eu explico o porquê (me desculpe)",
+          155: "VÍDEOS DE 2020 QUANDO EU ESTAVA COM 30 DIAS DE NOFAP (VÍDEO RARO)",
+          156: "PARE DE GOZ@R E DESBLOQUEIE SEU ALTER EGO PRIME. (Assustador)",
           157: "", // Título do Episódio 157
           158: "", // Título do Episódio 158
           159: "", // Título do Episódio 159
