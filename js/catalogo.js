@@ -24,7 +24,6 @@ function criarEpisodios(quantidade, idsVideos = {}, titulosEpisodios = {}) {
 const catalogo = [
   {
     id: "vida-2",
-    numero: "01",
     titulo: "A VIDA 2%",
     categoria: "DESENVOLVIMENTO PESSOAL",
     descricao: "Uma série sobre escolhas, disciplina e transformação. Um convite para questionar hábitos e construir uma vida com mais propósito.",
@@ -547,7 +546,6 @@ const catalogo = [
   },
   {
     id: "retencao-48-leis",
-    numero: "02",
     titulo: "AS 48 LEIS DA RETENÇÃO SEMINAL",
     categoria: "AUTOCONHECIMENTO",
     descricao: "Uma jornada de reflexões sobre autocontrole, hábitos e desenvolvimento pessoal.",
@@ -578,7 +576,6 @@ const catalogo = [
   },
   {
     id: "voz-dos-2",
-    numero: "03",
     titulo: "A VOZ DOS 2%",
     categoria: "REFLEXÕES E CONHECIMENTO",
     descricao: "Ideias, conversas e perspectivas para olhar o mundo por outros ângulos e estimular novas reflexões.",

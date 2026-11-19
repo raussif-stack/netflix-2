@@ -19,11 +19,14 @@ function renderizarSeries(lista) {
   seriesGrid.innerHTML = "";
 
   lista.forEach((serie) => {
+    const posicaoNoCatalogo = catalogo.indexOf(serie) + 1;
+    const numeroExibido = String(posicaoNoCatalogo).padStart(2, "0");
+    const totalSeries = String(catalogo.length).padStart(2, "0");
     const card = document.createElement("article");
     card.className = "series-card";
     card.innerHTML = `
       <img class="card-poster" src="${serie.capa}" alt="" loading="lazy">
-      <span class="card-number">${serie.numero} / 03</span>
+      <span class="card-number">${numeroExibido} / ${totalSeries}</span>
       <div class="card-content">
         <p class="card-category">${serie.categoria}</p>
         <h3>${serie.titulo}</h3>
