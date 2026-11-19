@@ -40,3 +40,4 @@ Vídeos privados, removidos, inválidos ou indisponíveis para a API permanecem 
 - Antes de alterar `js/catalogo.js`, o script cria `js/catalogo.js.backup`.
 - Títulos, IDs e durações já preenchidas são preservados.
 - O script não roda no navegador nem é executado pelos visitantes do site.
+
