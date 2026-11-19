@@ -338,7 +338,7 @@ const catalogo = [
           53: "O Único Benefício que Eu Tive Assistindo Pornografia (e é benefício mesmo)", // Episódio 053 — Título do Episódio 053
           54: "Como Jesus venceria a pornografia hoje (ele deixou códigos)", // Episódio 054 — Título do Episódio 054
           55: "Por que o NoFap pode acabar te destruindo (é isso mesmo que você leu) (7 perigos)", // Episódio 055 — Título do Episódio 055
-          56: "A Bíblia tentou nos avisar sobre o NoFap (e o sistema escondido)", // Episódio 056 — Título do Episódio 056
+          56: "A Bíblia tentou nos avisar sobre o NoFap (e o sistema escondeu)", // Episódio 056 — Título do Episódio 056
           57: "Transmutar energia sexual é impossível no Nofap [até você fazer isso]", // Episódio 057 — Título do Episódio 057
           58: "NoFap | Como criar AUTOCONFIANÇA (códigos de Desbloqueio)", // Episódio 058 — Título do Episódio 058
           59: "Eu nem queria contar isso (mas é preciso). A verdade sobre o NoFap", // Episódio 059 — Título do Episódio 059
