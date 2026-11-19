@@ -265,8 +265,6 @@ async function executar() {
   let atualizados = 0;
   let naoEncontrados = 0;
 
-  let codigoFinal = habilitarCampoDuracao(codigoOriginal);
-
   for (const serie of catalogo) {
     for (const temporada of serie.temporadas || []) {
       const chamada = chamadas[indiceChamada++];
@@ -316,12 +314,18 @@ async function executar() {
   }
 
   if (atualizados > 0) {
+    // Primeiro aplica os offsets calculados sobre o código original.
+    // Só depois altera a assinatura/função, para não deslocar os índices.
+    let codigoFinal = codigoOriginal;
+
     for (const item of substituicoes.sort((a, b) => b.inicio - a.inicio)) {
       codigoFinal =
         codigoFinal.slice(0, item.inicio) +
         item.texto +
         codigoFinal.slice(item.fim);
     }
+
+    codigoFinal = habilitarCampoDuracao(codigoFinal);
 
     // Confere se o catálogo resultante continua executável antes de gravar.
     carregarCatalogo(codigoFinal);
@@ -343,5 +347,3 @@ executar().catch((erro) => {
   console.error(`\nERRO: ${erro.message}`);
   process.exitCode = 1;
 });
-
-   
