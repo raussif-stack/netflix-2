@@ -282,8 +282,9 @@ const catalogo = [
         245: "", // Episódio 245
         }, {
           // Escreva o título de cada episódio entre aspas. Ex.: 1: "Meu título"
-          1: "Título", // Título do Episódio 001
-          2: "", // Título do Episódio 002
+          1: "Decidi vir para o YouTube e falar sobre a verdade do NoFap. 1.599 dias", // Episódio 001 — Decidi vir para o YouTube e falar sobre a verdade do NoFap. 1.599 dias
+
+          2: "Você tem essa sensação ao praticar NoFap? (hipnotizado). 1600 dias", // Episódio 002 — Você tem essa sensação ao praticar NoFap? (hipnotizado). 1600 dias
           3: "", // Título do Episódio 003
           4: "", // Título do Episódio 004
           5: "", // Título do Episódio 005
