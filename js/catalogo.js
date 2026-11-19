@@ -445,40 +445,47 @@ const catalogo = [
           154: "Nofap não funciona e eu explico o porquê (me desculpe)",
           155: "VÍDEOS DE 2020 QUANDO EU ESTAVA COM 30 DIAS DE NOFAP (VÍDEO RARO)",
           156: "PARE DE GOZ@R E DESBLOQUEIE SEU ALTER EGO PRIME. (Assustador)",
-          157: "", // Título do Episódio 157
-          158: "", // Título do Episódio 158
-          159: "", // Título do Episódio 159
-          160: "", // Título do Episódio 160
-          161: "", // Título do Episódio 161
-          162: "", // Título do Episódio 162
-          163: "", // Título do Episódio 163
-          164: "", // Título do Episódio 164
-          165: "", // Título do Episódio 165
-          166: "", // Título do Episódio 166
-          167: "", // Título do Episódio 167
-          168: "", // Título do Episódio 168
-          169: "", // Título do Episódio 169
-          170: "", // Título do Episódio 170
-          171: "", // Título do Episódio 171
-          172: "", // Título do Episódio 172
-          173: "", // Título do Episódio 173
-          174: "", // Título do Episódio 174
-          175: "", // Título do Episódio 175
-          176: "", // Título do Episódio 176
-          177: "", // Título do Episódio 177
-          178: "", // Título do Episódio 178
-          179: "", // Título do Episódio 179
-          180: "", // Título do Episódio 180
-          181: "", // Título do Episódio 181
-          182: "", // Título do Episódio 182
-          183: "", // Título do Episódio 183
-          184: "", // Título do Episódio 184
-          185: "", // Título do Episódio 185
-          186: "", // Título do Episódio 186
-          187: "", // Título do Episódio 187
-          188: "", // Título do Episódio 188
-          189: "", // Título do Episódio 189
-          190: "", // Título do Episódio 190
+          157: "O Segredo Sexu4l Antigo Que Foi Escondido dos Homens Modernos (Retenção de Sêmen)",
+          158: "NoFap me deixou CARECA e agora?",
+          159: "RECOMEÇANDO APÓS A RECAÍDA.",
+          160: "SE VOCÊ ACORDA DURO, CUIDADO!",
+          161: "Eu preciso me Retratar",
+          162: "O Experimento Que Eles Esperam Que Você Nunca Complete (90 Dias) Sublimação de Sêmen",
+          163: "O BRASIL entrará em guerra. Pare de Goz@r",
+          164: "Antes Que Tudo Acabe, Você Precisa Entender Isso",
+          165: "Por Que Homens Fracos Odeiam Retenção Seminal?",
+          166: "Seu Espelho está TENTANDO TE AVISAR | Sublimação do Sêmen",
+
+          // Vídeo extra — sem numeração de episódio
+          "extra": "#Lei 5: A Energia Que Não Circula, Estagna e Adoece o Rei",
+
+          // Episódios 167–176
+          167: "Eles(as) NÃO gostam quando você para de ESVAZIAR (cuidado)",
+          168: "POTENCIALIZE a Retenção Seminal",
+          169: "Retenção Seminal te fará um Cavalo Selvagem",
+          170: "EM RETENÇÃO SEMINAL Elas vão te mandar mensagem todo dia",
+          171: "Se você quer DOMINAR A RETENÇÃO Seminal, grave estas 15 regras",
+          172: "EM RETENÇÃO SEMINAL Você vai atrair mulheres naturalmente... e vai parar de se importar",
+          173: "Em retenção Seminal: FUJA DE MULHER CASADA",
+          174: "EM RETENÇÃO SEMINAL, Jesus ensinou a sair da Matrix",
+          175: "RETENÇÃO SEMINAL + JEJUM + VISUALIZAÇÃO = O CÓDIGO DA ENERGIA INFINITA",
+          176: "EM RETENÇÃO SEMINAL você é o MEL que elas querem. (Atração)",
+
+          // Episódios 177–190
+          177: "RETENÇÃO SEMINAL vs VENVANSE, QUAL O MAIS PODEROSO?",
+          178: "EM RETENÇÃO SEMINAL, PARA ELAS VOCÊ SE TORNARÁ UM ESCROTO",
+          179: "EM RETENÇÃO SEMINAL VOCÊ PASSARÁ A TER ESSES 7 PODERES (Use com cuidado)",
+          180: "DESCOBRI QUE RETENÇÃO SEMINAL É EFEITO PLACEBO (Droga)",
+          181: "EU PRATICO RETENÇÃO SEMINAL E MAIS 26 HÁBITOS QUE VÃO CONTRA A MATRIX",
+          182: "A BRONHA É A KRYPTONITA DO HOMEM",
+          183: "EM 30 DIAS DE RETENÇÃO SEMINAL VOCÊ TERÁ UM NOVO CPF",
+          184: "O MARANHENSE QUE VENDEU OS TESTÍCULOS POR 13,5 MILHÕES (Deu ruim)",
+          185: "A RETENÇÃO SEMINAL NÃO VAI TER PENA DE VOCÊ",
+          186: "Toda Vez Que Você Ejacula, Seu Corpo PAGA Isso...",
+          187: "EU PENSEI EM PARAR COM A RETENÇÃO",
+          188: "NÃO ACREDITE EM QUEM ENSINA NOFAP/RETENÇÃO SEMINAL",
+          189: "VOCÊ FOI ENGANADO: O Que os Antigos Sabiam Sobre Energia Sexual",
+          190: "O Fardo De Estar Mais Desperto Que a Maioria",
           191: "", // Título do Episódio 191
           192: "", // Título do Episódio 192
           193: "", // Título do Episódio 193
