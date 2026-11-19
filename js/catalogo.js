@@ -303,75 +303,75 @@ const catalogo = [
           18: "AS MULHERES AMAM ISSO. (HOMENS QUE SE MAST). 1.741 Dias", // Episódio 018 — AS MULHERES AMAM ISSO. (HOMENS QUE SE MAST). 1.741 Dias
           19: "DIA 1.742 DE NOFAP E A ESSA ALTURA DO CAMPEONATO ESTOU ARREPENDIDO", // Episódio 019 — DIA 1.742 DE NOFAP E A ESSA ALTURA DO CAMPEONATO ESTOU ARREPENDIDO
           20: "O MESMO OLHAR DE SOLDADOS EM GUERRA ESTÁ APARECENDO EM MULHERES ONLINE", // Episódio 020 — O MESMO OLHAR DE SOLDADOS EM GUERRA ESTÁ APARECENDO EM MULHERES ONLINE
-          21: "", // Título do Episódio 021
-          22: "", // Título do Episódio 022
-          23: "", // Título do Episódio 023
-          24: "", // Título do Episódio 024
-          25: "", // Título do Episódio 025
-          26: "", // Título do Episódio 026
-          27: "", // Título do Episódio 027
-          28: "", // Título do Episódio 028
-          29: "", // Título do Episódio 029
-          30: "", // Título do Episódio 030
-          31: "", // Título do Episódio 031
-          32: "", // Título do Episódio 032
-          33: "", // Título do Episódio 033
-          34: "", // Título do Episódio 034
-          35: "", // Título do Episódio 035
-          36: "", // Título do Episódio 036
-          37: "", // Título do Episódio 037
-          38: "", // Título do Episódio 038
-          39: "", // Título do Episódio 039
-          40: "", // Título do Episódio 040
-          41: "", // Título do Episódio 041
-          42: "A Lua Está Fazendo Você Recaír no NoFap (Ninguém Te Contou Isso)", // Título do Episódio 042
-          43: "", // Título do Episódio 043
-          44: "", // Título do Episódio 044
-          45: "", // Título do Episódio 045
-          46: "", // Título do Episódio 046
-          47: "", // Título do Episódio 047
-          48: "", // Título do Episódio 048
-          49: "", // Título do Episódio 049
-          50: "", // Título do Episódio 050
-          51: "", // Título do Episódio 051
-          52: "", // Título do Episódio 052
-          53: "", // Título do Episódio 053
-          54: "", // Título do Episódio 054
-          55: "", // Título do Episódio 055
-          56: "", // Título do Episódio 056
-          57: "", // Título do Episódio 057
-          58: "", // Título do Episódio 058
-          59: "", // Título do Episódio 059
-          60: "", // Título do Episódio 060
-          61: "", // Título do Episódio 061
-          62: "", // Título do Episódio 062
-          63: "", // Título do Episódio 063
-          64: "", // Título do Episódio 064
-          65: "", // Título do Episódio 065
-          66: "", // Título do Episódio 066
-          67: "", // Título do Episódio 067
-          68: "", // Título do Episódio 068
-          69: "", // Título do Episódio 069
-          70: "", // Título do Episódio 070
-          71: "", // Título do Episódio 071
-          72: "", // Título do Episódio 072
-          73: "", // Título do Episódio 073
-          74: "", // Título do Episódio 074
-          75: "", // Título do Episódio 075
-          76: "", // Título do Episódio 076
-          77: "", // Título do Episódio 077
-          78: "", // Título do Episódio 078
-          79: "", // Título do Episódio 079
-          80: "", // Título do Episódio 080
-          81: "", // Título do Episódio 081
-          82: "", // Título do Episódio 082
-          83: "", // Título do Episódio 083
-          84: "", // Título do Episódio 084
-          85: "", // Título do Episódio 085
-          86: "", // Título do Episódio 086
-          87: "", // Título do Episódio 087
-          88: "", // Título do Episódio 088
-          89: "", // Título do Episódio 089
+          21: "JOGUE FORA SEU CAFÉ (125 dias sem café e o NoFap mudou de nível)", // Episódio 021 — Título do Episódio 021
+          22: "Eles querem que você recaia no NOFAP. 1751 DIAS", // Episódio 022 — Título do Episódio 022
+          23: "Soldado, você foi programado. (Aqui começa a sua mudança no NoFap)", // Episódio 023 — Título do Episódio 023
+          24: "ACONTECEU ISSO COM MINHA PRÓSTATA (depois de mais de 1.700 dias)", // Episódio 024 — Título do Episódio 024
+          25: "O perigo da POLUÇÃO NOTURNA (veja se acontece com você) 1.755 Dias NoFap", // Episódio 025 — Título do Episódio 025
+          26: "Fiquei broxa? (Depois de +1.700 dias de NoFap)", // Episódio 026 — Título do Episódio 026
+          27: "Não compre nenhum curso de NoFap (eu vou te ensinar tudo)", // Episódio 027 — Título do Episódio 027
+          28: "Essas 10 maldições seguirão (aqueles que não praticam NoFap)", // Episódio 028 — Título do Episódio 028
+          29: "Eu anotei os meus 90 dias (REBOOT) de NOFAP e vou te contar tudo", // Episódio 029 — Título do Episódio 029
+          30: "Sansão caiu... José venceu. A diferença estava no CONTROLE DA LIBIDO", // Episódio 030 — Título do Episódio 030
+          31: "NoFap + Minimalismo: O Combo que Transforma Qualquer Homem Fraco em Disciplinado.", // Episódio 031 — Título do Episódio 031
+          32: "Mentiram pra você? Magnetismo Pessoal no NoFap.", // Episódio 032 — Título do Episódio 032
+          33: "Descobri a Verdadeira Pílula do Filme Sem Limites (E Não É o Que Você Pensa) No fap", // Episódio 033 — Título do Episódio 033
+          34: "Fim do canal? Eu também sou uma fraude no NoFap", // Episódio 034 — Título do Episódio 034
+          35: "Fora do algoritmo. Apenas 1% dos homens vão assistir. PodcastNoFap 01", // Episódio 035 — Título do Episódio 035
+          36: "Esses motivos farão você começar a praticar Nofap", // Episódio 036 — Título do Episódio 036
+          37: "Depois desse conselho você nunca mais vai recair", // Episódio 037 — Título do Episódio 037
+          38: "Os 5 efeitos 'obscuros' do NoFap que não te contam", // Episódio 038 — Título do Episódio 038
+          39: "Eu só consegui 1.779 dias porque faço essas 5 práticas de transmutação no NoFap", // Episódio 039 — Título do Episódio 039
+          40: "Com NoFap eu só faço 2 refeições por dia", // Episódio 040 — Título do Episódio 040
+          41: "Hoje a pornografia não tem mais nenhum efeito sobre mim (Como chegar nesse nível?)", // Episódio 041 — Título do Episódio 041
+          42: "A Lua Está Fazendo Você Recaír no NoFap (Ninguém Te Contou Isso)", // Episódio 042 — Título do Episódio 042
+          43: "Como sobreviver até 2030 com a retenção seminal (eles não querem que você chegue)", // Episódio 043 — Título do Episódio 043
+          44: "Chega! Vou Sumir das Redes por 6 Meses (Monk Mode)", // Episódio 044 — Título do Episódio 044
+          45: "Conversei com um FUNCIONÁRIO de Only F. (o que ele revelou é assustador)", // Episódio 045 — Título do Episódio 045
+          46: "Monk Mode: O Que Acontece com Seu Cérebro em 72 Horas (loucura)", // Episódio 046 — Título do Episódio 046
+          47: "Se Você Ainda Não Casou, Talvez Nunca Vá Casar Mesmo...", // Episódio 047 — Título do Episódio 047
+          48: "E se você parasse de se masturbar? (Eu fiquei 5 anos) No FAP", // Episódio 048 — Título do Episódio 048
+          49: "As 4 Modalidades do NoFap que Podem Transformar Sua Vida (a 4ª é a mais poderosa)", // Episódio 049 — Título do Episódio 049
+          50: "De Tímido a Magnético: Como o Neurofap Mudou Minha Vida! (Teste em você)", // Episódio 050 — Título do Episódio 050
+          51: "Felca revelou o que ninguém tem coragem de falar sobre a pornografia (adultização)", // Episódio 051 — Título do Episódio 051
+          52: "A dica mais estranha que te impede de recair no NoFap (aplique em 3 segundos)", // Episódio 052 — Título do Episódio 052
+          53: "O Único Benefício que Eu Tive Assistindo Pornografia (e é benefício mesmo)", // Episódio 053 — Título do Episódio 053
+          54: "Como Jesus venceria a pornografia hoje (ele deixou códigos)", // Episódio 054 — Título do Episódio 054
+          55: "Por que o NoFap pode acabar te destruindo (é isso mesmo que você leu) (7 perigos)", // Episódio 055 — Título do Episódio 055
+          56: "A Bíblia tentou nos avisar sobre o NoFap (e o sistema escondido)", // Episódio 056 — Título do Episódio 056
+          57: "Transmutar energia sexual é impossível no Nofap [até você fazer isso]", // Episódio 057 — Título do Episódio 057
+          58: "NoFap | Como criar AUTOCONFIANÇA (códigos de Desbloqueio)", // Episódio 058 — Título do Episódio 058
+          59: "Eu nem queria contar isso (mas é preciso). A verdade sobre o NoFap", // Episódio 059 — Título do Episódio 059
+          60: "A vida dos 2%", // Episódio 060 — Título do Episódio 060
+          61: "O que a pornografia está fazendo com a geração Z", // Episódio 061 — Título do Episódio 061
+          62: "O SEGREDO DOS 2%: Como avançar 10 anos em 1 (NoFap)", // Episódio 062 — Título do Episódio 062
+          63: "NoFap September é uma mentira? (Veja até o final)", // Episódio 063 — Título do Episódio 063
+          64: "Pare de Ser Bonzinho Se Quer Vencer a Pornografia. (Isso vai doer)", // Episódio 064 — Título do Episódio 064
+          65: "EU FIQUEI 1.834 DIAS SEM GOZ@R E DESCOBRI UM MÉTODO INFALÍVEL", // Episódio 065 — Título do Episódio 065
+          66: "EU DESCOBRI QUE A P@RN@GRAFI@ DESTRUIU MINHA DOPAMINA", // Episódio 066 — Título do Episódio 066
+          67: "EU RESPONDI AS PERGUNTAS MAIS POLÊMICAS DO NOFAP (e choquei a galera)", // Episódio 067 — Título do Episódio 067
+          68: "A TÉCNICA DE LAVAGEM CEREBRAL QUE ME DEIXOU 1.837 DIAS SEM M@STURB@Ç@O", // Episódio 068 — Título do Episódio 068
+          69: "EU ENCONTREI ESSE DETALHE em Pense e Enriqueça... e mudou a forma como vejo o Sexo e a Riqueza", // Episódio 069 — Título do Episódio 069
+          70: "CONVERSEI COM A PORNOGR@FI@ (E PERGUNTEI COMO ELA TE CONTROLA)", // Episódio 070 — Título do Episódio 070
+          71: "O Maldito Segredo que Te Torna Repelente para Elas", // Episódio 071 — Título do Episódio 071
+          72: "NoFap dia 1.843: É isso que está acontecendo comigo", // Episódio 072 — Título do Episódio 072
+          73: "Você precisa praticar NoFap Antes de 2030 (urgente)", // Episódio 073 — Título do Episódio 073
+          74: "Respondi às críticas de médicos e psicólogos sobre o NoFap (mentirosos)", // Episódio 074 — Título do Episódio 074
+          75: "1 Homem Sem Pornografia VS 30 Viciados – A Verdade Chocante", // Episódio 075 — Título do Episódio 075
+          76: "Brainrot & Pornografia – A Combinação Que Está Matando a Sua Mente", // Episódio 076 — Título do Episódio 076
+          77: "Se você e ela assistem pornografia – Estejam preparados para se separarem (AVISO)", // Episódio 077 — Título do Episódio 077
+          78: "POR QUE MILHÕES DE HOMENS NÃO TR@NSAM SEM TADALAFILA (CRISE)", // Episódio 078 — Título do Episódio 078
+          79: "O fim do Instagram (vou excluir minha conta)", // Episódio 079 — Título do Episódio 079
+          80: "Ouça esse áudio todos os Dias – Transforme-se em 21 Dias (Não conte a ninguém)", // Episódio 080 — Título do Episódio 080
+          81: "EU MEDI A MINHA TESTOSTERONA DEPOIS DE 5 ANOS DE NOFAP (susto)", // Episódio 081 — Título do Episódio 081
+          82: "ENERGIA INFINITA (Assista até o fim)", // Episódio 082 — Título do Episódio 082
+          83: "Como é a vida de quem não goz@", // Episódio 083 — Título do Episódio 083
+          84: "A Matrix quer seu sêmen", // Episódio 084 — Título do Episódio 084
+          85: "Protocolo RECARGA - o que fazer imediatamente após uma recaída", // Episódio 085 — Título do Episódio 085
+          86: "Você não foi criado para goz@r (Matrix)", // Episódio 086 — Título do Episódio 086
+          87: "O livro proibido que me fez praticar Retenção Seminal (ele elimina a Matrix)", // Episódio 087 — Título do Episódio 087
+          88: "Seu testículo vale 4 milhões de euros (a Matrix quer ele)", // Episódio 088 — Título do Episódio 088
+          89: "Pare de Goz@r e o Espelho Vai Começar a Te Respeitar", // Episódio 089 — Título do Episódio 089
           90: "", // Título do Episódio 090
           91: "", // Título do Episódio 091
           92: "", // Título do Episódio 092
