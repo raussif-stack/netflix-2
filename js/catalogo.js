@@ -485,59 +485,59 @@ const catalogo = [
           188: "NÃO ACREDITE EM QUEM ENSINA NOFAP/RETENÇÃO SEMINAL",
           189: "VOCÊ FOI ENGANADO: O Que os Antigos Sabiam Sobre Energia Sexual",
           190: "O Fardo De Estar Mais Desperto Que a Maioria",
-          191: "", // Título do Episódio 191
-          192: "", // Título do Episódio 192
-          193: "", // Título do Episódio 193
-          194: "", // Título do Episódio 194
-          195: "", // Título do Episódio 195
-          196: "", // Título do Episódio 196
-          197: "", // Título do Episódio 197
-          198: "", // Título do Episódio 198
-          199: "", // Título do Episódio 199
-          200: "", // Título do Episódio 200
-          201: "", // Título do Episódio 201
-          202: "", // Título do Episódio 202
-          203: "", // Título do Episódio 203
-          204: "", // Título do Episódio 204
-          205: "", // Título do Episódio 205
-          206: "", // Título do Episódio 206
-          207: "", // Título do Episódio 207
-          208: "", // Título do Episódio 208
-          209: "", // Título do Episódio 209
-          210: "", // Título do Episódio 210
-          211: "", // Título do Episódio 211
-          212: "", // Título do Episódio 212
-          213: "", // Título do Episódio 213
-          214: "", // Título do Episódio 214
-          215: "", // Título do Episódio 215
-          216: "", // Título do Episódio 216
-          217: "", // Título do Episódio 217
-          218: "", // Título do Episódio 218
-          219: "", // Título do Episódio 219
-          220: "", // Título do Episódio 220
-          221: "", // Título do Episódio 221
-          222: "", // Título do Episódio 222
-          223: "", // Título do Episódio 223
-          224: "", // Título do Episódio 224
-          225: "", // Título do Episódio 225
-          226: "", // Título do Episódio 226
-          227: "", // Título do Episódio 227
-          228: "", // Título do Episódio 228
-          229: "", // Título do Episódio 229
-          230: "", // Título do Episódio 230
-          231: "", // Título do Episódio 231
-          232: "", // Título do Episódio 232
-          233: "", // Título do Episódio 233
-          234: "", // Título do Episódio 234
-          235: "", // Título do Episódio 235
-          236: "", // Título do Episódio 236
-          237: "", // Título do Episódio 237
-          238: "", // Título do Episódio 238
-          239: "", // Título do Episódio 239
-          240: "", // Título do Episódio 240
-          241: "", // Título do Episódio 241
-          242: "", // Título do Episódio 242
-          243: "", // Título do Episódio 243
+          191: "EM RETENÇÃO SEMINAL: MENTE VAZIA É OFICINA DE DEUS",
+          192: "Pare de Goz@r e vire o Centro. (Retenção de Sêmen)",
+          193: "Se você continua recaindo com Pornografia, isso está destruindo sua mente",
+          194: "Sua bronha faz uma mulher perder o interesse instantaneamente",
+          195: "Dia 2.068 de Retenção Seminal | Como desenvolver presença masculina real",
+          196: "Retenção Seminal: Nesse mundo SUJO, jogue de hack. Não seja bobo",
+          197: "RECADO DE DEUS: RELAXE, E NÃO GOZ3.",
+          198: "Em Retenção Seminal: Quanto mais carente você está, menos atraente você se torna",
+          199: "5 MOTIVOS PRA VOCÊ NÃO PRATICAR NOFAP",
+          200: "Em Retenção Seminal seu Patrão vai te Demitir",
+          201: "Ejaculação: Os homens mais fracos da geração acham que isso é normal",
+          202: "30 dias Limpo... e você vai odiar a versão que aceitava ser",
+          203: "Essa é a minha Ritalina e o meu Venvanse (Retenção de Sêmen)",
+          204: "A idade que todo homem comum teme (menos os 2%) Retenção Seminal",
+          205: "A RETENÇÃO SEMINAL ACABOU ME AFETANDO. (É hora de parar?)",
+          206: "EM RETENÇÃO SEMINAL VOCÊ FICARÁ FRENTE A FRENTE COM O DIABO | NoFaP",
+          207: "SE VOCÊ ACORDA COM TESÃO, VOCÊ É UM HOMEM PODEROSO | Emoção do Sexo",
+          208: "PORQUÊ EU DECIDI COMER SÓ CARNE, SAL E ÁGUA PRO RESTO DA VIDA (Lion Diet)",
+          209: "EU NÃO SOU UM SER HUMANO (Retenção Seminal)",
+          210: "Como criar Tesão sem nem abrir a boca (Retenção de Sêmen)",
+          211: "Tenho 30 anos, não trabalho, não tenho relação sexual... sou um peso?",
+          212: "COMEÇOU A DAR TUDO ERRADO — 2.100 DIAS DE RETENÇÃO SEMINAL",
+          213: "Os 98% que não fazem Retenção Seminal são BOT (Veja se você é um)",
+          214: "Os Poderes Que Estou tendo com 2.105 dias de Retenção Seminal",
+          215: "Aos 2.106 Dias Eu Desisti do Sucesso (Retenção Seminal)",
+          216: "Respondendo os comentários dos 98% sobre Retenção Seminal (Polêmico)",
+          217: "EM RETENÇÃO VOCÊ SERÁ UM FOLGADO, INSUPORTÁVEL E METIDO (Iá ele)",
+          218: "Recaindo nenhuma mulher te quer, nem sua MÃE.",
+          219: "Nenhum Pastor, Padre ou Guru te ensinou isso. (O Deus da Pureza Sexual)",
+          220: "Como usar a Energia Sexual para não ficar Doente.",
+          221: "O NoFap Está Criando Homens Fracos (E Quase Ninguém Percebeu)",
+          222: "JOGADORES DA NBA FICARAM 10 SEMANAS SEM RELAÇÃO COM AS PARCEIRAS (Retenção Seminal?)",
+          223: "As 8 maldições da masturbação",
+          224: "A Retenção Seminal está me Destruindo.",
+          225: "Se torne um mutante com a Retenção Seminal",
+          226: "Se você é casado, cuidado com a Retenção Seminal",
+          227: "Desabafo",
+          228: "6° Dia... Recomeçando",
+          229: "Sem Café/Cafeína e Bronha | Dia 7",
+          230: "Bronha e café/cafeína te deixa sem essas vitaminas | Dia 8",
+          231: "ISSO ESTÁ ADOECENDO SEU CÉREBRO | DIA 12",
+          232: "Em Retenção Seminal Você vive pouco como um Zé",
+          233: "EFEITO PRONOIA | NoFap",
+          234: "EFEITO METANOIA | Retenção Seminal",
+          235: "EFEITO CELEBRIDADE | NoFap",
+          236: "RETENÇÃO SEMINAL | O EFEITO EXPANSÃO",
+          237: "O EFEITO SINGULARIDADE | NoFap",
+          238: "O EFEITO NPC | NoFap (Um perigo)",
+          239: "NoFap: O EFEITO FLUXO (Tudo Acontece Sem Esforço)",
+          240: "Masturbação é MAGIA?",
+          241: "Einstein ensinou o TRUQUE para largar a Masturbação",
+          242: "A Retenção Seminal te transforma em uma Anomalia 👁️",
+          243: "Em Retenção Seminal Tudo vai dar errado até que..."
           244: "", // Título do Episódio 244
           245: "", // Título do Episódio 245
         
