@@ -538,7 +538,7 @@ const catalogo = [
           241: "Einstein ensinou o TRUQUE para largar a Masturbação",
           242: "A Retenção Seminal te transforma em uma Anomalia 👁️",
           243: "Em Retenção Seminal Tudo vai dar errado até que...",
-          244: "", // Título do Episódio 244
+          244: "Se a bronha não te mata, aleja", // Título do Episódio 244
           245: "", // Título do Episódio 245
         
         }, {
@@ -772,12 +772,12 @@ const catalogo = [
         6: "6eoSYw6Rdas", // Episódio 006
         }, {
           // Escreva o título de cada episódio entre aspas. Ex.: 1: "Meu título"
-          1: "Título", // Título do Episódio 001
-          2: "", // Título do Episódio 002
-          3: "", // Título do Episódio 003
-          4: "", // Título do Episódio 004
-          5: "", // Título do Episódio 005
-          6: "", // Título do Episódio 006
+          1: "LEI #1 Preserve a Coroa Que Ninguém Pode Ver (RETENÇÃO SEMINAL)", // Título do Episódio 001
+          2: "LEI #2 Transforme Desejo(t3são) em Ação", // Título do Episódio 002
+          3: "LEI #3 O Magnetismo É o Efeito da Retenção Seminal, Não do Esforço", // Título do Episódio 003
+          4: "LEI #4 Domine o Intervalo e Você Domina o Impulso (Retenção de Sêmen", // Título do Episódio 004
+          5: "LEi #5 A Energia Que Não Circula, Estagna e Adoece o Rei", // Título do Episódio 005
+          6: "LEI #6 O Sêmen que é Guardado Sem Renovação, Perde o Espírito da Prática. (Retenção Seminal)", // Título do Episódio 006
         
         }, {
                 "1": "17 min",
@@ -806,9 +806,9 @@ const catalogo = [
         3: "lH275gpnLk0", // Episódio 003
         }, {
           // Escreva o título de cada episódio entre aspas. Ex.: 1: "Meu título"
-          1: "", // Título do Episódio 001
-          2: "", // Título do Episódio 002
-          3: "", // Título do Episódio 003
+          1: "ELA VENCEU OS VÍCIOS FAZENDO "AUTO-EXORCISMO"", // Título do Episódio 001
+          2: "ELE VENCEU A MATRIX ATRAVÉZ DA RETENÇÃO SEMINAL", // Título do Episódio 002
+          3: "ELE RESETOU A MENTE E O CORPO COM A RETENÇÃO SEMINAL", // Título do Episódio 003
         
         }, {
                 "1": "1h 6min",
