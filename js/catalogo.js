@@ -836,10 +836,10 @@ const catalogo = [
           3: "HLnZjhzC79Y",
           4: "jdwRQg_Umj0",
         }, {
-          1: "Título do primeiro episódio",
-          2: "Título do segundo episódio",
-          3: "Título do terceiro episódio",
-          4: "Título do quarto episódio",
+          1: "Vencendo a Pornografia e Jogando de HACK",
+          2: "Em Retenção Seminal com \"T\" alto a Vida muda de nível",
+          3: "7 Passos para acabar com as recaídas na retenção Seminal",
+          4: "COMO SE TORNAR UM IMÃ AMBULANTE | Retenção Seminal",
         }, {
                 "1": "3h 1min",
                 "2": "2h 25min",
