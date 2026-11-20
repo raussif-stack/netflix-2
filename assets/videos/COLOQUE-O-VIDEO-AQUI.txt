@@ -1,0 +1,9 @@
+VÍDEO DE FUNDO DA PÁGINA INICIAL
+
+Coloque o seu vídeo nesta pasta com exatamente este nome:
+video-fundo-principal.mp4
+
+Caminho esperado pelo site: assets/videos/video-fundo-principal.mp4
+Formato recomendado: MP4 / H.264 / 1920x1080 / sem áudio.
+O vídeo será reproduzido automaticamente, sem som, em loop e sem controles.
+Se o vídeo ainda não estiver nesta pasta ou não carregar, o banner da série em destaque continuará como fundo de reserva.
