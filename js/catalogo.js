@@ -806,9 +806,9 @@ const catalogo = [
     categoria: "LIVES E TRANSMISSÕES",
     descricao: "Lives, conversas e transmissões do universo 2%.",
     destaque: false,
-    banner: "assets/banners/lives-2-banner.svg",
-    capa: "assets/posters/lives-2-poster.svg",
-    capaFallback: "assets/posters/lives-2-poster.svg",
+    banner: "assets/banners/lives-2-banner.png",
+    capa: "assets/posters/lives-2-poster.png",
+    capaFallback: "assets/posters/lives-2-poster.png",
     temporadas: [
       {
         numero: 1,
