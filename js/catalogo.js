@@ -817,21 +817,35 @@ const catalogo = [
         }) }
     ]
   },
-  {
-    id: "lives-2",
-    titulo: "LIVES 2%",
-    categoria: "LIVES E TRANSMISSÕES",
-    descricao: "Lives, conversas e transmissões do universo 2%.",
-    destaque: false,
-    banner: "assets/banners/lives-2-banner.png",
-    capa: "assets/posters/lives-2-poster.png",
-    capaFallback: "assets/posters/lives-2-poster.png",
-    temporadas: [
-      {
-        numero: 1,
-        titulo: "Temporada 1",
-        episodios: criarEpisodios(4, {}, {}, {})
-      }
-    ]
-  }
-];
+ {
+  id: "lives-2",
+  titulo: "LIVES 2%",
+  categoria: "LIVES E TRANSMISSÕES",
+  descricao: "Lives, conversas e transmissões do universo 2%.",
+  destaque: false,
+  banner: "assets/banners/lives-2-banner.png",
+  capa: "assets/posters/lives-2-poster.png",
+  capaFallback: "assets/posters/lives-2-poster.png",
+  temporadas: [
+    {
+      numero: 1,
+      titulo: "Temporada 1",
+      episodios: criarEpisodios(
+        4,
+        {
+          1: "eXGDQ8F_bVI",
+          2: "mjnYL06mMyI",
+          3: "HLnZjhzC79Y",
+          4: "jdwRQg_Umj0"
+        },
+        {
+          1: "Título do primeiro episódio",
+          2: "Título do segundo episódio",
+          3: "Título do terceiro episódio",
+          4: "Título do quarto episódio"
+        },
+        {}
+      )
+    }
+  ]
+}
