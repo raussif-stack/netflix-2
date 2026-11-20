@@ -806,7 +806,7 @@ const catalogo = [
         3: "lH275gpnLk0", // Episódio 003
         }, {
           // Escreva o título de cada episódio entre aspas. Ex.: 1: "Meu título"
-          1: "ELA VENCEU OS VÍCIOS FAZENDO "AUTO-EXORCISMO"", // Título do Episódio 001
+          1: "ELA VENCEU OS VÍCIOS FAZENDO AUTO-EXORCISMO", // Título do Episódio 001
           2: "ELE VENCEU A MATRIX ATRAVÉZ DA RETENÇÃO SEMINAL", // Título do Episódio 002
           3: "ELE RESETOU A MENTE E O CORPO COM A RETENÇÃO SEMINAL", // Título do Episódio 003
         
