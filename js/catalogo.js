@@ -537,7 +537,7 @@ const catalogo = [
           240: "Masturbação é MAGIA?",
           241: "Einstein ensinou o TRUQUE para largar a Masturbação",
           242: "A Retenção Seminal te transforma em uma Anomalia 👁️",
-          243: "Em Retenção Seminal Tudo vai dar errado até que..."
+          243: "Em Retenção Seminal Tudo vai dar errado até que...",
           244: "", // Título do Episódio 244
           245: "", // Título do Episódio 245
         
@@ -686,6 +686,23 @@ const catalogo = [
                 "142": "31 min",
                 "143": "28 min",
                 "144": "33 min",
+                "182": "26 min",
+                "183": "35 min",
+                "184": "30 min",
+                "185": "31 min",
+                "186": "27 min",
+                "187": "42 min",
+                "188": "34 min",
+                "189": "30 min",
+                "190": "23 min",
+                "191": "36 min",
+                "192": "27 min",
+                "193": "19 min",
+                "194": "21 min",
+                "195": "21 min",
+                "196": "25 min",
+                "197": "28 min",
+                "198": "25 min",
                 "199": "26 min",
                 "200": "24 min",
                 "201": "26 min",
