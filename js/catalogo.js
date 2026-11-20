@@ -830,22 +830,22 @@ const catalogo = [
     {
       numero: 1,
       titulo: "Temporada 1",
-      episodios: criarEpisodios(
-        4,
-        {
+      episodios: criarEpisodios(4, {
           1: "eXGDQ8F_bVI",
           2: "mjnYL06mMyI",
           3: "HLnZjhzC79Y",
           4: "jdwRQg_Umj0",
-        },
-        {
+        }, {
           1: "Título do primeiro episódio",
           2: "Título do segundo episódio",
           3: "Título do terceiro episódio",
           4: "Título do quarto episódio",
-        },
-        {}
-      )
+        }, {
+                "1": "3h 1min",
+                "2": "2h 25min",
+                "3": "2h 30min",
+                "4": "2h 10min"
+        })
     }
   ]
 }]
