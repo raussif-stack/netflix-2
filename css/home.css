@@ -70,7 +70,7 @@
   right: 8%; top: 18%;
   font: 700 clamp(190px, 31vw, 440px)/1 "Space Grotesk", sans-serif;
   letter-spacing: -35px;
-  color: rgba(255, 0, 0, 0.74);
+  color: rgba(255, 0, 0, 0);
   transform: rotate(-8deg);
   z-index: 1;
   pointer-events: none;
