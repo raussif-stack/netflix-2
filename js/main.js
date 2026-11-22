@@ -53,7 +53,36 @@ const serieDestaque = catalogo.find((serie) => serie.destaque) || catalogo[0];
 const hero = document.querySelector(".hero");
 hero.style.setProperty("--hero-image", `url("${serieDestaque.banner}")`);
 const heroVideo = document.querySelector("#heroVideo");
-if (heroVideo) heroVideo.poster = serieDestaque.banner;
+if (heroVideo) {
+  // A imagem do destaque continua visível enquanto o vídeo carrega ou se não puder tocar.
+  heroVideo.poster = serieDestaque.banner;
+  heroVideo.classList.remove("is-playing");
+
+  const movimentoReduzido = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (movimentoReduzido) {
+    // Respeita a preferência de acessibilidade e mantém o banner como fundo.
+    heroVideo.pause();
+  } else {
+    heroVideo.addEventListener("playing", () => {
+      heroVideo.classList.add("is-playing");
+    });
+
+    // Se a reprodução parar ou falhar, revela novamente o banner de fundo.
+    const mostrarBanner = () => heroVideo.classList.remove("is-playing");
+    heroVideo.addEventListener("waiting", mostrarBanner);
+    heroVideo.addEventListener("stalled", mostrarBanner);
+    heroVideo.addEventListener("pause", mostrarBanner);
+    heroVideo.addEventListener("error", mostrarBanner);
+    heroVideo.addEventListener("abort", mostrarBanner);
+    heroVideo.addEventListener("emptied", mostrarBanner);
+
+    const tentativaDeReproducao = heroVideo.play();
+    if (tentativaDeReproducao && typeof tentativaDeReproducao.catch === "function") {
+      tentativaDeReproducao.catch(mostrarBanner);
+    }
+  }
+}
 document.querySelector("#heroCategory").textContent = serieDestaque.categoria;
 document.querySelector("#heroTitle").textContent = serieDestaque.titulo;
 document.querySelector("#heroDescription").textContent = serieDestaque.descricao;

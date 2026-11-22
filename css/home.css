@@ -63,6 +63,14 @@
   object-fit: cover;
   object-position: center center;
   pointer-events: none;
+  /* O vídeo só aparece depois que o navegador confirma a reprodução. */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .35s ease;
+}
+.hero-video.is-playing {
+  opacity: 1;
+  visibility: visible;
 }
 .hero::before {
   content: "2%";
