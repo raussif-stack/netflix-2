@@ -188,3 +188,12 @@ A responsividade foi implementada em CSS. Ainda é importante conferir o resulta
 - O campo `descricao` do episódio recebe o texto de `titulosEpisodios`, e a pesquisa da versão 1.7 já procura esse conteúdo.
 - Nenhum título foi inventado; os campos começam vazios.
 - Os IDs do YouTube foram preservados.
+
+
+## Melhorias visuais desta versão
+
+- Alternância entre tema escuro e claro, com preferência salva localmente no dispositivo.
+- Controle de tema disponível na página inicial, na página da série e no player.
+- Animações discretas de entrada durante a rolagem e microinterações em cards e botões.
+- Respeito à preferência do sistema por movimento reduzido.
+- Ajustes de contraste, superfícies, bordas, sombras e profundidade nos dois temas.

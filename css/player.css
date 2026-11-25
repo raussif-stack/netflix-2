@@ -1,8 +1,9 @@
-body.player-page { min-height: 100vh; display: flex; flex-direction: column; background: #080808; }
+body.player-page { min-height: 100vh; display: flex; flex-direction: column; background: var(--bg); }
 .player-topbar {
   min-height: 78px; padding: 0 var(--page-padding); display: flex; align-items: center;
-  justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,.08); background: #090909;
+  justify-content: space-between; border-bottom: 1px solid var(--line); background: var(--bg);
 }
+.player-header-actions { display: flex; align-items: center; gap: 18px; }
 .brand { display: inline-flex; align-items: baseline; gap: 7px; font-family: "Space Grotesk", sans-serif; font-weight: 700; letter-spacing: -1.5px; }
 .brand-main { color: var(--red); font-size: 25px; }
 .brand-mark { color: #fff; font-size: 19px; }
@@ -12,9 +13,9 @@ body.player-page { min-height: 100vh; display: flex; flex-direction: column; bac
 .watch-heading { margin-bottom: 22px; }
 .watch-kicker { margin: 0 0 9px; color: #e50914; font-size: 10px; font-weight: 800; letter-spacing: 2px; }
 .watch-heading h1 { margin: 0; font: 700 clamp(27px, 4vw, 42px)/1.12 "Space Grotesk", sans-serif; letter-spacing: -1px; }
-.watch-description { max-width: 760px; margin: 12px 0 0; color: #aaa; font-size: 13px; line-height: 1.7; }
-.video-shell { padding: 1px; background: linear-gradient(135deg, rgba(229,9,20,.55), rgba(255,255,255,.08) 45%, rgba(229,9,20,.18)); box-shadow: 0 22px 70px rgba(0,0,0,.45); }
-.video-frame { position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; background: #000; }
+.watch-description { max-width: 760px; margin: 12px 0 0; color: var(--muted); font-size: 13px; line-height: 1.7; }
+.video-shell { padding: 1px; border-radius: 10px; overflow: hidden; background: linear-gradient(135deg, rgba(229,9,20,.65), rgba(255,255,255,.12) 45%, rgba(229,9,20,.22)); box-shadow: 0 22px 70px rgba(0,0,0,.28); }
+.video-frame { position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; background: #000; border-radius: 9px; }
 .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 .video-placeholder { position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 28px; text-align: center; background: radial-gradient(ellipse at center, #251316 0%, #100d0e 48%, #050505 100%); }
 .video-placeholder[hidden] { display: none; }
@@ -22,8 +23,8 @@ body.player-page { min-height: 100vh; display: flex; flex-direction: column; bac
 .video-placeholder h2 { max-width: 650px; margin: 0; font: 700 clamp(15px, 2.4vw, 23px)/1.3 "Space Grotesk", sans-serif; letter-spacing: .5px; }
 .video-placeholder p { max-width: 570px; margin: 12px 0 0; color: #aaa; font-size: 12px; line-height: 1.7; }
 .watch-controls { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 0; }
-.episode-nav { display: inline-flex; align-items: center; min-height: 42px; padding: 0 15px; color: #eee; border: 1px solid #444; border-radius: 3px; font-size: 11px; font-weight: 700; transition: background .2s, border-color .2s; }
-.episode-nav:hover { background: #242424; border-color: #777; }
+.episode-nav { display: inline-flex; align-items: center; min-height: 42px; padding: 0 15px; color: var(--text); border: 1px solid var(--line); border-radius: 7px; font-size: 11px; font-weight: 700; transition: background .2s, border-color .2s, transform .2s; }
+.episode-nav:hover { background: var(--surface-raised); border-color: var(--red); transform: translateY(-1px); }
 .episode-nav[hidden] { display: none; }
 .episode-counter { color: #888; font-size: 11px; text-align: center; }
 .youtube-note { margin: 0; color: #777; font-size: 10px; line-height: 1.6; }
@@ -72,3 +73,28 @@ body.player-page { min-height: 100vh; display: flex; flex-direction: column; bac
   .video-placeholder h2 { font-size: 14px; }
   .episode-nav { font-size: 9px; }
 }
+
+
+/* REFINAMENTO VISUAL E TEMA CLARO */
+.watch-heading h1 { text-wrap: balance; }
+.watch-kicker { letter-spacing: 2.3px; }
+.player-footer { border-color: var(--line); }
+.player-footer span { color: var(--muted-strong); }
+.youtube-note { color: var(--muted); }
+.episode-counter { color: var(--muted); }
+
+:root[data-theme="light"] .watch-heading h1 { color: #17191d; }
+:root[data-theme="light"] .watch-kicker { color: #c30b16; }
+:root[data-theme="light"] .player-footer { color: #777e88; }
+:root[data-theme="light"] .player-footer span { color: #3d434c; }
+:root[data-theme="light"] .episode-counter { color: #626873; }
+:root[data-theme="light"] .youtube-note { color: #737983; }
+
+@media (max-width: 600px) {
+  .player-header-actions { gap: 10px; }
+  .player-topbar .theme-toggle { width: 36px; height: 36px; flex-basis: 36px; }
+}
+
+:root[data-theme="light"] .player-topbar .brand-mark { color: #20232a; }
+:root[data-theme="light"] .player-topbar .back-link { color: #454b55; }
+:root[data-theme="light"] .player-topbar .back-link:hover { color: #17191d; }

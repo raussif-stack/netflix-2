@@ -7,6 +7,7 @@
   <title>NETFLIX 2% | Assistir</title>
   <link rel="stylesheet" href="../css/global.css">
   <link rel="stylesheet" href="../css/player.css">
+  <script src="../js/theme.js" defer></script>
   <script src="../js/catalogo.js" defer></script>
   <script src="../js/player.js" defer></script>
 </head>
@@ -15,7 +16,10 @@
     <a class="brand" href="../index.html" aria-label="NETFLIX 2% - início">
       <span class="brand-main">NETFLIX</span><span class="brand-mark">2%</span>
     </a>
-    <a class="back-link" id="backToSeries" href="../index.html">← Voltar à série</a>
+    <div class="player-header-actions">
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Ativar modo claro" title="Ativar modo claro" aria-pressed="false"><span class="theme-toggle-icon" aria-hidden="true">☾</span></button>
+      <a class="back-link" id="backToSeries" href="../index.html">← Voltar à série</a>
+    </div>
   </header>
 
   <main class="watch-main">
