@@ -1,4 +1,32 @@
-# NETFLIX 2% — Versão 1.10
+# NETFLIX 2% — Versão 1.18.0 BETA
+
+> Atualização 1.18.0: sistema de favoritos locais para séries, com controles na página inicial e na página individual, seção de favoritas e filtro dedicado.
+
+## Favoritos locais — versão 1.18.0
+- Adicionar e remover séries dos favoritos diretamente nos cards da página inicial.
+- Adicionar e remover séries na página individual.
+- Seção dedicada às séries favoritas, com acesso direto à página de cada série.
+- Filtro “Favoritas” integrado aos filtros de categoria.
+- Persistência no `localStorage`, usando a chave `netflix2-favorite-series-v1`.
+- Os favoritos são locais ao navegador/dispositivo e não sincronizam entre aparelhos.
+- A funcionalidade “Minha Lista” permanece separada e pausada até o planejamento de cadastro, autenticação e usuários.
+
+# NETFLIX 2% — Versão 1.13.0 BETA
+
+> Versão de refinamento: **1.12.5 BETA** (microinterações, estados de carregamento, disponibilidade visual e responsividade).
+
+
+> Atualização 1.13.0: evolução da página inicial, panorama dinâmico do catálogo, filtros por categoria e refinamento do carrossel.
+
+## Página inicial — versão 1.13.0
+
+- Novo panorama do catálogo com quantidade dinâmica de séries, episódios e IDs de vídeo cadastrados.
+- Filtros de categoria gerados automaticamente a partir dos valores existentes no catálogo; a opção “Todas as séries” restaura a visualização completa.
+- Os filtros são ocultados durante uma pesquisa para não misturar os dois modos de navegação. Ao limpar a pesquisa, a categoria selecionada volta a ser aplicada.
+- O destaque principal agora informa a quantidade de episódios e vídeos cadastrados na série em destaque.
+- Os cards de séries mostram a quantidade de episódios e vídeos cadastrados em cada produção.
+- Setas do carrossel indicam quando não há mais conteúdo para navegar naquela direção; o gesto horizontal no celular continua disponível.
+- Os números são calculados diretamente a partir de `js/catalogo.js`; não foram inventadas datas de lançamento ou de inclusão.
 
 ## Miniaturas dos episódios nos resultados da pesquisa
 
@@ -204,3 +232,172 @@ A responsividade foi implementada em CSS. Ainda é importante conferir o resulta
 - **Carrossel de séries:** a página inicial apresenta as capas em uma faixa horizontal; use as setas no computador ou deslize no celular. Durante uma pesquisa, os resultados continuam em grade.
 - **Ir para episódio:** na página de cada série, selecione a temporada, informe o número do episódio e pressione Enter ou clique em IR.
 - **Continue explorando:** os últimos oito episódios abertos aparecem na página inicial. O histórico fica salvo no `localStorage` do navegador e pode ser apagado pelo botão "Limpar histórico". Ele não sincroniza entre dispositivos nem exige conta.
+
+## YouTube IFrame Player API (1.13.1 BETA)
+
+A página `pages/assistir.html` carrega a IFrame Player API oficial do YouTube. O player inclui `enablejsapi=1` e o parâmetro `origin` para permitir a comunicação entre a página e o iframe. Não é necessária chave de API nem configuração de faturamento para essa API.
+
+A integração atualiza o estado do carregamento quando o player fica pronto, identifica o encerramento do episódio e trata os códigos de erro mais comuns (ID inválido, vídeo indisponível, incorporação bloqueada e falha de identificação da origem). Se o script da API estiver indisponível, o iframe ainda pode ser exibido normalmente pelo carregamento direto do YouTube.
+
+## Versão 1.14.0 BETA — evolução do player
+
+- Ao detectar o encerramento pelo evento `YT.PlayerState.ENDED`, o player exibe uma tela própria sobre o vídeo.
+- Quando existe um episódio seguinte na ordem do catálogo, a tela oferece a opção de avançar manualmente e inicia uma contagem regressiva de 10 segundos.
+- O avanço automático pode ser cancelado; o link para o próximo episódio continua disponível para navegação manual.
+- A navegação automática envia `autoplay=1` para tentar iniciar o próximo vídeo. A reprodução automática com som pode ser bloqueada pelas políticas do navegador ou do dispositivo; nesse caso, o usuário pode iniciar o vídeo pelo próprio YouTube.
+- No último episódio cadastrado, a tela informa que não há próximo episódio e oferece a opção de rever.
+- O botão de rever retorna ao início do vídeo usando a IFrame Player API.
+- Os estados de reprodução, pausa, carregamento e encerramento atualizam a mensagem de status da página.
+- Erros recuperáveis de reprodução e identificação da origem oferecem um botão para tentar carregar novamente.
+- O histórico local e os dados do catálogo permanecem com a estrutura anterior.
+
+### Testes recomendados
+
+1. Reproduzir um episódio e aguardar o encerramento.
+2. Conferir a contagem regressiva e o avanço para o episódio seguinte.
+3. Repetir o teste e cancelar o avanço automático.
+4. Usar o botão de rever.
+5. Abrir o último episódio de uma série e confirmar que não aparece um próximo episódio inexistente.
+6. Testar em celular e computador. O comportamento de autoplay pode variar conforme navegador e dispositivo.
+
+
+## 1.15.0 BETA — Navegação aprimorada do player
+
+- Navegação entre episódios na mesma página, atualizando o player sem recarregar o documento.
+- Painel expansível com episódios da temporada atual, título adicional e duração cadastrada.
+- Atalhos: ←/→ para episódios anterior/próximo, Espaço para pausar/reproduzir e Esc para fechar o painel ou voltar à série.
+- Metadados do episódio atual e atualização do endereço com histórico do navegador.
+- Mantidos o encerramento, a contagem regressiva, o cancelamento do avanço automático e o tratamento de erros da IFrame Player API.
+
+
+## 1.16.0 BETA — Retomada e progresso dos episódios
+
+- Salva localmente o ponto de reprodução enquanto o episódio está tocando.
+- Oferece continuar de onde parou ou recomeçar quando existe progresso salvo.
+- Marca automaticamente episódios concluídos ao receber o evento de término do YouTube.
+- Mostra na lista os estados não assistido, em andamento e assistido, com indicador visual de progresso.
+- Os dados ficam no `localStorage` do navegador/dispositivo; não há sincronização entre aparelhos nem sistema de contas.
+
+
+## 1.17.0 BETA — Descoberta e retomada na página inicial
+
+- Seção Continue assistindo com progresso e retomada direta.
+- Histórico de episódios reproduzidos recentemente.
+- Filtro do catálogo por disponibilidade de vídeos, combinado com as categorias existentes.
+- Progresso consultado a partir das chaves locais criadas pelo player 1.16.0.
+- Dados mantidos no localStorage do navegador/dispositivo.
+
+
+## 1.18.0 BETA — Favoritos locais
+- Favoritar e desfavoritar séries pela capa da página inicial ou pela página individual da série.
+- Seção de séries favoritas e filtro dedicado no catálogo.
+- Persistência local pela chave `netflix2-favorite-series-v1`; sem contas ou sincronização entre dispositivos.
+- A funcionalidade `Minha Lista` permanece separada e não foi implementada nesta versão.
+
+
+## 1.19.0 BETA — Central de atividades
+
+- Histórico de reprodução ampliado para até 100 episódios recentes, sem duplicatas.
+- Remoção individual de registros do histórico.
+- Remoção individual do progresso de episódios em andamento.
+- Limpeza do histórico com confirmação, preservando o progresso salvo para retomada.
+- Controles de gerenciamento responsivos e acessíveis.
+- Dados continuam locais no navegador e dispositivo; não há sincronização entre aparelhos.
+
+
+## 1.20.0 BETA — Pesquisa avançada
+
+- Filtro para exibir séries e episódios juntos ou separadamente.
+- Filtro por categoria do catálogo.
+- Filtro de episódios e séries com ou sem vídeos cadastrados.
+- Ordenação por relevância, ordem alfabética ou quantidade de episódios.
+- Botão para limpar os filtros e retornar aos padrões.
+- Painel responsivo, exibido quando há um termo de pesquisa.
+- Preserva a busca tolerante a pequenos erros, os títulos personalizados, as miniaturas e o catálogo existente.
+
+
+## 1.21.0 BETA — recomendações personalizadas
+
+- Adiciona a seção “Recomendado para você” na página inicial.
+- Organiza até três sugestões com base nas categorias das séries favoritas, no histórico recente e nos episódios em andamento.
+- Exibe o motivo de cada sugestão e um atalho para abrir a página da série.
+- Quando não há atividade registrada, apresenta sugestões iniciais com base no catálogo e na disponibilidade de vídeos.
+- Atualiza as recomendações quando favoritos, histórico ou progresso são alterados.
+- As informações usadas para personalizar ficam no `localStorage` do navegador; não há conta, sincronização entre dispositivos nem envio desses dados para um servidor.
+- Mantém intactos o catálogo, a pesquisa avançada, os favoritos, o histórico e o progresso existentes.
+
+
+## 1.22.0 BETA — suporte aprimorado a múltiplas temporadas
+
+- Adiciona seletor de temporada dentro do painel de episódios do player, permitindo explorar outra temporada sem sair da reprodução atual.
+- Exibe o total de episódios concluídos e em andamento na temporada selecionada no player.
+- A lista do player destaca o episódio atual somente quando a temporada exibida corresponde à temporada em reprodução.
+- A página da série apresenta progresso de conclusão por temporada, usando o progresso local já salvo.
+- O seletor de temporadas mostra a quantidade de episódios concluídos em cada temporada.
+- Links de retorno do player preservam a temporada e o episódio de origem; a página da série abre na temporada correta e localiza o episódio solicitado.
+- A identificação de progresso continua separada por série, temporada e episódio, sem migração ou perda dos dados já salvos.
+- Mantém o catálogo atual (4 séries e 258 episódios), sem criar temporadas ou episódios fictícios.
+
+
+# NETFLIX 2% — Versão 1.23.0 BETA
+
+## Identidade visual dos episódios e miniaturas
+- As miniaturas da página de série agora tentam carregar a melhor resolução disponível do YouTube: `maxresdefault`, `sddefault`, `hqdefault`, `mqdefault` e `default`.
+- Se uma resolução não existir ou retornar uma imagem-placeholder pequena, o carregamento tenta automaticamente a próxima opção.
+- Os cards exibem o número do episódio, um título curto sobre a miniatura e um indicador visual de reprodução.
+- Episódios sem vídeo cadastrado recebem uma arte de disponibilidade “EM BREVE”, mantendo o padrão visual da lista.
+- A miniatura usa carregamento tardio (`loading="lazy"`) e decodificação assíncrona para reduzir trabalho inicial da página.
+- Os IDs de vídeo, títulos, durações, descrições e estrutura do catálogo foram preservados.
+- As miniaturas continuam sendo fornecidas pelo YouTube; nenhuma imagem externa foi copiada para o projeto.
+
+
+# NETFLIX 2% — Versão 1.24.0 BETA
+
+## Categorias e coleções
+- Nova área de descoberta na página inicial, com categorias calculadas diretamente a partir dos valores de `categoria` em `js/catalogo.js`.
+- Cada categoria mostra quantas séries estão cadastradas e permite filtrar o catálogo com um único comando.
+- Coleções temáticas agrupam categorias já existentes, sem duplicar ou alterar os registros das séries.
+- Os cards das coleções usam os pôsteres já cadastrados, com carregamento tardio e fallback de imagem quando disponível.
+- O botão de cada coleção aplica o filtro correspondente na seção de séries.
+- Layout responsivo para desktop, tablet e celular; controles com foco visível e suporte a preferência por movimento reduzido.
+- Não foram adicionadas séries, episódios, categorias fictícias ou dados de usuário. Favoritos, histórico, progresso, recomendações e pesquisa permanecem independentes.
+
+
+## 1.25.0 BETA — Controles avançados do player
+
+- Barra de progresso interativa com tempo atual e duração.
+- Busca na reprodução e saltos de 10 segundos para trás/à frente.
+- Controles de reproduzir/pausar, volume e silenciar.
+- Seletor de velocidade (0,5× a 2×), conforme suporte do vídeo pelo YouTube.
+- Acesso à tela cheia.
+- Atalhos K (reproduzir/pausar), J/L (buscar 10 segundos) e M (silenciar).
+- Controles ativados quando a YouTube IFrame Player API fica pronta e desativados sem player válido.
+- Interface responsiva e compatível com os temas existentes.
+
+Os comandos operam por meio da YouTube IFrame Player API. A disponibilidade de algumas velocidades pode variar conforme o vídeo e o próprio YouTube.
+
+
+## 1.26.0 BETA — Reprodução contínua
+
+- Preferência de reprodução automática do próximo episódio, ativada por padrão para preservar o comportamento anterior.
+- Preferência salva localmente no navegador (`netflix2-auto-next-v1`).
+- Com reprodução automática ativada, o player exibe contagem regressiva de 10 segundos ao terminar um episódio.
+- Com a opção desativada, a tela de encerramento permanece disponível sem iniciar o próximo episódio sozinha.
+- O usuário pode avançar imediatamente pelo comando de próximo episódio ou cancelar a contagem regressiva.
+- A navegação usa a ordem global do catálogo: ao terminar uma temporada, segue para a próxima temporada cadastrada; no último episódio da série, encerra sem tentar avançar.
+- Histórico e progresso continuam sendo registrados pelas chaves existentes.
+- A preferência é local ao navegador/dispositivo e não é sincronizada entre dispositivos.
+
+
+## 1.27.0 BETA — Player responsivo e adaptativo
+
+- Refinamento do player para celulares pequenos, celulares maiores e tablets, com ajustes de largura, espaçamento, tipografia e organização dos controles.
+- Em telas sensíveis ao toque, controles e ações recebem áreas de interação maiores para facilitar o uso com os dedos.
+- Barra de progresso com área de toque ampliada e controles reorganizados em grade no celular.
+- Em celulares na orientação horizontal, o cabeçalho e as informações do episódio ficam mais compactos e o vídeo aproveita melhor a altura disponível.
+- Ajustes para telas muito estreitas e para aparelhos com pouca altura útil, além de suporte a áreas seguras da tela (`viewport-fit=cover`).
+- Estados de foco visíveis para navegação por teclado e respeito à preferência do sistema por movimento reduzido.
+- Mantém a YouTube IFrame Player API, os controles avançados, o histórico, o progresso, a retomada e a reprodução automática da versão 1.26.0.
+- Não altera IDs de vídeos, catálogo, títulos, durações ou dados salvos no navegador.
+
+A adaptação visual depende das dimensões e dos recursos oferecidos pelo navegador e pelo dispositivo. A rotação da tela não é forçada pelo site; o layout responde à orientação escolhida pelo usuário.

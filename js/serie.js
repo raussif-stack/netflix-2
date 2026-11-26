@@ -47,45 +47,97 @@ function renderizarEpisodios(temporada) {
 
   episodios.forEach((episodio) => {
     const card = document.createElement("article");
-    card.className = "episode-card";
+    card.className = episodio.youtubeId ? "episode-card is-available" : "episode-card is-upcoming";
     const numero = String(episodio.numero).padStart(3, "0");
     const status = episodio.youtubeId ? "VÍDEO CADASTRADO" : "EM BREVE";
-    card.innerHTML = `
-      <div class="episode-art" aria-label="Miniatura do ${episodio.titulo}">
-        <span class="episode-art-number">${numero}</span>
-      </div>
-      <div class="episode-info">
-        <h3></h3>
-        <p></p>
-        <span class="episode-duration"></span>
-      </div>
-      <a class="episode-watch" href="assistir.html?id=${encodeURIComponent(serie.id)}&temporada=${temporada.numero}&episodio=${episodio.numero}">
-        ${episodio.youtubeId ? "ASSISTIR ↗" : "VER DETALHES ↗"}
-      </a>
-    `;
 
-    // Quando existe um ID, carrega automaticamente a miniatura correspondente do YouTube.
+    const arte = document.createElement("div");
+    arte.className = "episode-art";
+    arte.setAttribute("role", "img");
+    arte.setAttribute("aria-label", `Arte do ${episodio.titulo}${episodio.descricao ? `: ${episodio.descricao}` : ""}`);
+
+    const numeroArte = document.createElement("span");
+    numeroArte.className = "episode-art-number";
+    numeroArte.textContent = numero;
+    arte.appendChild(numeroArte);
+
+    const selo = document.createElement("span");
+    selo.className = "episode-art-label";
+    selo.textContent = episodio.descricao?.trim() || `EPISÓDIO ${numero}`;
+    arte.appendChild(selo);
+
+    if (episodio.youtubeId) {
+      const play = document.createElement("span");
+      play.className = "episode-art-play";
+      play.setAttribute("aria-hidden", "true");
+      play.textContent = "▶";
+      arte.appendChild(play);
+    } else {
+      const indisponivel = document.createElement("span");
+      indisponivel.className = "episode-art-upcoming";
+      indisponivel.textContent = "EM BREVE";
+      arte.appendChild(indisponivel);
+    }
+
+    const info = document.createElement("div");
+    info.className = "episode-info";
+    const titulo = document.createElement("h3");
+    titulo.textContent = episodio.titulo;
+    const descricao = document.createElement("p");
+    descricao.textContent = episodio.descricao || "";
+    const duracao = document.createElement("span");
+    duracao.className = "episode-duration";
+    duracao.textContent = episodio.duracao || "Duração a definir";
+    const statusEl = document.createElement("span");
+    statusEl.className = "episode-status";
+    statusEl.textContent = status;
+    info.append(titulo, descricao, duracao, statusEl);
+
+    const link = document.createElement("a");
+    link.className = "episode-watch";
+    link.href = `assistir.html?id=${encodeURIComponent(serie.id)}&temporada=${temporada.numero}&episodio=${episodio.numero}`;
+    link.textContent = episodio.youtubeId ? "ASSISTIR ↗" : "VER DETALHES ↗";
+    link.setAttribute("aria-label", `${status}: ${episodio.titulo}`);
+
+    card.append(arte, info, link);
+
+    // Tenta a melhor miniatura disponível e recua automaticamente quando o YouTube
+    // não oferece a resolução solicitada para aquele vídeo.
     if (episodio.youtubeId) {
       const videoId = obterIdYoutubeParaMiniatura(episodio.youtubeId);
       if (videoId) {
         const imagem = document.createElement("img");
-        imagem.className = "episode-thumbnail";
-        imagem.src = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
-        imagem.alt = `Miniatura de ${episodio.titulo}`;
+        imagem.className = "episode-thumbnail is-loading";
+        imagem.alt = "";
+        imagem.setAttribute("aria-hidden", "true");
         imagem.loading = "lazy";
-        imagem.onerror = () => {
-          imagem.remove();
-          card.querySelector(".episode-art").classList.add("thumbnail-unavailable");
+        imagem.decoding = "async";
+        const tamanhos = ["maxresdefault", "sddefault", "hqdefault", "mqdefault", "default"];
+        let tentativa = 0;
+        const carregarProxima = () => {
+          if (tentativa >= tamanhos.length) {
+            imagem.remove();
+            arte.classList.add("thumbnail-unavailable");
+            return;
+          }
+          imagem.src = `https://i.ytimg.com/vi/${videoId}/${tamanhos[tentativa++]}.jpg`;
         };
-        card.querySelector(".episode-art").prepend(imagem);
+        imagem.addEventListener("load", () => {
+          // Algumas URLs maxres retornam uma imagem-placeholder pequena (120x90).
+          if (imagem.naturalWidth < 300 && tentativa < tamanhos.length) {
+            carregarProxima();
+            return;
+          }
+          imagem.classList.remove("is-loading");
+          arte.classList.add("has-thumbnail");
+        });
+        imagem.addEventListener("error", carregarProxima);
+        arte.prepend(imagem);
+        carregarProxima();
         card.classList.add("has-thumbnail");
       }
     }
 
-    card.querySelector("h3").textContent = episodio.titulo;
-    card.querySelector("p").textContent = episodio.descricao;
-    card.querySelector(".episode-duration").textContent = episodio.duracao || "Duração a definir";
-    card.querySelector(".episode-watch").setAttribute("aria-label", `${status}: ${episodio.titulo}`);
     lista.appendChild(card);
   });
 }
@@ -103,20 +155,74 @@ if (!serie) {
   document.querySelector("#seriesMeta").textContent =
     `${totalTemporadas} ${totalTemporadas === 1 ? "temporada" : "temporadas"}  •  ${totalEpisodios} ${totalEpisodios === 1 ? "episódio" : "episódios"}`;
 
+  const CHAVE_FAVORITOS = "netflix2-favorite-series-v1";
+  const botaoFavorito = document.querySelector("#seriesFavoriteToggle");
+  function obterFavoritos() {
+    try { const dados = JSON.parse(localStorage.getItem(CHAVE_FAVORITOS) || "[]"); return Array.isArray(dados) ? dados : []; }
+    catch { return []; }
+  }
+  function atualizarBotaoFavorito() {
+    const ativo = obterFavoritos().includes(serie.id);
+    botaoFavorito.classList.toggle("is-favorite", ativo);
+    botaoFavorito.setAttribute("aria-pressed", String(ativo));
+    botaoFavorito.textContent = ativo ? "♥ Remover dos favoritos" : "♡ Adicionar aos favoritos";
+  }
+  botaoFavorito.addEventListener("click", () => {
+    const favoritos = obterFavoritos();
+    const atualizados = favoritos.includes(serie.id) ? favoritos.filter((id) => id !== serie.id) : [...favoritos, serie.id];
+    localStorage.setItem(CHAVE_FAVORITOS, JSON.stringify([...new Set(atualizados)]));
+    atualizarBotaoFavorito();
+  });
+  atualizarBotaoFavorito();
+
   const seletor = document.querySelector("#seasonSelect");
+  const CHAVE_PROGRESSO = "netflix2-episode-progress-v1";
+  function lerProgressoLocal() {
+    try {
+      const dados = JSON.parse(localStorage.getItem(CHAVE_PROGRESSO) || "{}");
+      return dados && typeof dados === "object" && !Array.isArray(dados) ? dados : {};
+    } catch { return {}; }
+  }
+  function obterResumoTemporada(temporada) {
+    const mapa = lerProgressoLocal();
+    const total = temporada.episodios.length;
+    const assistidos = temporada.episodios.filter((ep) => mapa[`${serie.id}:${temporada.numero}:${ep.numero}`]?.status === "completed").length;
+    const emAndamento = temporada.episodios.filter((ep) => mapa[`${serie.id}:${temporada.numero}:${ep.numero}`]?.status === "in-progress").length;
+    return { total, assistidos, emAndamento, percent: total ? Math.round(assistidos / total * 100) : 0 };
+  }
+  function atualizarResumoTemporada(temporada) {
+    const resumo = obterResumoTemporada(temporada);
+    const label = document.querySelector("#seasonProgressLabel");
+    const count = document.querySelector("#seasonProgressCount");
+    const bar = document.querySelector("#seasonProgressBar");
+    const fill = document.querySelector("#seasonProgressFill");
+    if (!label || !count || !bar || !fill) return;
+    label.textContent = `Progresso — ${temporada.titulo}`;
+    count.textContent = `${resumo.assistidos} de ${resumo.total} episódios assistidos${resumo.emAndamento ? ` · ${resumo.emAndamento} em andamento` : ""}`;
+    fill.style.width = `${resumo.percent}%`;
+    bar.setAttribute("aria-valuenow", String(resumo.percent));
+  }
   serie.temporadas.forEach((temporada) => {
     const opcao = document.createElement("option");
+    const resumo = obterResumoTemporada(temporada);
     opcao.value = temporada.numero;
-    opcao.textContent = temporada.titulo;
+    opcao.textContent = `${temporada.titulo} · ${resumo.assistidos}/${resumo.total} assistidos`;
     seletor.appendChild(opcao);
   });
 
-  seletor.addEventListener("change", () => {
-    const selecionada = serie.temporadas.find((temporada) => String(temporada.numero) === seletor.value);
+  function selecionarTemporada(numero, rolar = false) {
+    const selecionada = serie.temporadas.find((temporada) => String(temporada.numero) === String(numero));
+    if (!selecionada) return false;
+    seletor.value = String(selecionada.numero);
     renderizarEpisodios(selecionada);
-  });
+    atualizarResumoTemporada(selecionada);
+    if (rolar) document.querySelector(".episodes-section")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    return true;
+  }
+  seletor.addEventListener("change", () => selecionarTemporada(seletor.value));
 
-  if (serie.temporadas.length) renderizarEpisodios(serie.temporadas[0]);
+  const temporadaInicial = parametros.get("temporada") || serie.temporadas[0]?.numero;
+  if (serie.temporadas.length) selecionarTemporada(temporadaInicial);
   else document.querySelector("#episodeEmpty").hidden = false;
 
   const campoEpisodio = document.querySelector("#episodeJumpInput");
@@ -161,4 +267,9 @@ if (!serie) {
   });
   campoEpisodio.addEventListener("input", () => { feedbackIr.textContent = ""; });
   seletor.addEventListener("change", () => { feedbackIr.textContent = ""; });
+  const episodioInicial = parametros.get("episodio");
+  if (episodioInicial) {
+    campoEpisodio.value = episodioInicial;
+    irParaEpisodio();
+  }
 }

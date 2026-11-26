@@ -28,6 +28,7 @@
         <h1 id="seriesTitle">Carregando...</h1>
         <p class="series-description" id="seriesDescription"></p>
         <div class="series-meta" id="seriesMeta"></div>
+        <button class="series-favorite-toggle" id="seriesFavoriteToggle" type="button" aria-pressed="false">♡ Adicionar aos favoritos</button>
       </div>
     </section>
 
@@ -41,6 +42,10 @@
           <span class="visually-hidden">Selecionar temporada</span>
           <select id="seasonSelect" aria-label="Selecionar temporada"></select>
         </label>
+      </div>
+      <div class="season-progress" id="seasonProgress" aria-live="polite">
+        <div class="season-progress-copy"><strong id="seasonProgressLabel">Progresso da temporada</strong><span id="seasonProgressCount">0 de 0 episódios assistidos</span></div>
+        <div class="season-progress-track" role="progressbar" id="seasonProgressBar" aria-label="Progresso da temporada" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="seasonProgressFill"></span></div>
       </div>
 
       <div class="episode-jump">

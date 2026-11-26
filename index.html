@@ -20,6 +20,8 @@
     <nav class="main-nav" aria-label="Navegação principal">
       <a class="active" href="#inicio">Início</a>
       <a href="#series">Séries</a>
+      <a href="#descobrir">Categorias</a>
+      <a href="#favoritos">Favoritos</a>
       <a href="#minha-lista" id="navMinhaLista">Minha lista</a>
     </nav>
 
@@ -44,7 +46,8 @@
         <p class="hero-description" id="heroDescription">
           Histórias que provocam ideias, ampliam perspectivas e fazem você enxergar além.
         </p>
-        <div class="hero-buttons">
+        <div class="hero-meta" id="heroMeta" aria-label="Informações do catálogo"></div>
+      <div class="hero-buttons">
           <button class="button button-primary" id="heroDetailsButton" type="button">
             <span aria-hidden="true">▶</span> Explorar série
           </button>
@@ -56,6 +59,42 @@
       <div class="hero-bottom-label">HISTÓRIAS PARA IR ALÉM DO ÓBVIO.</div>
     </section>
 
+    <section class="catalog-overview" aria-label="Panorama do catálogo">
+      <div class="overview-item"><strong id="overviewSeries">04</strong><span>SÉRIES</span></div>
+      <div class="overview-divider" aria-hidden="true"></div>
+      <div class="overview-item"><strong id="overviewEpisodes">258</strong><span>EPISÓDIOS</span></div>
+      <div class="overview-divider" aria-hidden="true"></div>
+      <div class="overview-item"><strong id="overviewAvailable">00</strong><span>VÍDEOS CADASTRADOS</span></div>
+    </section>
+
+    <section class="discovery-section" id="descobrir" aria-labelledby="discoveryTitle">
+      <div class="section-heading">
+        <div>
+          <p class="section-overline">EXPLORE POR ASSUNTO</p>
+          <h2 id="discoveryTitle">Categorias e coleções</h2>
+        </div>
+        <span class="catalog-count" id="discoveryCount"></span>
+      </div>
+      <div class="discovery-categories" id="discoveryCategories" aria-label="Categorias do catálogo"></div>
+      <div class="collections-heading">
+        <p class="section-overline">CURADORIAS DO CATÁLOGO</p>
+        <h3>Coleções para explorar</h3>
+      </div>
+      <div class="collections-grid" id="collectionsGrid"></div>
+    </section>
+
+    <section class="recommendations-section" id="recommendations" hidden aria-labelledby="recommendationsTitle">
+      <div class="section-heading">
+        <div>
+          <p class="section-overline">SELEÇÃO PERSONALIZADA</p>
+          <h2 id="recommendationsTitle">Recomendado para você</h2>
+        </div>
+        <span class="catalog-count" id="recommendationsCount"></span>
+      </div>
+      <p class="recommendations-intro" id="recommendationsIntro">Sugestões organizadas a partir das suas atividades no NETFLIX 2%.</p>
+      <div class="recommendations-grid" id="recommendationsGrid" aria-live="polite"></div>
+    </section>
+
     <section class="catalog-section" id="series">
       <div class="section-heading">
         <div>
@@ -63,6 +102,50 @@
           <h2>Nossas séries</h2>
         </div>
         <span class="catalog-count" id="catalogCount">CATÁLOGO</span>
+      </div>
+
+      <div class="catalog-tools">
+        <div class="category-filters" id="categoryFilters" aria-label="Filtrar séries por categoria"></div>
+        <label class="availability-filter" for="availabilityFilter">Disponibilidade
+          <select id="availabilityFilter">
+            <option value="all">Todos os títulos</option>
+            <option value="available">Com vídeos cadastrados</option>
+            <option value="unavailable">Sem vídeos cadastrados</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="advanced-search" id="advancedSearch" hidden aria-label="Filtros avançados da pesquisa">
+        <div class="advanced-search-heading">
+          <div><span class="advanced-search-kicker">REFINE SUA BUSCA</span><strong>Filtros avançados</strong></div>
+          <button class="advanced-search-reset" id="resetSearchFilters" type="button">Limpar filtros</button>
+        </div>
+        <div class="advanced-search-controls">
+          <label>Tipo de resultado
+            <select id="searchTypeFilter">
+              <option value="all">Séries e episódios</option>
+              <option value="series">Somente séries</option>
+              <option value="episodes">Somente episódios</option>
+            </select>
+          </label>
+          <label>Categoria
+            <select id="searchCategoryFilter"><option value="all">Todas as categorias</option></select>
+          </label>
+          <label>Vídeos
+            <select id="searchAvailabilityFilter">
+              <option value="all">Todos</option>
+              <option value="available">Com vídeo cadastrado</option>
+              <option value="unavailable">Sem vídeo cadastrado</option>
+            </select>
+          </label>
+          <label>Ordenar por
+            <select id="searchSortFilter">
+              <option value="relevance">Maior relevância</option>
+              <option value="alphabetical">Ordem alfabética</option>
+              <option value="episodes">Mais episódios primeiro</option>
+            </select>
+          </label>
+        </div>
       </div>
 
       <div class="series-carousel">
@@ -75,11 +158,34 @@
       <p class="empty-message" id="emptyMessage" hidden>Nenhuma série encontrada. Tente outro termo.</p>
     </section>
 
+    <section class="favorites-section" id="favoritos" hidden>
+      <div class="section-heading">
+        <div>
+          <p class="section-overline">SEU CATÁLOGO PESSOAL</p>
+          <h2>Séries favoritas</h2>
+        </div>
+        <span class="catalog-count" id="favoritesCount"></span>
+      </div>
+      <div class="favorites-grid" id="favoritesGrid"></div>
+      <p class="favorites-empty" id="favoritesEmpty">Você ainda não favoritou nenhuma série. Use o coração nas capas para adicioná-las aqui.</p>
+    </section>
+
+    <section class="history-section continue-watching-section" id="continueWatching" hidden>
+      <div class="section-heading">
+        <div>
+          <p class="section-overline">SEU PROGRESSO</p>
+          <h2>Continue assistindo</h2>
+        </div>
+        <span class="catalog-count" id="continueWatchingCount"></span>
+      </div>
+      <div class="history-list" id="continueWatchingList"></div>
+    </section>
+
     <section class="history-section" id="continueExplorando" hidden>
       <div class="section-heading">
         <div>
-          <p class="section-overline">RETOME DE ONDE PAROU</p>
-          <h2>Continue explorando</h2>
+          <p class="section-overline">REPRODUZIDOS RECENTEMENTE</p>
+          <h2>Assistidos recentemente</h2>
         </div>
         <button class="clear-history" id="clearHistory" type="button">Limpar histórico</button>
       </div>

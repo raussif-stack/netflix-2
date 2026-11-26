@@ -2,12 +2,13 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="description" content="Assista aos episódios da NETFLIX 2%.">
   <title>NETFLIX 2% | Assistir</title>
   <link rel="stylesheet" href="../css/global.css">
   <link rel="stylesheet" href="../css/player.css">
   <script src="../js/theme.js" defer></script>
+  <script src="https://www.youtube.com/iframe_api" async></script>
   <script src="../js/catalogo.js" defer></script>
   <script src="../js/player.js" defer></script>
 </head>
@@ -27,23 +28,98 @@
       <p class="watch-kicker" id="watchSeriesTitle">NETFLIX 2%</p>
       <h1 id="watchEpisodeTitle">Carregando episódio...</h1>
       <p class="watch-description" id="watchEpisodeDescription"></p>
+      <p class="watch-episode-meta" id="watchEpisodeMeta" aria-live="polite"></p>
     </div>
 
     <section class="video-shell" aria-label="Reprodutor de vídeo">
       <div class="video-frame" id="videoFrame">
-        <div class="video-placeholder" id="videoPlaceholder">
+        <div class="video-placeholder" id="videoPlaceholder" role="status" aria-live="polite">
           <span class="placeholder-mark">2%</span>
           <h2>ESTE EPISÓDIO ESTARÁ DISPONÍVEL EM BREVE</h2>
           <p>O vídeo ainda não foi cadastrado. Quando você adicionar o ID do YouTube no catálogo, ele aparecerá aqui.</p>
+          <button class="player-retry" id="retryVideo" type="button" hidden>TENTAR NOVAMENTE</button>
+        </div>
+        <div class="episode-ended" id="episodeEnded" role="dialog" aria-modal="true" aria-labelledby="episodeEndedTitle" hidden>
+          <div class="episode-ended-card">
+            <span class="episode-ended-mark">2%</span>
+            <h2 id="episodeEndedTitle">EPISÓDIO ENCERRADO</h2>
+            <p id="episodeEndedMessage">O que deseja fazer agora?</p>
+            <p class="episode-countdown" id="episodeCountdown" aria-live="polite" hidden></p>
+            <div class="episode-ended-actions">
+              <button class="player-action player-action-primary" id="replayEpisode" type="button">REVER EPISÓDIO</button>
+              <a class="player-action" id="continueNextEpisode" href="#" hidden>PRÓXIMO EPISÓDIO</a>
+              <button class="player-action player-action-quiet" id="cancelAutoNext" type="button" hidden>CANCELAR AVANÇO</button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
+    <section class="advanced-player-controls" id="advancedPlayerControls" aria-label="Controles avançados de reprodução">
+      <div class="player-seek-row">
+        <span id="playerCurrentTime" class="player-time">0:00</span>
+        <input id="playerSeek" class="player-seek" type="range" min="0" max="1000" value="0" step="1" aria-label="Posição do episódio" disabled>
+        <span id="playerDuration" class="player-time">0:00</span>
+      </div>
+      <div class="player-tools-row">
+        <div class="player-tools-group player-tools-main">
+          <button class="player-tool-button" id="playerPlayPause" type="button" disabled aria-label="Reproduzir">▶ REPRODUZIR</button>
+          <button class="player-tool-button" id="playerBack10" type="button" disabled aria-label="Voltar 10 segundos">↶ 10s</button>
+          <button class="player-tool-button" id="playerForward10" type="button" disabled aria-label="Avançar 10 segundos">10s ↷</button>
+          <button class="player-tool-button" id="playerMute" type="button" disabled aria-label="Silenciar">SOM</button>
+          <label class="player-volume-control" for="playerVolume">VOLUME <input id="playerVolume" type="range" min="0" max="100" value="100" step="1" disabled></label>
+        </div>
+        <div class="player-tools-group player-tools-extra">
+          <label class="player-speed-control" for="playerSpeed">VELOCIDADE
+            <select id="playerSpeed" disabled><option value="0.5">0,5×</option><option value="0.75">0,75×</option><option value="1" selected>1×</option><option value="1.25">1,25×</option><option value="1.5">1,5×</option><option value="2">2×</option></select>
+          </label>
+          <button class="player-tool-button" id="playerFullscreen" type="button" disabled>⛶ TELA CHEIA</button>
+        </div>
+      </div>
+      <div class="player-autoplay-setting">
+        <label for="autoNextToggle">
+          <input id="autoNextToggle" type="checkbox" checked>
+          <span class="player-autoplay-copy"><strong>REPRODUÇÃO AUTOMÁTICA</strong><small>Iniciar o próximo episódio automaticamente após a contagem regressiva.</small></span>
+        </label>
+        <span class="player-autoplay-state" id="autoNextState" aria-live="polite">ATIVADA</span>
+      </div>
+      <p class="player-controls-hint">Atalhos: K reproduzir/pausar · J/L voltar ou avançar 10s · M silenciar</p>
+    </section>
+    <section class="resume-panel" id="resumePanel" aria-label="Retomar reprodução" hidden>
+      <div class="resume-panel-copy">
+        <p class="resume-kicker">CONTINUE DE ONDE PAROU</p>
+        <h2>Você já começou este episódio</h2>
+        <p id="resumeDescription">Deseja continuar de onde parou?</p>
+      </div>
+      <div class="resume-panel-actions">
+        <button class="resume-button resume-button-primary" id="resumePlayback" type="button">CONTINUAR</button>
+        <button class="resume-button" id="restartPlayback" type="button">RECOMEÇAR</button>
+      </div>
+    </section>
+    <p class="player-status" id="playerStatus" aria-live="polite" hidden></p>
 
     <div class="watch-controls">
       <a class="episode-nav" id="previousEpisode" href="#" hidden>← Episódio anterior</a>
       <span class="episode-counter" id="episodeCounter"></span>
       <a class="episode-nav next" id="nextEpisode" href="#" hidden>Próximo episódio →</a>
     </div>
+
+    <section class="episode-list-section" aria-label="Lista de episódios">
+      <div class="episode-list-heading">
+        <div>
+          <p class="episode-list-kicker">CONTINUE ASSISTINDO</p>
+          <h2 id="episodeListTitle">Episódios</h2>
+        </div>
+        <button class="episode-list-toggle" id="toggleEpisodeList" type="button" aria-expanded="false" aria-controls="episodeListPanel">VER EPISÓDIOS <span aria-hidden="true">⌄</span></button>
+      </div>
+      <div class="episode-list-panel" id="episodeListPanel" hidden>
+        <div class="player-season-tools">
+          <label for="playerSeasonSelect">Temporada</label>
+          <select id="playerSeasonSelect" aria-label="Selecionar temporada na lista de episódios"></select>
+          <span id="playerSeasonSummary" aria-live="polite"></span>
+        </div>
+        <div class="episode-list-items" id="episodeListItems"></div>
+      </div>
+    </section>
 
     <p class="youtube-note" id="youtubeNote" hidden>O vídeo é reproduzido pelo YouTube. A disponibilidade depende das configurações de privacidade e incorporação definidas pelo proprietário do vídeo.</p>
   </main>

@@ -100,3 +100,16 @@ body * {
 :root[data-theme="light"] body * {
   text-shadow: 0 2px 3px rgba(20, 24, 31, .18) !important;
 }
+
+
+/* 1.12.5 BETA — MICROINTERAÇÕES E ACESSIBILIDADE */
+button, a, input, select { -webkit-tap-highlight-color: transparent; }
+button:not(:disabled), a { transition-property: color, background-color, border-color, box-shadow, transform, opacity; transition-duration: .2s; transition-timing-function: ease; }
+button:active:not(:disabled), .episode-watch:active, .card-action:active { transform: scale(.97); }
+button:disabled { cursor: not-allowed; opacity: .55; }
+:focus-visible { outline: 2px solid var(--red); outline-offset: 4px; }
+.is-loading { color: transparent !important; background-color: var(--surface-raised); background-image: linear-gradient(100deg, transparent 20%, rgba(255,255,255,.12) 45%, transparent 70%); background-size: 220% 100%; animation: loadingSweep 1.25s ease-in-out infinite; }
+@keyframes loadingSweep { from { background-position: 100% 0; } to { background-position: -120% 0; } }
+@media (prefers-reduced-motion: reduce) { .is-loading { animation: none; } }
+@media (hover: none) { .series-card:hover, .history-card:hover, .episode-card:hover, .search-episode-card:hover { transform: none; } }
+@media (max-width: 650px) { button, .episode-watch, .episode-nav { min-height: 42px; } }
