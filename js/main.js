@@ -51,7 +51,8 @@ function renderizarSeries(lista) {
 
 const serieDestaque = catalogo.find((serie) => serie.destaque) || catalogo[0];
 const hero = document.querySelector(".hero");
-hero.style.setProperty("--hero-image", `url("${serieDestaque.banner}")`);
+const heroBanner = document.querySelector("#heroBanner");
+if (heroBanner) heroBanner.src = serieDestaque.banner;
 document.querySelector("#heroCategory").textContent = serieDestaque.categoria;
 document.querySelector("#heroTitle").textContent = serieDestaque.titulo;
 document.querySelector("#heroDescription").textContent = serieDestaque.descricao;
