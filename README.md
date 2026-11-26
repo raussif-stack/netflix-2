@@ -1,3 +1,35 @@
+# NETFLIX 2% — Versão 1.28.1 BETA
+
+> Correção da instalação e do funcionamento offline do PWA. Esta versão substitui os arquivos PWA da 1.28.0, mantendo as páginas, catálogo, player e estilos existentes.
+
+## Correções PWA — versão 1.28.1
+
+- Corrigido o pré-cache: os arquivos são armazenados individualmente, evitando que a falha de um recurso secundário cancele todo o cache.
+- A página inicial `/index.html` é armazenada primeiro e é o recurso essencial para a abertura offline.
+- Incluído `js/pwa.js` na lista de recursos armazenados.
+- Corrigido o fallback de navegação: tenta a página solicitada, depois a página inicial em cache e, por último, a página offline.
+- Respostas HTTP malsucedidas não são tratadas como páginas válidas de navegação.
+- A primeira ativação do Service Worker não força uma recarga desnecessária da página.
+- Atualizações do Service Worker ignoram o cache HTTP do navegador e a nova versão ativa sem ficar aguardando indefinidamente.
+- Vídeos e arquivos de mídia continuam fora do cache.
+
+## Como atualizar a instalação existente
+
+1. Substitua os arquivos do projeto pelos arquivos desta versão, mantendo a estrutura de pastas.
+2. Publique a atualização no mesmo domínio HTTPS usado pelo aplicativo.
+3. Abra o site pelo Chrome com internet e aguarde alguns segundos para o novo Service Worker ser instalado.
+4. Feche completamente o aplicativo NETFLIX 2% e abra novamente. Se aparecer o aviso de atualização, toque em **ATUALIZAR**.
+5. Se continuar abrindo a tela offline antiga, remova a instalação antiga, limpe os dados do site no Chrome e instale novamente pelo menu do navegador.
+
+## Validação desta entrega
+
+- Verificados os caminhos de todos os arquivos listados no shell da versão recebida.
+- Verificada a sintaxe JavaScript do Service Worker e do registro PWA.
+- Validado o JSON do manifesto.
+- A instalação e o funcionamento em aparelho físico precisam ser confirmados após publicar esta versão no domínio real.
+
+---
+
 # NETFLIX 2% — Versão 1.28.0 BETA
 
 > Atualização 1.28.0: preparação do site como Progressive Web App (PWA), com instalação, estrutura offline e atualização controlada.

@@ -1,11 +1,14 @@
-/* NETFLIX 2% — Service Worker | 1.28.0 BETA */
+/* NETFLIX 2% — Service Worker | 1.28.1 BETA */
 const CACHE_PREFIX = "netflix2-shell-";
-const CACHE_VERSION = "1.28.0";
+const CACHE_VERSION = "1.28.1";
 const CACHE_NAME = `${CACHE_PREFIX}${CACHE_VERSION}`;
+const HOME_URL = "/index.html";
 const OFFLINE_URL = "/offline.html";
+
+// Arquivos essenciais. Cada recurso é armazenado individualmente para que
+// uma imagem ou rota indisponível não invalide todo o cache do aplicativo.
 const APP_SHELL = [
-  "/",
-  "/index.html",
+  HOME_URL,
   "/pages/serie.html",
   "/pages/assistir.html",
   "/css/global.css",
@@ -17,8 +20,9 @@ const APP_SHELL = [
   "/js/main.js",
   "/js/serie.js",
   "/js/player.js",
+  "/js/pwa.js",
   "/manifest.json",
-  "/offline.html",
+  OFFLINE_URL,
   "/assets/icons/icon-192.png",
   "/assets/icons/icon-512.png"
 ];
@@ -26,7 +30,24 @@ const APP_SHELL = [
 self.addEventListener("install", (event) => {
   event.waitUntil((async () => {
     const cache = await caches.open(CACHE_NAME);
-    await cache.addAll(APP_SHELL);
+
+    // A página inicial é o único recurso obrigatório para concluir a
+    // instalação do cache. Sem ela, não há fallback funcional para o app.
+    const homeResponse = await fetch(HOME_URL, { cache: "reload" });
+    if (!homeResponse.ok) {
+      throw new Error(`Não foi possível armazenar ${HOME_URL}: HTTP ${homeResponse.status}`);
+    }
+    await cache.put(HOME_URL, homeResponse.clone());
+
+    // Recursos secundários são tentados individualmente. Uma falha isolada
+    // não impede o aplicativo de abrir nem de manter a página inicial em cache.
+    await Promise.allSettled(APP_SHELL.filter((url) => url !== HOME_URL).map(async (url) => {
+      const response = await fetch(url, { cache: "reload" });
+      if (response.ok) await cache.put(url, response.clone());
+    }));
+
+    // Ativa esta versão sem deixar uma atualização aguardando indefinidamente.
+    await self.skipWaiting();
   })());
 });
 
@@ -51,7 +72,7 @@ self.addEventListener("fetch", (event) => {
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
 
-  // Nunca guardar vídeos ou arquivos de mídia grandes no cache do aplicativo.
+  // Não armazenar vídeos ou arquivos de mídia grandes.
   if (/\.(mp4|webm|mov|mp3|m4a|wav)$/i.test(url.pathname)) return;
 
   if (request.mode === "navigate") {
@@ -59,29 +80,44 @@ self.addEventListener("fetch", (event) => {
       try {
         const response = await fetch(request);
         if (response && response.ok) {
-          const cache = await caches.open(CACHE_NAME);
-          cache.put(request, response.clone());
+          const contentType = response.headers.get("content-type") || "";
+          if (contentType.includes("text/html")) {
+            const cache = await caches.open(CACHE_NAME);
+            await cache.put(request, response.clone());
+          }
+          return response;
         }
-        return response;
-      } catch {
-        return (await caches.match(request)) ||
-          (await caches.match("/index.html")) ||
-          (await caches.match(OFFLINE_URL));
+      } catch (error) {
+        // Sem conexão: tenta a rota solicitada e depois a página inicial.
       }
+
+      const cachedPage = await caches.match(request, { ignoreSearch: true });
+      if (cachedPage) return cachedPage;
+
+      const cachedHome = await caches.match(HOME_URL);
+      if (cachedHome) return cachedHome;
+
+      const offlinePage = await caches.match(OFFLINE_URL);
+      if (offlinePage) return offlinePage;
+
+      return new Response("<h1>NETFLIX 2%</h1><p>Conecte-se à internet para abrir o aplicativo pela primeira vez.</p>", {
+        status: 503,
+        headers: { "Content-Type": "text/html; charset=utf-8" }
+      });
     })());
     return;
   }
 
-  // Arquivos locais: cache primeiro para abertura rápida; atualizações entram
-  // pela troca de versão do Service Worker e pela limpeza do cache anterior.
+  // Recursos locais: cache primeiro e rede como alternativa.
   event.respondWith((async () => {
     const cached = await caches.match(request);
     if (cached) return cached;
+
     try {
       const response = await fetch(request);
       if (response && response.ok && response.type === "basic") {
         const cache = await caches.open(CACHE_NAME);
-        cache.put(request, response.clone());
+        await cache.put(request, response.clone());
       }
       return response;
     } catch {
