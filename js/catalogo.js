@@ -454,9 +454,13 @@ const catalogo = [
           164: "Antes Que Tudo Acabe, Você Precisa Entender Isso",
           165: "Por Que Homens Fracos Odeiam Retenção Seminal?",
           166: "Seu Espelho está TENTANDO TE AVISAR | Sublimação do Sêmen",
+
+          // Vídeo extra — sem numeração de episódio
+          "extra": "#Lei 5: A Energia Que Não Circula, Estagna e Adoece o Rei",
+
           // Episódios 167–176
           167: "Eles(as) NÃO gostam quando você para de ESVAZIAR (cuidado)",
-          168: "POTENCIALIZE a Retenção Seminal (Vitaminas + Desparasitação)",
+          168: "POTENCIALIZE a Retenção Seminal",
           169: "Retenção Seminal te fará um Cavalo Selvagem",
           170: "EM RETENÇÃO SEMINAL Elas vão te mandar mensagem todo dia",
           171: "Se você quer DOMINAR A RETENÇÃO Seminal, grave estas 15 regras",

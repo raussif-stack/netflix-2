@@ -1,4 +1,27 @@
-# NETFLIX 2% — Versão 1.18.0 BETA
+# NETFLIX 2% — Versão 1.28.0 BETA
+
+> Atualização 1.28.0: preparação do site como Progressive Web App (PWA), com instalação, estrutura offline e atualização controlada.
+
+## PWA — versão 1.28.0
+
+- Adicionado `manifest.json` com nome, identidade visual, escopo e modo de exibição standalone.
+- Criados ícones PNG nos tamanhos 192×192 e 512×512.
+- Adicionado `service-worker.js` e registro nas três páginas HTML.
+- O Service Worker pré-armazena a estrutura essencial do site e utiliza cache para recursos locais acessados.
+- Navegações sem conexão recorrem à página inicial em cache ou à página `offline.html`.
+- Arquivos de vídeo e mídia de grande porte não são armazenados pelo Service Worker.
+- Ao detectar uma nova versão, a interface oferece atualização; o cache de versões anteriores é removido na ativação da nova versão.
+- O catálogo, favoritos e progresso continuam usando os mecanismos existentes do projeto; o PWA não cria sincronização de dados entre dispositivos.
+- Vídeos do YouTube, conteúdo externo e recursos que dependem de conexão não ficam disponíveis offline.
+
+## Observações de implantação e validação
+
+- O Service Worker foi configurado para a raiz do domínio (`/service-worker.js`), adequado à publicação do projeto na raiz do domínio da Vercel.
+- A instalação PWA exige HTTPS (a Vercel fornece HTTPS nos domínios publicados).
+- Para que o modo offline funcione, o usuário precisa abrir o site online pelo menos uma vez para o Service Worker instalar e armazenar a estrutura.
+- Esta entrega contém a implementação dos arquivos; a instalação em dispositivos, o comportamento offline em navegador real e a atualização entre versões ainda precisam ser verificados após a publicação.
+
+# NETFLIX 2% — Versão 1.28.0 BETA
 
 > Atualização 1.18.0: sistema de favoritos locais para séries, com controles na página inicial e na página individual, seção de favoritas e filtro dedicado.
 

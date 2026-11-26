@@ -1,0 +1,1 @@
+NETFLIX 2%\nVersão: 1.28.0 BETA\nBase: 1.27.0 BETA — Player responsivo\nAtualização: PWA instalável, cache da estrutura, fallback offline e gerenciamento de atualizações.\n
