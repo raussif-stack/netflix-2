@@ -45,6 +45,12 @@ function renderizarSeries(lista) {
     seriesGrid.appendChild(card);
   });
 
+  const emPesquisa = Boolean(normalizarTexto(searchInput.value));
+  seriesGrid.classList.toggle("is-carousel", !emPesquisa);
+  document.querySelector(".series-carousel").classList.toggle("search-mode", emPesquisa);
+  document.querySelector("#seriesPrevious").hidden = emPesquisa || lista.length < 2;
+  document.querySelector("#seriesNext").hidden = emPesquisa || lista.length < 2;
+  seriesGrid.scrollLeft = 0;
   emptyMessage.hidden = lista.length !== 0;
   catalogCount.textContent = `${String(lista.length).padStart(2, "0")} TÍTULOS`;
 }
@@ -149,6 +155,74 @@ function renderizarPesquisa(termo) {
   if (!consulta) {
     emptyMessage.textContent = "Nenhuma série encontrada. Tente outro termo.";
     renderizarSeries(catalogo);
+
+// CARROSSEL: setas no desktop; o mesmo trilho aceita gesto de deslizar no celular.
+const seriesPrevious = document.querySelector("#seriesPrevious");
+const seriesNext = document.querySelector("#seriesNext");
+function deslocarCarrossel(direcao) {
+  const card = seriesGrid.querySelector(".series-card");
+  if (!card) return;
+  const distancia = card.getBoundingClientRect().width + 20;
+  seriesGrid.scrollBy({ left: direcao * distancia, behavior: "smooth" });
+}
+seriesPrevious.addEventListener("click", () => deslocarCarrossel(-1));
+seriesNext.addEventListener("click", () => deslocarCarrossel(1));
+
+// HISTÓRICO LOCAL: os registros guardam apenas IDs do catálogo, sem dados pessoais.
+const CHAVE_HISTORICO = "netflix2-watch-history";
+function lerHistorico() {
+  try {
+    const dados = JSON.parse(localStorage.getItem(CHAVE_HISTORICO) || "[]");
+    return Array.isArray(dados) ? dados : [];
+  } catch {
+    return [];
+  }
+}
+function renderizarHistorico() {
+  const secao = document.querySelector("#continueExplorando");
+  const lista = document.querySelector("#historyList");
+  const historico = lerHistorico().slice(0, 8);
+  lista.innerHTML = "";
+  historico.forEach((registro) => {
+    const serie = catalogo.find((item) => item.id === registro.serieId);
+    const temporada = serie?.temporadas.find((item) => Number(item.numero) === Number(registro.temporada));
+    const episodio = temporada?.episodios.find((item) => Number(item.numero) === Number(registro.episodio));
+    if (!serie || !temporada || !episodio) return;
+
+    const card = document.createElement("a");
+    card.className = "history-card";
+    card.href = `pages/assistir.html?id=${encodeURIComponent(serie.id)}&temporada=${temporada.numero}&episodio=${episodio.numero}`;
+    if (episodio.youtubeId) {
+      const idVideo = String(episodio.youtubeId).trim();
+      const idValido = /^[A-Za-z0-9_-]{11}$/.test(idVideo) ? idVideo : "";
+      if (idValido) {
+        const imagem = document.createElement("img");
+        imagem.src = `https://img.youtube.com/vi/${idValido}/hqdefault.jpg`;
+        imagem.alt = "";
+        imagem.loading = "lazy";
+        imagem.onerror = () => imagem.remove();
+        card.appendChild(imagem);
+      }
+    }
+    const info = document.createElement("span");
+    info.className = "history-card-info";
+    const serieNome = document.createElement("strong");
+    serieNome.textContent = serie.titulo;
+    const epNome = document.createElement("span");
+    epNome.textContent = `${episodio.titulo} · ${temporada.titulo}`;
+    const acao = document.createElement("small");
+    acao.textContent = "CONTINUAR ↗";
+    info.append(serieNome, epNome, acao);
+    card.appendChild(info);
+    lista.appendChild(card);
+  });
+  secao.hidden = lista.children.length === 0;
+}
+document.querySelector("#clearHistory").addEventListener("click", () => {
+  localStorage.removeItem(CHAVE_HISTORICO);
+  renderizarHistorico();
+});
+renderizarHistorico();
     return;
   }
 
@@ -257,3 +331,71 @@ document.querySelector("#navMinhaLista").addEventListener("click", (event) => {
 });
 
 renderizarSeries(catalogo);
+
+// CARROSSEL: setas no desktop; o mesmo trilho aceita gesto de deslizar no celular.
+const seriesPrevious = document.querySelector("#seriesPrevious");
+const seriesNext = document.querySelector("#seriesNext");
+function deslocarCarrossel(direcao) {
+  const card = seriesGrid.querySelector(".series-card");
+  if (!card) return;
+  const distancia = card.getBoundingClientRect().width + 20;
+  seriesGrid.scrollBy({ left: direcao * distancia, behavior: "smooth" });
+}
+seriesPrevious.addEventListener("click", () => deslocarCarrossel(-1));
+seriesNext.addEventListener("click", () => deslocarCarrossel(1));
+
+// HISTÓRICO LOCAL: os registros guardam apenas IDs do catálogo, sem dados pessoais.
+const CHAVE_HISTORICO = "netflix2-watch-history";
+function lerHistorico() {
+  try {
+    const dados = JSON.parse(localStorage.getItem(CHAVE_HISTORICO) || "[]");
+    return Array.isArray(dados) ? dados : [];
+  } catch {
+    return [];
+  }
+}
+function renderizarHistorico() {
+  const secao = document.querySelector("#continueExplorando");
+  const lista = document.querySelector("#historyList");
+  const historico = lerHistorico().slice(0, 8);
+  lista.innerHTML = "";
+  historico.forEach((registro) => {
+    const serie = catalogo.find((item) => item.id === registro.serieId);
+    const temporada = serie?.temporadas.find((item) => Number(item.numero) === Number(registro.temporada));
+    const episodio = temporada?.episodios.find((item) => Number(item.numero) === Number(registro.episodio));
+    if (!serie || !temporada || !episodio) return;
+
+    const card = document.createElement("a");
+    card.className = "history-card";
+    card.href = `pages/assistir.html?id=${encodeURIComponent(serie.id)}&temporada=${temporada.numero}&episodio=${episodio.numero}`;
+    if (episodio.youtubeId) {
+      const idVideo = String(episodio.youtubeId).trim();
+      const idValido = /^[A-Za-z0-9_-]{11}$/.test(idVideo) ? idVideo : "";
+      if (idValido) {
+        const imagem = document.createElement("img");
+        imagem.src = `https://img.youtube.com/vi/${idValido}/hqdefault.jpg`;
+        imagem.alt = "";
+        imagem.loading = "lazy";
+        imagem.onerror = () => imagem.remove();
+        card.appendChild(imagem);
+      }
+    }
+    const info = document.createElement("span");
+    info.className = "history-card-info";
+    const serieNome = document.createElement("strong");
+    serieNome.textContent = serie.titulo;
+    const epNome = document.createElement("span");
+    epNome.textContent = `${episodio.titulo} · ${temporada.titulo}`;
+    const acao = document.createElement("small");
+    acao.textContent = "CONTINUAR ↗";
+    info.append(serieNome, epNome, acao);
+    card.appendChild(info);
+    lista.appendChild(card);
+  });
+  secao.hidden = lista.children.length === 0;
+}
+document.querySelector("#clearHistory").addEventListener("click", () => {
+  localStorage.removeItem(CHAVE_HISTORICO);
+  renderizarHistorico();
+});
+renderizarHistorico();

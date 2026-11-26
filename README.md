@@ -197,3 +197,10 @@ A responsividade foi implementada em CSS. Ainda é importante conferir o resulta
 - Animações discretas de entrada durante a rolagem e microinterações em cards e botões.
 - Respeito à preferência do sistema por movimento reduzido.
 - Ajustes de contraste, superfícies, bordas, sombras e profundidade nos dois temas.
+
+
+## Melhorias de navegação e histórico
+
+- **Carrossel de séries:** a página inicial apresenta as capas em uma faixa horizontal; use as setas no computador ou deslize no celular. Durante uma pesquisa, os resultados continuam em grade.
+- **Ir para episódio:** na página de cada série, selecione a temporada, informe o número do episódio e pressione Enter ou clique em IR.
+- **Continue explorando:** os últimos oito episódios abertos aparecem na página inicial. O histórico fica salvo no `localStorage` do navegador e pode ser apagado pelo botão "Limpar histórico". Ele não sincroniza entre dispositivos nem exige conta.

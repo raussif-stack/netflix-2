@@ -65,10 +65,25 @@
         <span class="catalog-count" id="catalogCount">CATÁLOGO</span>
       </div>
 
-      <div class="series-grid" id="seriesGrid" aria-live="polite">
-        <!-- Os cards são inseridos pelo JavaScript a partir de js/catalogo.js. -->
+      <div class="series-carousel">
+        <button class="carousel-arrow carousel-previous" id="seriesPrevious" type="button" aria-label="Séries anteriores">‹</button>
+        <div class="series-grid" id="seriesGrid" aria-live="polite">
+          <!-- Os cards são inseridos pelo JavaScript a partir de js/catalogo.js. -->
+        </div>
+        <button class="carousel-arrow carousel-next" id="seriesNext" type="button" aria-label="Próximas séries">›</button>
       </div>
       <p class="empty-message" id="emptyMessage" hidden>Nenhuma série encontrada. Tente outro termo.</p>
+    </section>
+
+    <section class="history-section" id="continueExplorando" hidden>
+      <div class="section-heading">
+        <div>
+          <p class="section-overline">RETOME DE ONDE PAROU</p>
+          <h2>Continue explorando</h2>
+        </div>
+        <button class="clear-history" id="clearHistory" type="button">Limpar histórico</button>
+      </div>
+      <div class="history-list" id="historyList"></div>
     </section>
 
     <section class="quote-strip" id="minha-lista">

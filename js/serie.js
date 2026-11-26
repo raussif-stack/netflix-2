@@ -118,4 +118,47 @@ if (!serie) {
 
   if (serie.temporadas.length) renderizarEpisodios(serie.temporadas[0]);
   else document.querySelector("#episodeEmpty").hidden = false;
+
+  const campoEpisodio = document.querySelector("#episodeJumpInput");
+  const botaoIr = document.querySelector("#episodeJumpButton");
+  const feedbackIr = document.querySelector("#episodeJumpFeedback");
+
+  function irParaEpisodio() {
+    const numero = Number(campoEpisodio.value);
+    const temporadaAtual = serie.temporadas.find((item) => String(item.numero) === seletor.value);
+    const episodioEncontrado = temporadaAtual?.episodios.find((item) => Number(item.numero) === numero);
+
+    if (!campoEpisodio.value || !Number.isInteger(numero) || numero < 1) {
+      feedbackIr.textContent = "Digite um número de episódio válido.";
+      campoEpisodio.focus();
+      return;
+    }
+    if (!episodioEncontrado) {
+      feedbackIr.textContent = `O episódio ${String(numero).padStart(3, "0")} não existe em ${temporadaAtual?.titulo || "esta temporada"}.`;
+      campoEpisodio.focus();
+      return;
+    }
+
+    const cartoes = [...document.querySelectorAll(".episode-card")];
+    const cartao = cartoes.find((item) =>
+      item.querySelector(".episode-art-number")?.textContent === String(numero).padStart(3, "0")
+    );
+    if (!cartao) {
+      feedbackIr.textContent = "Não foi possível localizar esse episódio na lista.";
+      return;
+    }
+    feedbackIr.textContent = `Episódio ${String(numero).padStart(3, "0")} localizado.`;
+    cartao.scrollIntoView({ behavior: "smooth", block: "center" });
+    cartao.classList.remove("episode-highlight");
+    void cartao.offsetWidth;
+    cartao.classList.add("episode-highlight");
+    window.setTimeout(() => cartao.classList.remove("episode-highlight"), 2200);
+  }
+
+  botaoIr.addEventListener("click", irParaEpisodio);
+  campoEpisodio.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") irParaEpisodio();
+  });
+  campoEpisodio.addEventListener("input", () => { feedbackIr.textContent = ""; });
+  seletor.addEventListener("change", () => { feedbackIr.textContent = ""; });
 }

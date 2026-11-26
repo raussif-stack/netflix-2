@@ -93,6 +93,35 @@ if (!serie) {
     );
     configurarNavegacao(todosEpisodios, indiceAtual);
 
+    // Registra o episódio aberto no histórico local deste navegador.
+    try {
+      const chaveHistorico = "netflix2-watch-history";
+      let historicoAtual = [];
+      try {
+        historicoAtual = JSON.parse(localStorage.getItem(chaveHistorico) || "[]");
+      } catch {
+        historicoAtual = [];
+      }
+      const historicoSeguro = Array.isArray(historicoAtual)
+        ? historicoAtual.filter((item) => item && typeof item === "object")
+        : [];
+      const novoRegistro = {
+        serieId: serie.id,
+        temporada: temporada.numero,
+        episodio: episodio.numero,
+        acessadoEm: Date.now()
+      };
+      const semDuplicata = historicoSeguro.filter((item) =>
+        !(item.serieId === novoRegistro.serieId &&
+          Number(item.temporada) === Number(novoRegistro.temporada) &&
+          Number(item.episodio) === Number(novoRegistro.episodio))
+      );
+      localStorage.setItem(chaveHistorico, JSON.stringify([novoRegistro, ...semDuplicata].slice(0, 8)));
+    } catch (erro) {
+      // O player continua funcionando mesmo se o navegador bloquear o armazenamento local.
+      console.warn("Não foi possível salvar o histórico local.", erro);
+    }
+
     const videoId = obterIdYoutube(episodio.youtubeId);
     if (videoId) {
       placeholder.hidden = true;
