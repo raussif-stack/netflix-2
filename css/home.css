@@ -359,7 +359,7 @@
   background: #f2f3f5;
 }
 :root[data-theme="light"] .hero-shade {
-  background: linear-gradient(90deg, rgba(255,255,255,.52) 0%, rgba(255,255,255,.28) 48%, rgba(255,255,255,.08) 100%);
+  background: linear-gradient(90deg, rgba(255,255,255,.30) 0%, rgba(255,255,255,.16) 48%, rgba(255,255,255,.04) 100%);
 }
 .hero::after { height: 190px; }
 :root[data-theme="light"] .hero::after {
@@ -373,7 +373,7 @@
 :root[data-theme="light"] .hero-description { color: #343942; }
 :root[data-theme="light"] .hero-bottom-label { color: rgba(45,49,57,.62); }
 :root[data-theme="light"] .series-card::before {
-  background: linear-gradient(0deg, rgba(48,0,5,.96) 0%, rgba(126,0,10,.76) 48%, rgba(229,9,20,.08) 90%);
+  background: linear-gradient(0deg, rgba(48,0,5,.76) 0%, rgba(126,0,10,.48) 48%, rgba(229,9,20,.04) 90%);
 }
 :root[data-theme="light"] .card-category { color: #ffe1e3; }
 :root[data-theme="light"] .card-content h3 { color: #ff3944; }

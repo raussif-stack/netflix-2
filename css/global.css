@@ -91,3 +91,12 @@ body .motion-reveal { transition: opacity .65s ease, transform .65s cubic-bezier
 :root[data-theme="light"] .theme-toggle:focus-visible {
   border-color: var(--red);
 }
+
+
+/* SOMBRA PROJETADA GLOBAL — TEXTOS EM TODOS OS TEMAS */
+body * {
+  text-shadow: 0 2px 3px rgba(0, 0, 0, .24) !important;
+}
+:root[data-theme="light"] body * {
+  text-shadow: 0 2px 3px rgba(20, 24, 31, .18) !important;
+}
