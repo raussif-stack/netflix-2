@@ -85,3 +85,9 @@ body .motion-reveal { transition: opacity .65s ease, transform .65s cubic-bezier
   .motion-reveal, .motion-reveal.is-visible { opacity: 1; transform: none; transition: none; }
   .theme-toggle { transition: none; }
 }
+
+
+:root[data-theme="light"] .theme-toggle:hover,
+:root[data-theme="light"] .theme-toggle:focus-visible {
+  border-color: var(--red);
+}

@@ -165,3 +165,14 @@ body { min-height: 100vh; }
   .series-header-actions { gap: 10px; }
   .series-topbar .theme-toggle { width: 36px; height: 36px; flex-basis: 36px; }
 }
+
+
+/* AJUSTES FINAIS — BANNERS E TÍTULOS NO TEMA CLARO */
+:root[data-theme="light"] .series-hero-overlay {
+  background: linear-gradient(90deg, rgba(255,255,255,.94) 0%, rgba(255,255,255,.78) 56%, rgba(255,255,255,.28) 100%),
+              linear-gradient(0deg, #f2f3f5 0%, rgba(242,243,245,.46) 25%, transparent 72%);
+}
+:root[data-theme="light"] .series-hero h1 { color: var(--red); text-shadow: none; }
+:root[data-theme="light"] .series-kicker { color: #b80d16; }
+:root[data-theme="light"] .series-description { color: #343942; }
+:root[data-theme="light"] .series-meta { color: #626873; }
