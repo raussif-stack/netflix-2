@@ -1,78 +1,87 @@
-/* NETFLIX 2% — registro PWA e atualização | 1.28.1 BETA */
 (() => {
+  "use strict";
+
   if (!("serviceWorker" in navigator)) return;
 
-  // A primeira ativação apenas passa a controlar a página. Recarregar nesse
-  // momento poderia interromper a abertura inicial do aplicativo.
-  let jaPossuiaControlador = Boolean(navigator.serviceWorker.controller);
-  let recarregamentoSolicitado = false;
+  const script = document.currentScript;
+  const scriptUrl = script && script.src
+    ? new URL(script.src)
+    : new URL("./js/pwa.js", location.href);
+  const workerUrl = new URL("../service-worker.js", scriptUrl);
+  const workerScope = new URL("../", workerUrl);
+  const isLocalhost = ["localhost", "127.0.0.1"].includes(location.hostname);
+  const isSecure = location.protocol === "https:" || isLocalhost;
 
-  navigator.serviceWorker.addEventListener("controllerchange", () => {
-    if (!jaPossuiaControlador) {
-      jaPossuiaControlador = true;
-      return;
-    }
-    if (recarregamentoSolicitado) return;
-    recarregamentoSolicitado = true;
-    window.location.reload();
-  });
+  if (!isSecure) return;
 
-  function mostrarAtualizacao(registration) {
-    if (document.querySelector("#pwaUpdateNotice")) return;
+  function showUpdateNotice(registration) {
+    if (!registration.waiting || !navigator.serviceWorker.controller) return;
+    if (document.getElementById("pwa-update-notice")) return;
 
     const notice = document.createElement("aside");
-    notice.id = "pwaUpdateNotice";
+    notice.id = "pwa-update-notice";
     notice.setAttribute("role", "status");
-    notice.style.cssText = "position:fixed;z-index:99999;left:16px;right:16px;bottom:16px;max-width:520px;margin:auto;padding:14px 16px;background:#202020;color:#fff;border:1px solid #555;border-radius:10px;box-shadow:0 8px 30px #0008;display:flex;gap:12px;align-items:center;justify-content:space-between;font:14px system-ui";
+    notice.innerHTML = `
+      <span>Uma atualização da NETFLIX 2% está pronta.</span>
+      <button type="button" id="pwa-update-button">ATUALIZAR</button>
+      <button type="button" id="pwa-update-dismiss" aria-label="Fechar aviso">×</button>
+    `;
 
-    const message = document.createElement("span");
-    message.textContent = "Uma nova versão da NETFLIX 2% está disponível.";
-
-    const button = document.createElement("button");
-    button.type = "button";
-    button.textContent = "ATUALIZAR";
-    button.style.cssText = "border:0;border-radius:6px;padding:10px 12px;background:#e50914;color:#fff;font-weight:700;cursor:pointer";
-    button.addEventListener("click", () => {
-      button.disabled = true;
-      button.textContent = "ATUALIZANDO…";
-      if (registration.waiting) registration.waiting.postMessage("SKIP_WAITING");
-    });
-
-    notice.append(message, button);
+    const style = document.createElement("style");
+    style.textContent = `
+      #pwa-update-notice {
+        position: fixed; z-index: 99999; left: 16px; right: 16px; bottom: 16px;
+        display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+        padding: 14px 16px; border: 1px solid rgba(229,9,20,.55);
+        border-radius: 12px; background: #202020; color: #fff;
+        box-shadow: 0 8px 30px rgba(0,0,0,.4);
+        font: 14px/1.4 system-ui, sans-serif;
+      }
+      #pwa-update-notice span { flex: 1 1 180px; }
+      #pwa-update-notice button {
+        border: 0; border-radius: 7px; padding: 9px 12px;
+        cursor: pointer; font-weight: 700;
+      }
+      #pwa-update-button { background: #e50914; color: #fff; }
+      #pwa-update-dismiss { background: transparent; color: #fff; font-size: 20px; }
+    `;
+    document.head.appendChild(style);
     document.body.appendChild(notice);
+
+    notice.querySelector("#pwa-update-button").addEventListener("click", () => {
+      registration.waiting?.postMessage({ type: "SKIP_WAITING" });
+    });
+    notice.querySelector("#pwa-update-dismiss").addEventListener("click", () => notice.remove());
   }
 
-  async function registrarPWA() {
+  let refreshing = false;
+  navigator.serviceWorker.addEventListener("controllerchange", () => {
+    if (refreshing) return;
+    refreshing = true;
+    location.reload();
+  });
+
+  window.addEventListener("load", async () => {
     try {
-      const registration = await navigator.serviceWorker.register("/service-worker.js", {
-        scope: "/",
+      const registration = await navigator.serviceWorker.register(workerUrl.href, {
+        scope: workerScope.pathname,
         updateViaCache: "none"
       });
 
-      if (registration.waiting && navigator.serviceWorker.controller) {
-        mostrarAtualizacao(registration);
-      }
+      showUpdateNotice(registration);
 
       registration.addEventListener("updatefound", () => {
-        const worker = registration.installing;
-        if (!worker) return;
-        worker.addEventListener("statechange", () => {
-          if (worker.state === "installed" && navigator.serviceWorker.controller) {
-            mostrarAtualizacao(registration);
-          }
+        const installing = registration.installing;
+        if (!installing) return;
+        installing.addEventListener("statechange", () => {
+          if (installing.state === "installed") showUpdateNotice(registration);
         });
       });
 
-      // Força a verificação do arquivo do Service Worker no servidor.
-      await registration.update().catch(() => {});
+      // Check for a newer deployment when the app is opened.
+      registration.update().catch(() => {});
     } catch (error) {
-      console.warn("NETFLIX 2%: não foi possível registrar o modo offline.", error);
+      console.warn("[NETFLIX 2%] Não foi possível registrar o modo offline:", error);
     }
-  }
-
-  if (document.readyState === "complete") {
-    registrarPWA();
-  } else {
-    window.addEventListener("load", registrarPWA, { once: true });
-  }
+  });
 })();

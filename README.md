@@ -1,57 +1,15 @@
-# NETFLIX 2% — Versão 1.28.1 BETA
 
-> Correção da instalação e do funcionamento offline do PWA. Esta versão substitui os arquivos PWA da 1.28.0, mantendo as páginas, catálogo, player e estilos existentes.
+## PWA instalável — versão 1.28.0 BETA
 
-## Correções PWA — versão 1.28.1
-
-- Corrigido o pré-cache: os arquivos são armazenados individualmente, evitando que a falha de um recurso secundário cancele todo o cache.
-- A página inicial `/index.html` é armazenada primeiro e é o recurso essencial para a abertura offline.
-- Incluído `js/pwa.js` na lista de recursos armazenados.
-- Corrigido o fallback de navegação: tenta a página solicitada, depois a página inicial em cache e, por último, a página offline.
-- Respostas HTTP malsucedidas não são tratadas como páginas válidas de navegação.
-- A primeira ativação do Service Worker não força uma recarga desnecessária da página.
-- Atualizações do Service Worker ignoram o cache HTTP do navegador e a nova versão ativa sem ficar aguardando indefinidamente.
-- Vídeos e arquivos de mídia continuam fora do cache.
-
-## Como atualizar a instalação existente
-
-1. Substitua os arquivos do projeto pelos arquivos desta versão, mantendo a estrutura de pastas.
-2. Publique a atualização no mesmo domínio HTTPS usado pelo aplicativo.
-3. Abra o site pelo Chrome com internet e aguarde alguns segundos para o novo Service Worker ser instalado.
-4. Feche completamente o aplicativo NETFLIX 2% e abra novamente. Se aparecer o aviso de atualização, toque em **ATUALIZAR**.
-5. Se continuar abrindo a tela offline antiga, remova a instalação antiga, limpe os dados do site no Chrome e instale novamente pelo menu do navegador.
-
-## Validação desta entrega
-
-- Verificados os caminhos de todos os arquivos listados no shell da versão recebida.
-- Verificada a sintaxe JavaScript do Service Worker e do registro PWA.
-- Validado o JSON do manifesto.
-- A instalação e o funcionamento em aparelho físico precisam ser confirmados após publicar esta versão no domínio real.
-
----
-
-# NETFLIX 2% — Versão 1.28.0 BETA
-
-> Atualização 1.28.0: preparação do site como Progressive Web App (PWA), com instalação, estrutura offline e atualização controlada.
-
-## PWA — versão 1.28.0
-
-- Adicionado `manifest.json` com nome, identidade visual, escopo e modo de exibição standalone.
-- Criados ícones PNG nos tamanhos 192×192 e 512×512.
-- Adicionado `service-worker.js` e registro nas três páginas HTML.
-- O Service Worker pré-armazena a estrutura essencial do site e utiliza cache para recursos locais acessados.
-- Navegações sem conexão recorrem à página inicial em cache ou à página `offline.html`.
-- Arquivos de vídeo e mídia de grande porte não são armazenados pelo Service Worker.
-- Ao detectar uma nova versão, a interface oferece atualização; o cache de versões anteriores é removido na ativação da nova versão.
-- O catálogo, favoritos e progresso continuam usando os mecanismos existentes do projeto; o PWA não cria sincronização de dados entre dispositivos.
-- Vídeos do YouTube, conteúdo externo e recursos que dependem de conexão não ficam disponíveis offline.
-
-## Observações de implantação e validação
-
-- O Service Worker foi configurado para a raiz do domínio (`/service-worker.js`), adequado à publicação do projeto na raiz do domínio da Vercel.
-- A instalação PWA exige HTTPS (a Vercel fornece HTTPS nos domínios publicados).
-- Para que o modo offline funcione, o usuário precisa abrir o site online pelo menos uma vez para o Service Worker instalar e armazenar a estrutura.
-- Esta entrega contém a implementação dos arquivos; a instalação em dispositivos, o comportamento offline em navegador real e a atualização entre versões ainda precisam ser verificados após a publicação.
+- Manifesto `manifest.webmanifest` com nome, cores, modo standalone e ícones do aplicativo.
+- Ícones PNG em 192×192 e 512×512.
+- Registro do Service Worker nas páginas inicial, série e player.
+- Cache do núcleo local do aplicativo e cache de recursos locais acessados.
+- Estratégia de rede primeiro para navegação, com fallback para páginas armazenadas.
+- Atualizações detectadas pelo Service Worker com aviso para o usuário aplicar a nova versão.
+- Arquivos de vídeo e conteúdo de terceiros (incluindo YouTube) não são armazenados pelo cache do aplicativo.
+- O catálogo, as páginas e os recursos locais já armazenados podem abrir offline; reprodução de vídeos do YouTube exige internet.
+- Instalação exige HTTPS ou ambiente local (`localhost`). A hospedagem na Vercel atende ao requisito HTTPS.
 
 # NETFLIX 2% — Versão 1.28.0 BETA
 
