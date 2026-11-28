@@ -1,3 +1,15 @@
+# NETFLIX 2% — v1.34.2
+
+## Correção — conclusão do fluxo de atualização do PWA
+- O botão acompanha a mudança de estado do próprio Service Worker aguardando, além do evento `controllerchange`.
+- A mensagem `NETFLIX2_SKIP_WAITING` agora mantém a ativação vinculada ao ciclo de vida da mensagem com `event.waitUntil()`.
+- Se a ativação não for confirmada em 15 segundos, o aviso sai do estado infinito de processamento e oferece nova tentativa.
+- Se o worker for descartado/substituído, a interface também permite tentar novamente.
+- Cache do PWA atualizado para `v1.34.2`.
+- Preservados o cache de migração inicial e os dados locais do usuário (`localStorage`).
+
+---
+
 # NETFLIX 2% — v1.34.1
 
 ## Correção — Atualizações inteligentes do PWA

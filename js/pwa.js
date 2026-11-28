@@ -85,18 +85,68 @@
       if (!worker) {
         atualizar.disabled = true;
         atualizar.textContent = "Verificando…";
-        registroAtual?.update().catch((erro) => {
+        registroAtual?.update().then(() => {
+          if (registroAtual?.waiting) {
+            atualizar.disabled = false;
+            atualizar.textContent = "Atualizar agora";
+          } else {
+            atualizar.disabled = false;
+            atualizar.textContent = "Tentar novamente";
+          }
+        }).catch((erro) => {
           console.warn("[NETFLIX 2%] Não foi possível verificar a atualização:", erro);
           atualizar.disabled = false;
           atualizar.textContent = "Tentar novamente";
         });
         return;
       }
+
       recarregarAposAtivacao = true;
       atualizar.disabled = true;
       depois.disabled = true;
       atualizar.textContent = "Atualizando…";
-      worker.postMessage({ type: "NETFLIX2_SKIP_WAITING" });
+
+      let finalizado = false;
+      const concluir = () => {
+        if (finalizado) return;
+        finalizado = true;
+        window.clearTimeout(temporizador);
+        recargaIniciada = true;
+        window.location.reload();
+      };
+      const falhar = (motivo) => {
+        if (finalizado) return;
+        finalizado = true;
+        window.clearTimeout(temporizador);
+        recarregarAposAtivacao = false;
+        console.warn("[NETFLIX 2%] A ativação do Service Worker não foi confirmada:", motivo);
+        atualizar.disabled = false;
+        depois.disabled = false;
+        atualizar.textContent = "Tentar novamente";
+      };
+
+      // Observa o próprio worker aguardando. Assim não dependemos apenas de
+      // controllerchange, que pode não chegar em alguns cenários de controle.
+      const observarEstado = () => {
+        if (worker.state === "activated") concluir();
+        else if (worker.state === "redundant") falhar("o worker foi substituído ou descartado");
+      };
+      worker.addEventListener("statechange", observarEstado);
+
+      const temporizador = window.setTimeout(() => {
+        falhar(`tempo limite; estado atual: ${worker.state}`);
+      }, 15000);
+
+      if (worker.state === "activated") {
+        concluir();
+        return;
+      }
+
+      try {
+        worker.postMessage({ type: "NETFLIX2_SKIP_WAITING" });
+      } catch (erro) {
+        falhar(erro);
+      }
     });
 
     acoes.append(depois, atualizar);

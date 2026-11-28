@@ -1,5 +1,5 @@
 const CACHE_PREFIX = "netflix2-pwa-";
-const CACHE_VERSION = "v1.34.1";
+const CACHE_VERSION = "v1.34.2";
 const SHELL_CACHE = `${CACHE_PREFIX}shell-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `${CACHE_PREFIX}runtime-${CACHE_VERSION}`;
 const META_CACHE = `${CACHE_PREFIX}meta`;
@@ -93,7 +93,9 @@ self.addEventListener("activate", (event) => {
 // Usado pelas versões futuras, que aguardam a confirmação do usuário.
 self.addEventListener("message", (event) => {
   if (event.data && event.data.type === "NETFLIX2_SKIP_WAITING") {
-    self.skipWaiting();
+    // Mantém a ativação vinculada ao ciclo de vida da mensagem.
+    // O navegador só considera a mensagem concluída após skipWaiting resolver.
+    event.waitUntil(self.skipWaiting());
   }
 });
 
