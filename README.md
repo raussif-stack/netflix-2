@@ -1,3 +1,15 @@
+# NETFLIX 2% — v1.34.0
+
+## Novidades desta versão — Atualizações inteligentes do PWA
+- O aplicativo verifica atualizações do Service Worker ao abrir, ao voltar para primeiro plano e periodicamente enquanto permanece aberto.
+- Quando uma nova versão fica pronta, aparece um aviso discreto com as opções “Atualizar agora” e “Depois”.
+- Ao confirmar, o novo Service Worker é ativado e a página é recarregada para carregar os arquivos atualizados.
+- O processo não limpa o `localStorage`: favoritos, histórico e progresso permanecem armazenados no dispositivo.
+- A verificação de atualização usa `updateViaCache: "none"` e o cache do PWA foi atualizado para `v1.34.0`.
+- Migração inicial a partir da v1.33.0: esta versão ativa-se automaticamente e recarrega páginas abertas uma vez, pois a versão anterior ainda não possuía o aviso de atualização. Nas versões seguintes, o Service Worker deverá aguardar a confirmação do usuário (não repetir `skipWaiting()` automaticamente no evento `install`).
+
+---
+
 # NETFLIX 2% — v1.33.0
 
 ## Novidades desta versão
