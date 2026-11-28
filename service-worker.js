@@ -1,5 +1,5 @@
 const CACHE_PREFIX = "netflix2-pwa-";
-const CACHE_VERSION = "v1.28.2";
+const CACHE_VERSION = "v1.29.0";
 const SHELL_CACHE = `${CACHE_PREFIX}shell-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `${CACHE_PREFIX}runtime-${CACHE_VERSION}`;
 

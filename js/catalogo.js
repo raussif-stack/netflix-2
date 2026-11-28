@@ -28,8 +28,8 @@ const catalogo = [
     categoria: "DESENVOLVIMENTO PESSOAL",
     descricao: "Uma série sobre escolhas, disciplina e transformação. Um convite para questionar hábitos e construir uma vida com mais propósito.",
     destaque: true,
-    banner: "assets/banners/avidadoisporcentobanner.png",
-    capa: "assets/posters/avidadoisporcentocapa.png",
+    banner: "assets/banners/avidadoisporcentobanner.webp",
+    capa: "assets/posters/avidadoisporcentocapa.webp",
     capaFallback: "assets/posters/vida-2-poster.svg",
     temporadas: [
       { numero: 1, titulo: "Temporada 1", // Para cadastrar: 1: "ID_DO_YOUTUBE", 2: "OUTRO_ID" etc.
@@ -795,8 +795,8 @@ const catalogo = [
     categoria: "AUTOCONHECIMENTO",
     descricao: "Uma jornada de reflexões sobre autocontrole, hábitos e desenvolvimento pessoal.",
     destaque: false,
-    banner: "assets/banners/48leisretencaoseminalbanner.png",
-    capa: "assets/posters/48leisretencaoseminalcapa.png",
+    banner: "assets/banners/48leisretencaoseminalbanner.webp",
+    capa: "assets/posters/48leisretencaoseminalcapa.webp",
     capaFallback: "assets/posters/retencao-poster.svg",
     temporadas: [
       { numero: 1, titulo: "Temporada 1", // Use o número do episódio como chave: 1, 2, 3...
@@ -832,8 +832,8 @@ const catalogo = [
     categoria: "REFLEXÕES E CONHECIMENTO",
     descricao: "Ideias, conversas e perspectivas para olhar o mundo por outros ângulos e estimular novas reflexões.",
     destaque: false,
-    banner: "assets/banners/avozdos2porcentobanner.png",
-    capa: "assets/posters/avozdos2porcentocapa.png",
+    banner: "assets/banners/avozdos2porcentobanner.webp",
+    capa: "assets/posters/avozdos2porcentocapa.webp",
     capaFallback: "assets/posters/voz-2-poster.svg",
     temporadas: [
       { numero: 1, titulo: "Temporada 1", // Use o número do episódio como chave: 1, 2, 3.
@@ -860,9 +860,9 @@ const catalogo = [
   categoria: "LIVES E TRANSMISSÕES",
   descricao: "Lives, conversas e transmissões do universo 2%.",
   destaque: false,
-  banner: "assets/banners/lives-2-banner.png",
-  capa: "assets/posters/lives-2-poster.png",
-  capaFallback: "assets/posters/lives-2-poster.png",
+  banner: "assets/banners/lives-2-banner.webp",
+  capa: "assets/posters/lives-2-poster.webp",
+  capaFallback: "assets/posters/lives-2-poster.webp",
   temporadas: [
     {
       numero: 1,

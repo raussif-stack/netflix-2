@@ -1,3 +1,12 @@
+# NETFLIX 2% — Versão 1.29.0 BETA
+
+## Otimização de imagens e limpeza de arquivos
+- As quatro capas e os quatro banners do catálogo foram convertidos de PNG para WebP, mantendo as dimensões originais.
+- Os caminhos das oito imagens foram atualizados no HTML, JavaScript e documentação.
+- Os arquivos PNG dos ícones PWA foram mantidos para preservar a compatibilidade com o manifesto e a instalação.
+- O vídeo de fundo MP4 antigo, identificado como resquício sem uso, foi removido junto com as instruções específicas para adicioná-lo.
+- A versão do cache do Service Worker foi atualizada para `v1.29.0`, permitindo que instalações existentes reconheçam os novos arquivos.
+
 
 
 ## Correções PWA — versão 1.28.1 BETA
