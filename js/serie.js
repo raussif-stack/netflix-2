@@ -2,6 +2,30 @@ const parametros = new URLSearchParams(window.location.search);
 const serieId = parametros.get("id");
 const serie = catalogo.find((item) => item.id === serieId);
 
+// Favoritos de episódios são independentes dos favoritos de séries.
+const CHAVE_FAVORITOS_EPISODIOS = "netflix2-episode-favorites-v1";
+
+function obterFavoritosEpisodios() {
+  try {
+    const dados = JSON.parse(localStorage.getItem(CHAVE_FAVORITOS_EPISODIOS) || "[]");
+    return Array.isArray(dados) ? dados.filter((item) => typeof item === "string") : [];
+  } catch {
+    return [];
+  }
+}
+
+function chaveDoFavoritoEpisodio(temporada, episodio) {
+  return `${serie.id}:${temporada.numero}:${episodio.numero}`;
+}
+
+function atualizarBotaoFavoritoEpisodio(botao, favorito) {
+  botao.classList.toggle("is-favorite", favorito);
+  botao.setAttribute("aria-pressed", String(favorito));
+  botao.textContent = favorito ? "★" : "☆";
+  botao.setAttribute("aria-label", favorito ? "Remover episódio dos favoritos" : "Adicionar episódio aos favoritos");
+  botao.title = favorito ? "Remover dos favoritos" : "Adicionar aos favoritos";
+}
+
 function caminhoDaImagem(caminho) {
   return `../${caminho}`;
 }
@@ -37,12 +61,31 @@ function mostrarErro() {
   document.title = "NETFLIX 2% | Série não encontrada";
 }
 
+let ordemEpisodios = "asc";
+
+function atualizarControleOrdemEpisodios() {
+  const botao = document.querySelector("#episodeSortToggle");
+  if (!botao) return;
+  botao.dataset.order = ordemEpisodios;
+  botao.setAttribute("aria-label", ordemEpisodios === "asc"
+    ? "Ordem crescente. Inverter para ordem decrescente"
+    : "Ordem decrescente. Inverter para ordem crescente");
+  botao.title = ordemEpisodios === "asc"
+    ? "Ordem crescente — clique para inverter"
+    : "Ordem decrescente — clique para inverter";
+  botao.querySelector(".sort-arrow-up")?.classList.toggle("is-active", ordemEpisodios === "desc");
+  botao.querySelector(".sort-arrow-down")?.classList.toggle("is-active", ordemEpisodios === "asc");
+}
+
 function renderizarEpisodios(temporada) {
   const lista = document.querySelector("#episodeList");
   const vazio = document.querySelector("#episodeEmpty");
   lista.innerHTML = "";
 
-  const episodios = temporada?.episodios || [];
+  const episodiosOriginais = temporada?.episodios || [];
+  const episodios = [...episodiosOriginais].sort((a, b) =>
+    ordemEpisodios === "asc" ? Number(a.numero) - Number(b.numero) : Number(b.numero) - Number(a.numero)
+  );
   vazio.hidden = episodios.length > 0;
 
   episodios.forEach((episodio) => {
@@ -83,6 +126,29 @@ function renderizarEpisodios(temporada) {
     info.className = "episode-info";
     const titulo = document.createElement("h3");
     titulo.textContent = episodio.titulo;
+
+    const linhaTitulo = document.createElement("div");
+    linhaTitulo.className = "episode-title-row";
+    const botaoFavoritoEpisodio = document.createElement("button");
+    botaoFavoritoEpisodio.className = "episode-favorite-toggle";
+    botaoFavoritoEpisodio.type = "button";
+    const chaveFavorito = chaveDoFavoritoEpisodio(temporada, episodio);
+    atualizarBotaoFavoritoEpisodio(botaoFavoritoEpisodio, obterFavoritosEpisodios().includes(chaveFavorito));
+    botaoFavoritoEpisodio.addEventListener("click", () => {
+      const favoritos = obterFavoritosEpisodios();
+      const ativo = favoritos.includes(chaveFavorito);
+      const atualizados = ativo
+        ? favoritos.filter((chave) => chave !== chaveFavorito)
+        : [...favoritos, chaveFavorito];
+      try {
+        localStorage.setItem(CHAVE_FAVORITOS_EPISODIOS, JSON.stringify([...new Set(atualizados)]));
+        atualizarBotaoFavoritoEpisodio(botaoFavoritoEpisodio, !ativo);
+      } catch (erro) {
+        console.warn("[NETFLIX 2%] Não foi possível salvar o favorito deste episódio.", erro);
+      }
+    });
+    linhaTitulo.append(titulo, botaoFavoritoEpisodio);
+
     const descricao = document.createElement("p");
     descricao.textContent = episodio.descricao || "";
     const duracao = document.createElement("span");
@@ -91,7 +157,7 @@ function renderizarEpisodios(temporada) {
     const statusEl = document.createElement("span");
     statusEl.className = "episode-status";
     statusEl.textContent = status;
-    info.append(titulo, descricao, duracao, statusEl);
+    info.append(linhaTitulo, descricao, duracao, statusEl);
 
     const link = document.createElement("a");
     link.className = "episode-watch";
@@ -220,6 +286,15 @@ if (!serie) {
     return true;
   }
   seletor.addEventListener("change", () => selecionarTemporada(seletor.value));
+
+  const botaoOrdemEpisodios = document.querySelector("#episodeSortToggle");
+  atualizarControleOrdemEpisodios();
+  botaoOrdemEpisodios?.addEventListener("click", () => {
+    ordemEpisodios = ordemEpisodios === "asc" ? "desc" : "asc";
+    atualizarControleOrdemEpisodios();
+    const temporadaAtual = serie.temporadas.find((item) => String(item.numero) === seletor.value);
+    if (temporadaAtual) renderizarEpisodios(temporadaAtual);
+  });
 
   const temporadaInicial = parametros.get("temporada") || serie.temporadas[0]?.numero;
   if (serie.temporadas.length) selecionarTemporada(temporadaInicial);

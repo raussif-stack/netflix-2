@@ -837,3 +837,23 @@ window.addEventListener("storage", (event) => {
 renderizarHistorico();
 renderizarFavoritos();
 
+
+
+// 1.31.0 BETA — botão flutuante para retornar ao início da página.
+(() => {
+  const botaoTopo = document.querySelector("#backToTop");
+  if (!botaoTopo) return;
+
+  const atualizarVisibilidadeBotaoTopo = () => {
+    botaoTopo.hidden = window.scrollY < 350;
+  };
+
+  botaoTopo.addEventListener("click", () => {
+    const movimentoReduzido = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: 0, behavior: movimentoReduzido ? "auto" : "smooth" });
+  });
+
+  window.addEventListener("scroll", atualizarVisibilidadeBotaoTopo, { passive: true });
+  window.addEventListener("pageshow", atualizarVisibilidadeBotaoTopo);
+  atualizarVisibilidadeBotaoTopo();
+})();

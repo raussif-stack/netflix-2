@@ -1,5 +1,5 @@
 const CACHE_PREFIX = "netflix2-pwa-";
-const CACHE_VERSION = "v1.29.0";
+const CACHE_VERSION = "v1.33.0";
 const SHELL_CACHE = `${CACHE_PREFIX}shell-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `${CACHE_PREFIX}runtime-${CACHE_VERSION}`;
 
@@ -26,9 +26,22 @@ const APP_SHELL = [
 self.addEventListener("install", (event) => {
   event.waitUntil((async () => {
     const cache = await caches.open(SHELL_CACHE);
-    // A shell is only considered installed after its essential files are cached.
-    await cache.addAll(APP_SHELL);
-    // Activate the new worker without showing an update button in the interface.
+    // Cache each resource independently: one missing file must not cancel the
+    // installation of the entire application shell.
+    const resultados = await Promise.allSettled(
+      APP_SHELL.map((arquivo) => cache.add(arquivo))
+    );
+    const falhas = resultados
+      .map((resultado, indice) => ({ resultado, arquivo: APP_SHELL[indice] }))
+      .filter(({ resultado }) => resultado.status === "rejected");
+
+    if (falhas.length) {
+      console.warn(
+        "[NETFLIX 2%] Alguns recursos não entraram no cache inicial:",
+        falhas.map(({ arquivo }) => arquivo)
+      );
+    }
+
     await self.skipWaiting();
   })());
 });

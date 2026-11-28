@@ -62,6 +62,15 @@
         </div>
         <p class="episode-jump-feedback" id="episodeJumpFeedback" aria-live="polite"></p>
       </div>
+      <div class="episode-sort-control">
+        <span class="episode-sort-label">Ordem dos episódios</span>
+        <button class="episode-sort-toggle" id="episodeSortToggle" type="button" data-order="asc" aria-label="Inverter ordem dos episódios" title="Inverter ordem dos episódios">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path class="sort-arrow sort-arrow-up" d="M8 18V6 M4.5 9.5 8 6l3.5 3.5" />
+            <path class="sort-arrow sort-arrow-down is-active" d="M16 6v12 M12.5 14.5 16 18l3.5-3.5" />
+          </svg>
+        </button>
+      </div>
       <div class="episode-list" id="episodeList" aria-live="polite"></div>
       <p class="episode-empty" id="episodeEmpty" hidden>Esta série ainda não possui episódios cadastrados.</p>
     </section>

@@ -1,13 +1,48 @@
-# NETFLIX 2% — Versão 1.29.0 BETA
+# NETFLIX 2% — v1.33.0
 
-## Otimização de imagens e limpeza de arquivos
-- As quatro capas e os quatro banners do catálogo foram convertidos de PNG para WebP, mantendo as dimensões originais.
-- Os caminhos das oito imagens foram atualizados no HTML, JavaScript e documentação.
-- Os arquivos PNG dos ícones PWA foram mantidos para preservar a compatibilidade com o manifesto e a instalação.
-- O vídeo de fundo MP4 antigo, identificado como resquício sem uso, foi removido junto com as instruções específicas para adicioná-lo.
-- A versão do cache do Service Worker foi atualizada para `v1.29.0`, permitindo que instalações existentes reconheçam os novos arquivos.
+## Novidades desta versão
+- Controle circular para alternar a ordem dos episódios entre crescente e decrescente na página de cada série.
+- A seta correspondente à ordem ativa recebe destaque visual; a ordem crescente é o padrão.
+- A ordenação altera apenas a apresentação da lista: numeração, catálogo original, favoritos e links dos episódios permanecem intactos.
+- A ordem selecionada vale durante a navegação pela página; ao abrir novamente, a lista começa em ordem crescente.
+- Cache do PWA atualizado para a versão 1.33.0.
 
+---
 
+# NETFLIX 2% — v1.32.0
+
+## Novidades desta versão
+- Favoritar episódios individualmente com estrela: contorno quando não favoritado e dourada preenchida quando favoritado.
+- Favoritos de episódios armazenados separadamente dos favoritos de séries no navegador (`localStorage`).
+- Os favoritos permanecem neste dispositivo e navegador; não há sincronização entre aparelhos ou contas.
+- Cache do PWA atualizado para a versão 1.32.0.
+
+---
+
+# NETFLIX 2% — Versão 1.30.0 BETA
+
+## Consolidação e auditoria do projeto
+- Revisão estrutural da versão 1.29.0, preservando o catálogo, as páginas, o player, os favoritos de séries, o histórico, o progresso e a instalação PWA.
+- O Service Worker agora tenta armazenar cada recurso do núcleo separadamente. Se um arquivo isolado falhar, isso não cancela o cache dos demais recursos nem a instalação do novo Service Worker.
+- A versão do cache PWA foi atualizada para `v1.30.0`, para que instalações existentes reconheçam a nova versão.
+- Adicionado `scripts/validar-projeto.js`, uma auditoria estática sem dependências externas para conferir catálogo, numeração, IDs de vídeo, imagens, manifesto e recursos do cache.
+- Nenhuma das três novas funcionalidades planejadas (voltar ao topo, favoritar episódios e inverter a ordem dos episódios) foi antecipada nesta versão.
+
+## Estado do catálogo nesta versão
+- 4 séries e 258 episódios cadastrados.
+- 257 episódios possuem ID do YouTube; 1 episódio permanece sem ID.
+- Os IDs de vídeo cadastrados são únicos na verificação estática.
+
+## Como executar a auditoria
+Na pasta raiz do projeto, com Node.js instalado, execute:
+
+```bash
+node scripts/validar-projeto.js
+```
+
+A auditoria verifica a estrutura e os dados locais. Ela não substitui testes reais no navegador, no Android, na Vercel ou na reprodução do YouTube.
+
+---
 
 ## Correções PWA — versão 1.28.1 BETA
 - O cache inicial agora tenta armazenar cada recurso individualmente; a falha de um arquivo isolado não cancela toda a instalação do Service Worker.
@@ -442,3 +477,13 @@ A adaptação visual depende das dimensões e dos recursos oferecidos pelo naveg
 - O Service Worker ativa a nova versão automaticamente, sem interface de atualização.
 
 A instalação no Chrome Android ainda precisa ser confirmada depois do deploy, com os arquivos publicados na raiz do projeto.
+
+
+## v1.31.0 BETA — botão voltar ao topo
+
+- Adicionado botão flutuante circular no canto inferior direito da página inicial.
+- O botão aparece depois que a pessoa percorre 350 pixels da página e desaparece novamente próximo ao topo.
+- Um clique retorna ao início com rolagem suave.
+- Respeita a preferência do dispositivo por movimento reduzido.
+- Inclui rótulo acessível, foco visível, adaptação para telas pequenas e áreas seguras do dispositivo.
+- Versão do cache do PWA atualizada para `v1.31.0`.

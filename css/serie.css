@@ -353,3 +353,101 @@ body { min-height: 100vh; }
   .episode-thumbnail, .episode-art-play { transition: none; }
   .episode-card:hover .episode-thumbnail { transform: none; }
 }
+
+
+/* FAVORITAR EPISÓDIOS */
+.episode-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  min-width: 0;
+}
+.episode-title-row h3 { min-width: 0; }
+.episode-favorite-toggle {
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+  margin: -7px -7px 0 0;
+  display: inline-grid;
+  place-items: center;
+  color: #b8b8b8;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  font: 400 27px/1 Arial, sans-serif;
+  cursor: pointer;
+  transition: color .18s ease, background .18s ease, transform .18s ease;
+}
+.episode-favorite-toggle:hover {
+  color: #f5c542;
+  background: rgba(245,197,66,.10);
+  transform: scale(1.08);
+}
+.episode-favorite-toggle.is-favorite { color: #f5c542; }
+.episode-favorite-toggle:focus-visible {
+  outline: 2px solid #f5c542;
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .episode-favorite-toggle { transition: none; }
+}
+
+
+/* ORDENAR EPISÓDIOS */
+.episode-sort-control {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin: 0 0 15px;
+}
+.episode-sort-label {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 600;
+}
+.episode-sort-toggle {
+  width: 42px;
+  height: 42px;
+  display: inline-grid;
+  place-items: center;
+  padding: 0;
+  color: var(--muted);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease, transform .18s ease;
+}
+.episode-sort-toggle:hover {
+  border-color: var(--red);
+  background: var(--surface-raised);
+  transform: translateY(-1px);
+}
+.episode-sort-toggle svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.episode-sort-toggle .sort-arrow {
+  color: var(--muted);
+  stroke: currentColor;
+  opacity: .48;
+  transition: color .18s ease, opacity .18s ease, stroke-width .18s ease;
+}
+.episode-sort-toggle .sort-arrow.is-active {
+  color: var(--red);
+  opacity: 1;
+  stroke-width: 2.8;
+}
+.episode-sort-toggle:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .episode-sort-toggle, .episode-sort-toggle .sort-arrow { transition: none; }
+}
