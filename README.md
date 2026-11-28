@@ -1,5 +1,13 @@
 
-## PWA instalável — versão 1.28.0 BETA
+
+## Correções PWA — versão 1.28.1 BETA
+- O cache inicial agora tenta armazenar cada recurso individualmente; a falha de um arquivo isolado não cancela toda a instalação do Service Worker.
+- O aviso de atualização apresenta estado de processamento e permite tentar novamente se a ativação não for concluída dentro do tempo esperado.
+- O manifesto mantém um único nome (`manifest.webmanifest`) e inicia o aplicativo pela raiz (`./`).
+- A reprodução de vídeos continua fora do cache do Service Worker.
+- A instalação no Android ainda precisa ser confirmada em dispositivo real após a publicação.
+
+## PWA instalável — versão 1.28.1 BETA
 
 - Manifesto `manifest.webmanifest` com nome, cores, modo standalone e ícones do aplicativo.
 - Ícones PNG em 192×192 e 512×512.
@@ -11,7 +19,7 @@
 - O catálogo, as páginas e os recursos locais já armazenados podem abrir offline; reprodução de vídeos do YouTube exige internet.
 - Instalação exige HTTPS ou ambiente local (`localhost`). A hospedagem na Vercel atende ao requisito HTTPS.
 
-# NETFLIX 2% — Versão 1.28.0 BETA
+# NETFLIX 2% — Versão 1.28.1 BETA
 
 > Atualização 1.18.0: sistema de favoritos locais para séries, com controles na página inicial e na página individual, seção de favoritas e filtro dedicado.
 

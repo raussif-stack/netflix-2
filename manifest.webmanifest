@@ -4,7 +4,7 @@
   "short_name": "NETFLIX 2%",
   "description": "Sua plataforma de séries e episódios.",
   "lang": "pt-BR",
-  "start_url": "./index.html",
+  "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "any",

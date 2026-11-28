@@ -14,6 +14,15 @@
 
   if (!isSecure) return;
 
+  let refreshing = false;
+  let activeRegistration = null;
+
+  navigator.serviceWorker.addEventListener("controllerchange", () => {
+    if (refreshing) return;
+    refreshing = true;
+    location.reload();
+  });
+
   function showUpdateNotice(registration) {
     if (!registration.waiting || !navigator.serviceWorker.controller) return;
     if (document.getElementById("pwa-update-notice")) return;
@@ -22,7 +31,7 @@
     notice.id = "pwa-update-notice";
     notice.setAttribute("role", "status");
     notice.innerHTML = `
-      <span>Uma atualização da NETFLIX 2% está pronta.</span>
+      <span id="pwa-update-message">Uma atualização da NETFLIX 2% está pronta.</span>
       <button type="button" id="pwa-update-button">ATUALIZAR</button>
       <button type="button" id="pwa-update-dismiss" aria-label="Fechar aviso">×</button>
     `;
@@ -43,23 +52,43 @@
         cursor: pointer; font-weight: 700;
       }
       #pwa-update-button { background: #e50914; color: #fff; }
+      #pwa-update-button:disabled { opacity: .7; cursor: wait; }
       #pwa-update-dismiss { background: transparent; color: #fff; font-size: 20px; }
     `;
     document.head.appendChild(style);
     document.body.appendChild(notice);
 
-    notice.querySelector("#pwa-update-button").addEventListener("click", () => {
-      registration.waiting?.postMessage({ type: "SKIP_WAITING" });
+    const button = notice.querySelector("#pwa-update-button");
+    const message = notice.querySelector("#pwa-update-message");
+    let activationTimer = null;
+
+    button.addEventListener("click", () => {
+      const waitingWorker = registration.waiting;
+      if (!waitingWorker) {
+        message.textContent = "A atualização não está mais disponível. Recarregue a página.";
+        button.disabled = true;
+        return;
+      }
+
+      button.disabled = true;
+      button.textContent = "ATUALIZANDO...";
+      message.textContent = "Aplicando atualização. Aguarde...";
+      waitingWorker.postMessage({ type: "SKIP_WAITING" });
+
+      activationTimer = window.setTimeout(() => {
+        if (refreshing) return;
+        button.disabled = false;
+        button.textContent = "TENTAR NOVAMENTE";
+        message.textContent = "A atualização demorou mais que o esperado. Tente novamente ou recarregue a página.";
+      }, 15000);
     });
+
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      if (activationTimer) window.clearTimeout(activationTimer);
+    }, { once: true });
+
     notice.querySelector("#pwa-update-dismiss").addEventListener("click", () => notice.remove());
   }
-
-  let refreshing = false;
-  navigator.serviceWorker.addEventListener("controllerchange", () => {
-    if (refreshing) return;
-    refreshing = true;
-    location.reload();
-  });
 
   window.addEventListener("load", async () => {
     try {
@@ -67,6 +96,7 @@
         scope: workerScope.pathname,
         updateViaCache: "none"
       });
+      activeRegistration = registration;
 
       showUpdateNotice(registration);
 
@@ -74,12 +104,18 @@
         const installing = registration.installing;
         if (!installing) return;
         installing.addEventListener("statechange", () => {
-          if (installing.state === "installed") showUpdateNotice(registration);
+          if (installing.state === "installed") {
+            // A propriedade waiting pode ser atualizada logo após o evento installed.
+            window.setTimeout(() => showUpdateNotice(registration), 0);
+          }
         });
       });
 
-      // Check for a newer deployment when the app is opened.
-      registration.update().catch(() => {});
+      // Verifica uma nova publicação ao abrir o aplicativo.
+      await registration.update().catch((error) => {
+        console.warn("[NETFLIX 2%] Não foi possível verificar atualizações:", error);
+      });
+      showUpdateNotice(registration);
     } catch (error) {
       console.warn("[NETFLIX 2%] Não foi possível registrar o modo offline:", error);
     }

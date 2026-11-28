@@ -1,5 +1,5 @@
 const CACHE_PREFIX = "netflix2-pwa-";
-const CACHE_VERSION = "v1.28.0";
+const CACHE_VERSION = "v1.28.1";
 const SHELL_CACHE = `${CACHE_PREFIX}shell-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `${CACHE_PREFIX}runtime-${CACHE_VERSION}`;
 
@@ -24,10 +24,20 @@ const APP_SHELL = [
 ];
 
 self.addEventListener("install", (event) => {
-  event.waitUntil(
-    caches.open(SHELL_CACHE)
-      .then((cache) => cache.addAll(APP_SHELL))
-  );
+  event.waitUntil((async () => {
+    const cache = await caches.open(SHELL_CACHE);
+    const results = await Promise.allSettled(
+      APP_SHELL.map((path) => cache.add(path))
+    );
+    const failed = results
+      .map((result, index) => ({ result, path: APP_SHELL[index] }))
+      .filter(({ result }) => result.status === "rejected");
+
+    if (failed.length) {
+      console.warn("[NETFLIX 2%] Alguns recursos não entraram no cache:", failed.map(x => x.path));
+    }
+    // A instalação não é abortada por um recurso isolado indisponível.
+  })());
 });
 
 self.addEventListener("message", (event) => {
@@ -37,13 +47,13 @@ self.addEventListener("message", (event) => {
 });
 
 self.addEventListener("activate", (event) => {
-  event.waitUntil(
-    caches.keys().then((keys) => Promise.all(
-      keys
-        .filter((key) => key.startsWith(CACHE_PREFIX) && ![SHELL_CACHE, RUNTIME_CACHE].includes(key))
-        .map((key) => caches.delete(key))
-    )).then(() => self.clients.claim())
-  );
+  event.waitUntil((async () => {
+    const keys = await caches.keys();
+    await Promise.all(keys
+      .filter((key) => key.startsWith(CACHE_PREFIX) && ![SHELL_CACHE, RUNTIME_CACHE].includes(key))
+      .map((key) => caches.delete(key)));
+    await self.clients.claim();
+  })());
 });
 
 function isVideoRequest(request, url) {
@@ -64,7 +74,7 @@ self.addEventListener("fetch", (event) => {
         const response = await fetch(request);
         if (response && response.ok) {
           const cache = await caches.open(RUNTIME_CACHE);
-          cache.put(request, response.clone());
+          await cache.put(request, response.clone());
         }
         return response;
       } catch (error) {
@@ -98,7 +108,7 @@ self.addEventListener("fetch", (event) => {
       const response = await fetch(request);
       if (response && response.ok && response.type === "basic") {
         const cache = await caches.open(RUNTIME_CACHE);
-        cache.put(request, response.clone());
+        await cache.put(request, response.clone());
       }
       return response;
     } catch (error) {
