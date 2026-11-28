@@ -1,49 +1,36 @@
 const CACHE_PREFIX = "netflix2-pwa-";
-const CACHE_VERSION = "v1.28.1";
+const CACHE_VERSION = "v1.28.2";
 const SHELL_CACHE = `${CACHE_PREFIX}shell-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `${CACHE_PREFIX}runtime-${CACHE_VERSION}`;
 
 const APP_SHELL = [
-  "./",
-  "./index.html",
-  "./pages/serie.html",
-  "./pages/assistir.html",
-  "./manifest.webmanifest",
-  "./css/global.css",
-  "./css/home.css",
-  "./css/serie.css",
-  "./css/player.css",
-  "./js/theme.js",
-  "./js/catalogo.js",
-  "./js/main.js",
-  "./js/serie.js",
-  "./js/player.js",
-  "./js/pwa.js",
-  "./assets/icons/icon-192.png",
-  "./assets/icons/icon-512.png"
+  "/",
+  "/index.html",
+  "/pages/serie.html",
+  "/pages/assistir.html",
+  "/manifest.webmanifest",
+  "/css/global.css",
+  "/css/home.css",
+  "/css/serie.css",
+  "/css/player.css",
+  "/js/theme.js",
+  "/js/catalogo.js",
+  "/js/main.js",
+  "/js/serie.js",
+  "/js/player.js",
+  "/js/pwa.js",
+  "/assets/icons/icon-192.png",
+  "/assets/icons/icon-512.png"
 ];
 
 self.addEventListener("install", (event) => {
   event.waitUntil((async () => {
     const cache = await caches.open(SHELL_CACHE);
-    const results = await Promise.allSettled(
-      APP_SHELL.map((path) => cache.add(path))
-    );
-    const failed = results
-      .map((result, index) => ({ result, path: APP_SHELL[index] }))
-      .filter(({ result }) => result.status === "rejected");
-
-    if (failed.length) {
-      console.warn("[NETFLIX 2%] Alguns recursos não entraram no cache:", failed.map(x => x.path));
-    }
-    // A instalação não é abortada por um recurso isolado indisponível.
+    // A shell is only considered installed after its essential files are cached.
+    await cache.addAll(APP_SHELL);
+    // Activate the new worker without showing an update button in the interface.
+    await self.skipWaiting();
   })());
-});
-
-self.addEventListener("message", (event) => {
-  if (event.data && event.data.type === "SKIP_WAITING") {
-    self.skipWaiting();
-  }
 });
 
 self.addEventListener("activate", (event) => {
@@ -80,21 +67,18 @@ self.addEventListener("fetch", (event) => {
       } catch (error) {
         const cached = await caches.match(request);
         if (cached) return cached;
-
-        const path = url.pathname;
-        if (path.endsWith("/serie.html")) {
-          const page = await caches.match("./pages/serie.html");
+        if (url.pathname.endsWith("/serie.html")) {
+          const page = await caches.match("/pages/serie.html");
           if (page) return page;
         }
-        if (path.endsWith("/assistir.html")) {
-          const page = await caches.match("./pages/assistir.html");
+        if (url.pathname.endsWith("/assistir.html")) {
+          const page = await caches.match("/pages/assistir.html");
           if (page) return page;
         }
-        return (await caches.match("./index.html")) ||
-          new Response("Você está offline e esta página ainda não foi armazenada.", {
-            status: 503,
-            headers: { "Content-Type": "text/plain; charset=utf-8" }
-          });
+        return (await caches.match("/index.html")) || new Response(
+          "Você está offline e esta página ainda não foi armazenada.",
+          { status: 503, headers: { "Content-Type": "text/plain; charset=utf-8" } }
+        );
       }
     })());
     return;
@@ -103,7 +87,6 @@ self.addEventListener("fetch", (event) => {
   event.respondWith((async () => {
     const cached = await caches.match(request);
     if (cached) return cached;
-
     try {
       const response = await fetch(request);
       if (response && response.ok && response.type === "basic") {

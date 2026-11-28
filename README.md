@@ -422,3 +422,14 @@ Os comandos operam por meio da YouTube IFrame Player API. A disponibilidade de a
 - Não altera IDs de vídeos, catálogo, títulos, durações ou dados salvos no navegador.
 
 A adaptação visual depende das dimensões e dos recursos oferecidos pelo navegador e pelo dispositivo. A rotação da tela não é forçada pelo site; o layout responde à orientação escolhida pelo usuário.
+
+
+## v1.28.2 — PWA simplificado
+
+- Removido o aviso/botão manual de atualização.
+- Registro do Service Worker simplificado e com escopo explícito na raiz (`/`).
+- Manifesto único com URLs absolutas para início, escopo e ícones.
+- `vercel.json` define o MIME type correto do manifesto e evita cache prolongado dos arquivos de controle do PWA.
+- O Service Worker ativa a nova versão automaticamente, sem interface de atualização.
+
+A instalação no Chrome Android ainda precisa ser confirmada depois do deploy, com os arquivos publicados na raiz do projeto.
