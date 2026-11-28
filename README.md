@@ -1,3 +1,16 @@
+# NETFLIX 2% — v1.34.1
+
+## Correção — Atualizações inteligentes do PWA
+- Corrigida a transição da primeira migração para o novo sistema de atualizações.
+- A ativação automática (`skipWaiting`) agora é limitada a uma única migração, registrada em um cache técnico persistente.
+- Nas atualizações seguintes, o Service Worker permanece aguardando a confirmação do usuário.
+- O aviso de atualização não desaparece por uma recarga automática; a página só recarrega após a escolha “Atualizar agora”.
+- Melhorado o layout responsivo do aviso em telas pequenas e sua recuperação quando o usuário retorna ao aplicativo.
+- O cache técnico da migração não contém informações pessoais e não altera `localStorage`.
+- Cache do PWA atualizado para `v1.34.1`.
+
+---
+
 # NETFLIX 2% — v1.34.0
 
 ## Novidades desta versão — Atualizações inteligentes do PWA

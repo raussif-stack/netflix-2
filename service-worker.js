@@ -2,6 +2,13 @@ const CACHE_PREFIX = "netflix2-pwa-";
 const CACHE_VERSION = "v1.34.0";
 const SHELL_CACHE = `${CACHE_PREFIX}shell-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `${CACHE_PREFIX}runtime-${CACHE_VERSION}`;
+const META_CACHE = `${CACHE_PREFIX}meta`;
+const MIGRATION_KEY = new URL("/__netflix2-pwa-v134-migration-complete__", self.location.origin).href;
+
+async function migrationInicialPendente() {
+  const meta = await caches.open(META_CACHE);
+  return !(await meta.match(MIGRATION_KEY));
+}
 
 const APP_SHELL = [
   "/",
@@ -40,33 +47,46 @@ self.addEventListener("install", (event) => {
       );
     }
 
-    // Migração única da v1.33.0: ativa esta versão sem exigir ação manual.
-    // Nas próximas versões, remova este skipWaiting para permitir o aviso
-    // de atualização controlado pelo js/pwa.js.
-    await self.skipWaiting();
+    // A primeira migração para o sistema de atualização precisa ser automática,
+    // pois a v1.33.0 não tinha o fluxo novo de aviso. Depois dessa migração,
+    // versões futuras aguardam a escolha do usuário na interface.
+    if (await migrationInicialPendente()) await self.skipWaiting();
   })());
 });
 
 self.addEventListener("activate", (event) => {
   event.waitUntil((async () => {
+    const migracaoInicial = await migrationInicialPendente();
     const keys = await caches.keys();
     await Promise.all(keys
-      .filter((key) => key.startsWith(CACHE_PREFIX) && ![SHELL_CACHE, RUNTIME_CACHE].includes(key))
+      .filter((key) => key.startsWith(CACHE_PREFIX) &&
+        ![SHELL_CACHE, RUNTIME_CACHE, META_CACHE].includes(key))
       .map((key) => caches.delete(key)));
+
+    // Marca a migração uma única vez. Esse cache de metadados é preservado
+    // nas próximas atualizações e não contém dados pessoais do usuário.
+    if (migracaoInicial) {
+      const meta = await caches.open(META_CACHE);
+      await meta.put(MIGRATION_KEY, new Response("completed", {
+        headers: { "Content-Type": "text/plain; charset=utf-8" }
+      }));
+    }
 
     await self.clients.claim();
 
-    // A versão anterior não possuía interface de atualização. Recarrega as
-    // páginas abertas uma vez para que recebam o novo js/pwa.js.
-    const clientes = await self.clients.matchAll({ type: "window", includeUncontrolled: true });
-    await Promise.all(clientes.map(async (cliente) => {
-      try {
-        const url = new URL(cliente.url);
-        if (url.origin === self.location.origin) await cliente.navigate(cliente.url);
-      } catch (erro) {
-        console.warn("[NETFLIX 2%] Não foi possível atualizar uma página aberta:", erro);
-      }
-    }));
+    // Apenas na transição inicial, recarrega páginas que já eram controladas
+    // pela versão anterior. Atualizações futuras recarregam após confirmação.
+    if (migracaoInicial) {
+      const clientes = await self.clients.matchAll({ type: "window" });
+      await Promise.all(clientes.map(async (cliente) => {
+        try {
+          const url = new URL(cliente.url);
+          if (url.origin === self.location.origin) await cliente.navigate(cliente.url);
+        } catch (erro) {
+          console.warn("[NETFLIX 2%] Não foi possível concluir a migração de uma página aberta:", erro);
+        }
+      }));
+    }
   })());
 });
 
