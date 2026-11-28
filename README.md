@@ -1,3 +1,12 @@
+# NETFLIX 2% — v1.34.4
+
+## Correção de compatibilidade do PWA
+
+- Adicionada migração única e específica da v1.34.4 para forçar a substituição de páginas que ainda executam a interface antiga de atualização.
+- Na primeira ativação desta versão, o Service Worker limpa caches antigos, assume as páginas abertas e solicita sua navegação/recarregamento.
+- A migração é registrada no cache de metadados; atualizações futuras voltam a aguardar a confirmação do usuário.
+- Mantida a busca apenas nos caches da versão atual e a preservação dos dados locais da aplicação.
+
 # NETFLIX 2% — v1.34.3
 
 ## Correção — conclusão do fluxo de atualização do PWA

@@ -1,9 +1,10 @@
 const CACHE_PREFIX = "netflix2-pwa-";
-const CACHE_VERSION = "v1.34.3";
+const CACHE_VERSION = "v1.34.4";
 const SHELL_CACHE = `${CACHE_PREFIX}shell-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `${CACHE_PREFIX}runtime-${CACHE_VERSION}`;
 const META_CACHE = `${CACHE_PREFIX}meta`;
 const MIGRATION_KEY = new URL("/__netflix2-pwa-v134-migration-complete__", self.location.origin).href;
+const MIGRATION_V1344_KEY = new URL("/__netflix2-pwa-v1344-migration-complete__", self.location.origin).href;
 const LEGACY_CACHE_NAMES = ["Shell 1.28.1"];
 
 function isLegacyCacheName(name) {
@@ -25,6 +26,13 @@ async function matchCurrentCaches(request) {
 async function migrationInicialPendente() {
   const meta = await caches.open(META_CACHE);
   return !(await meta.match(MIGRATION_KEY));
+}
+
+// Migração pontual da v1.34.4: força uma ativação única para retirar páginas
+// que ainda executam o aviso antigo, mesmo quando a migração v1.34 já ocorreu.
+async function migrationCompatibilidadeV1344Pendente() {
+  const meta = await caches.open(META_CACHE);
+  return !(await meta.match(MIGRATION_V1344_KEY));
 }
 
 const APP_SHELL = [
@@ -67,13 +75,16 @@ self.addEventListener("install", (event) => {
     // A primeira migração para o sistema de atualização precisa ser automática,
     // pois a v1.33.0 não tinha o fluxo novo de aviso. Depois dessa migração,
     // versões futuras aguardam a escolha do usuário na interface.
-    if (await migrationInicialPendente()) await self.skipWaiting();
+    if (await migrationInicialPendente() || await migrationCompatibilidadeV1344Pendente()) {
+      await self.skipWaiting();
+    }
   })());
 });
 
 self.addEventListener("activate", (event) => {
   event.waitUntil((async () => {
     const migracaoInicial = await migrationInicialPendente();
+    const migracaoCompatibilidadeV1344 = await migrationCompatibilidadeV1344Pendente();
     const keys = await caches.keys();
     const cachesLegadosEncontrados = keys.filter(isLegacyCacheName);
     await Promise.all(keys
@@ -85,18 +96,25 @@ self.addEventListener("activate", (event) => {
 
     // Marca a migração uma única vez. Esse cache de metadados é preservado
     // nas próximas atualizações e não contém dados pessoais do usuário.
-    if (migracaoInicial) {
+    if (migracaoInicial || migracaoCompatibilidadeV1344) {
       const meta = await caches.open(META_CACHE);
-      await meta.put(MIGRATION_KEY, new Response("completed", {
-        headers: { "Content-Type": "text/plain; charset=utf-8" }
-      }));
+      if (migracaoInicial) {
+        await meta.put(MIGRATION_KEY, new Response("completed", {
+          headers: { "Content-Type": "text/plain; charset=utf-8" }
+        }));
+      }
+      if (migracaoCompatibilidadeV1344) {
+        await meta.put(MIGRATION_V1344_KEY, new Response("completed", {
+          headers: { "Content-Type": "text/plain; charset=utf-8" }
+        }));
+      }
     }
 
     await self.clients.claim();
 
     // Apenas na transição inicial, recarrega páginas que já eram controladas
     // pela versão anterior. Atualizações futuras recarregam após confirmação.
-    if (migracaoInicial || cachesLegadosEncontrados.length) {
+    if (migracaoInicial || migracaoCompatibilidadeV1344 || cachesLegadosEncontrados.length) {
       const clientes = await self.clients.matchAll({ type: "window" });
       await Promise.all(clientes.map(async (cliente) => {
         try {
