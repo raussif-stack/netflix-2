@@ -1,11 +1,11 @@
-# NETFLIX 2% — v1.34.2
+# NETFLIX 2% — v1.34.3
 
 ## Correção — conclusão do fluxo de atualização do PWA
 - O botão acompanha a mudança de estado do próprio Service Worker aguardando, além do evento `controllerchange`.
 - A mensagem `NETFLIX2_SKIP_WAITING` agora mantém a ativação vinculada ao ciclo de vida da mensagem com `event.waitUntil()`.
 - Se a ativação não for confirmada em 15 segundos, o aviso sai do estado infinito de processamento e oferece nova tentativa.
 - Se o worker for descartado/substituído, a interface também permite tentar novamente.
-- Cache do PWA atualizado para `v1.34.2`.
+- Cache do PWA atualizado para `v1.34.3`.
 - Preservados o cache de migração inicial e os dados locais do usuário (`localStorage`).
 
 ---
@@ -524,3 +524,10 @@ A instalação no Chrome Android ainda precisa ser confirmada depois do deploy, 
 - Respeita a preferência do dispositivo por movimento reduzido.
 - Inclui rótulo acessível, foco visível, adaptação para telas pequenas e áreas seguras do dispositivo.
 - Versão do cache do PWA atualizada para `v1.31.0`.
+
+
+### v1.34.3 — correção de caches legados do PWA
+- O Service Worker consulta somente os caches da versão atual, evitando reutilizar arquivos antigos.
+- Remove caches legados conhecidos (`Shell 1.28.1`, `pwa Shell v*` e `pwa runtime v*`).
+- Recarrega páginas abertas quando encontra esses caches antigos, para alinhar a interface de atualização.
+- Preserva o cache de metadados da migração e os dados locais armazenados pela aplicação.

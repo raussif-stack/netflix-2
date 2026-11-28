@@ -1,9 +1,26 @@
 const CACHE_PREFIX = "netflix2-pwa-";
-const CACHE_VERSION = "v1.34.2";
+const CACHE_VERSION = "v1.34.3";
 const SHELL_CACHE = `${CACHE_PREFIX}shell-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `${CACHE_PREFIX}runtime-${CACHE_VERSION}`;
 const META_CACHE = `${CACHE_PREFIX}meta`;
 const MIGRATION_KEY = new URL("/__netflix2-pwa-v134-migration-complete__", self.location.origin).href;
+const LEGACY_CACHE_NAMES = ["Shell 1.28.1"];
+
+function isLegacyCacheName(name) {
+  return LEGACY_CACHE_NAMES.includes(name) ||
+    name.startsWith("pwa Shell v") ||
+    name.startsWith("pwa runtime v");
+}
+
+// Nunca consulte caches globais: isso pode devolver arquivos de versões antigas.
+async function matchCurrentCaches(request) {
+  const shell = await caches.open(SHELL_CACHE);
+  const shellMatch = await shell.match(request);
+  if (shellMatch) return shellMatch;
+
+  const runtime = await caches.open(RUNTIME_CACHE);
+  return runtime.match(request);
+}
 
 async function migrationInicialPendente() {
   const meta = await caches.open(META_CACHE);
@@ -58,9 +75,12 @@ self.addEventListener("activate", (event) => {
   event.waitUntil((async () => {
     const migracaoInicial = await migrationInicialPendente();
     const keys = await caches.keys();
+    const cachesLegadosEncontrados = keys.filter(isLegacyCacheName);
     await Promise.all(keys
-      .filter((key) => key.startsWith(CACHE_PREFIX) &&
-        ![SHELL_CACHE, RUNTIME_CACHE, META_CACHE].includes(key))
+      .filter((key) =>
+        (key.startsWith(CACHE_PREFIX) &&
+          ![SHELL_CACHE, RUNTIME_CACHE, META_CACHE].includes(key)) ||
+        isLegacyCacheName(key))
       .map((key) => caches.delete(key)));
 
     // Marca a migração uma única vez. Esse cache de metadados é preservado
@@ -76,14 +96,14 @@ self.addEventListener("activate", (event) => {
 
     // Apenas na transição inicial, recarrega páginas que já eram controladas
     // pela versão anterior. Atualizações futuras recarregam após confirmação.
-    if (migracaoInicial) {
+    if (migracaoInicial || cachesLegadosEncontrados.length) {
       const clientes = await self.clients.matchAll({ type: "window" });
       await Promise.all(clientes.map(async (cliente) => {
         try {
           const url = new URL(cliente.url);
           if (url.origin === self.location.origin) await cliente.navigate(cliente.url);
         } catch (erro) {
-          console.warn("[NETFLIX 2%] Não foi possível concluir a migração de uma página aberta:", erro);
+          console.warn("[NETFLIX 2%] Não foi possível atualizar uma página aberta após limpar caches antigos:", erro);
         }
       }));
     }
@@ -121,17 +141,17 @@ self.addEventListener("fetch", (event) => {
         }
         return response;
       } catch (error) {
-        const cached = await caches.match(request);
+        const cached = await matchCurrentCaches(request);
         if (cached) return cached;
         if (url.pathname.endsWith("/serie.html")) {
-          const page = await caches.match("/pages/serie.html");
+          const page = await matchCurrentCaches("/pages/serie.html");
           if (page) return page;
         }
         if (url.pathname.endsWith("/assistir.html")) {
-          const page = await caches.match("/pages/assistir.html");
+          const page = await matchCurrentCaches("/pages/assistir.html");
           if (page) return page;
         }
-        return (await caches.match("/index.html")) || new Response(
+        return (await matchCurrentCaches("/index.html")) || new Response(
           "Você está offline e esta página ainda não foi armazenada.",
           { status: 503, headers: { "Content-Type": "text/plain; charset=utf-8" } }
         );
@@ -141,7 +161,7 @@ self.addEventListener("fetch", (event) => {
   }
 
   event.respondWith((async () => {
-    const cached = await caches.match(request);
+    const cached = await matchCurrentCaches(request);
     if (cached) return cached;
     try {
       const response = await fetch(request);
